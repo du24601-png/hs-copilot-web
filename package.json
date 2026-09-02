@@ -4,6 +4,7 @@
   "private": true,
   "description": "HS Copilot - 智能归类工作台前端",
   "scripts": {
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "test": "node --test --test-isolation=none test/*.test.cjs"
   }
 }

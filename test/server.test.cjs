@@ -1,0 +1,65 @@
+const test = require('node:test');
+const assert = require('node:assert/strict');
+
+process.env.PORT = '0';
+const handlesBeforeImport = new Set(process._getActiveHandles());
+const server = require('../server.js');
+const importedListeners = () => process._getActiveHandles().filter(handle =>
+  handle && handle.constructor && handle.constructor.name === 'Server' && !handlesBeforeImport.has(handle));
+
+test.after(async () => {
+  await new Promise(resolve => setImmediate(resolve));
+  importedListeners().forEach(listener => listener.close());
+});
+
+test('server module can be imported without opening a listener', () => {
+  assert.equal(typeof server.startServer, 'function');
+  assert.equal(importedListeners().length, 0);
+});
+
+test('normalizePlan clamps malformed LLM planning output', () => {
+  const plan = server.normalizePlan({
+    core: {
+      word: '不锈钢真空保温杯超长商品名称',
+      alt: ['保温瓶', 123, '真空容器', '家用器皿', '杯', '水瓶', '多余项'],
+      chapters: ['第96章', '85', 'x7', '123']
+    },
+    structure: { word: '真空双层结构' },
+    material: { word: '不锈钢' },
+    params: [{ key: '容量', value: '500ml', affectsCode: 0 }, null, { key: '功率', value: 30, affectsCode: 1 }],
+    confidence: 'certain'
+  });
+  assert.equal(plan.core.word.length <= 20, true);
+  assert.deepEqual(plan.core.alt, ['保温瓶', '123', '真空容器', '家用器皿', '杯', '水瓶']);
+  assert.deepEqual(plan.core.chapters, ['96', '85', '12']);
+  assert.deepEqual(plan.params, [
+    { key: '容量', value: '500ml', affectsCode: false },
+    { key: '功率', value: '30', affectsCode: true }
+  ]);
+  assert.equal(plan.confidence, 'low');
+});
+
+test('mergeCandidateCodes boosts plan terms while retaining literal candidates', () => {
+  const plan = {
+    core: { word: '保温杯', alt: ['保温瓶'], chapters: ['96'] },
+    structure: { word: '真空' },
+    material: { word: '不锈钢' },
+    params: [],
+    confidence: 'high'
+  };
+  const byWord = {
+    '保温杯': ['9617009000'],
+    '保温瓶': ['9617009000', '9617001000'],
+    '真空': ['9617009000'],
+    '不锈钢': ['7219331000']
+  };
+  const merged = server.mergeCandidateCodes(
+    plan,
+    ['7013370000', '7219331000'],
+    word => byWord[word] || [],
+    () => ['9617009000']
+  );
+  assert.equal(merged.picked[0], '9617009000');
+  assert.equal(merged.picked.includes('7013370000'), true);
+  assert.equal(merged.picked.length <= 16, true);
+});

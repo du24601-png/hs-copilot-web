@@ -189,22 +189,60 @@ function retrieveCandidates(query, extraKws = []) {
     .filter(Boolean);
 }
 
-// 查询扩展：让 LLM 给出商品的上位词/近义词/可能品名，提高检索召回（失败不影响主流程）
-const EXPAND_SYSTEM = '你是商品归类助手。给出用户商品的上位词、近义词、俗称，用于在海关税则品名中检索。只输出 JSON：{"keywords":["词1","词2",...]}，最多 8 个词，优先给出能命中税则品名的通用词（如"触控笔"→["触控笔","手写笔","电容笔","笔"]）。';
-const expandCache = new Map();
-async function llmExpand(query) {
-  if (expandCache.has(query)) return expandCache.get(query);
+/* 查询规划：让 LLM 把口语描述拆成四层，指导税则库检索。
+   与“字面检索”并行发起；失败由调用方回退到纯字面检索结果。 */
+const PLAN_SYSTEM = `你是中国海关 HS 归类助手。用户给出一个商品描述（可能是口语化大白话）。
+任务：把描述拆解成四层，用于指导税则数据库检索。
+
+四层定义与判定规则：
+1. core（核心商品）——这个东西“是什么”，回答“它属于哪一类物品”
+   - 判据：去掉所有修饰词后剩下的那个名词
+   - 正例：「不锈钢真空保温杯」→核心是「保温杯」，不是「不锈钢」
+   - 反例：「铝合金 iPad 触控笔」→核心是「触控笔」，铝合金和 iPad 都不是
+2. structure（关键结构）——影响归类的结构/功能特征，如「真空」「折叠」「带电加热」
+3. material（材质）——制成材料，如「不锈钢」「实木」「铝合金」
+4. params（规格参数）——容量/尺寸/功率/型号。逐项标注 affectsCode：
+   - true  = 该参数会影响编码（如冷藏箱按容积分档、电机按功率分档）
+   - false = 该参数只用于申报，不影响编码（如保温杯的 500ml）
+
+还要输出：
+- core.alt：税则品名中可能出现的同义说法。海关税则用语与口语差异很大，
+  例如口语「保温杯」在税则里叫「保温瓶」。请给出 2-4 个税则里可能出现的说法。
+- core.chapters：该商品可能所属的 HS 章节号（2 位数字字符串），最多 3 个，
+  按可能性排序。税则共 96 章，你给的章节会用于库内兜底检索，宁可多给不要漏给。
+
+只输出 JSON，不要任何解释文字、不要代码块标记：
+{"core":{"word":"","alt":[],"chapters":[]},"structure":{"word":""},"material":{"word":""},"params":[{"key":"","value":"","affectsCode":false}],"confidence":"high|medium|low"}`;
+
+function normalizePlan(raw) {
+  const root = raw && typeof raw === 'object' ? raw : {};
+  return {
+    core: {
+      word: String((root.core && root.core.word) || '').slice(0, 20),
+      alt: (Array.isArray(root.core && root.core.alt) ? root.core.alt : []).map(String).slice(0, 6),
+      chapters: (Array.isArray(root.core && root.core.chapters) ? root.core.chapters : [])
+        .map(c => String(c).replace(/\D/g, '').slice(0, 2)).filter(c => c.length === 2).slice(0, 3)
+    },
+    structure: { word: String((root.structure && root.structure.word) || '').slice(0, 20) },
+    material: { word: String((root.material && root.material.word) || '').slice(0, 20) },
+    params: (Array.isArray(root.params) ? root.params : [])
+      .filter(p => p && p.key).slice(0, 6)
+      .map(p => ({ key: String(p.key).slice(0, 12), value: String(p.value || '').slice(0, 20), affectsCode: !!p.affectsCode })),
+    confidence: ['high', 'medium', 'low'].includes(root.confidence) ? root.confidence : 'low'
+  };
+}
+
+const planCache = new Map();
+async function llmPlan(query) {
+  if (planCache.has(query)) return planCache.get(query);
   const messages = [
-    { role: 'system', content: EXPAND_SYSTEM },
+    { role: 'system', content: PLAN_SYSTEM },
     { role: 'user', content: '商品：' + query }
   ];
-  try {
-    const { data } = await llmChat(messages, { quick: true });
-    const kws = (Array.isArray(data.keywords) ? data.keywords : []).map(String).slice(0, 8);
-    expandCache.set(query, kws);
-    return kws;
-  } catch (e) { console.warn('[expand]', e.message); }
-  return [];
+  const { data } = await llmChat(messages, { quick: true });
+  const plan = normalizePlan(data);
+  planCache.set(query, plan);
+  return plan;
 }
 
 /* 两阶段 Prompt：
@@ -364,15 +402,74 @@ function sanitizePhase2(raw, candidates) {
   return out;
 }
 
-// 检索候选（含可选的查询扩展兜底）
-async function candidatesFor(query) {
-  let candidates = retrieveCandidates(query);
-  const distinctHeadings = new Set(candidates.map(c => c.code.slice(0, 4))).size;
-  if (distinctHeadings < 3) {
-    const extraKws = await llmExpand(query); // 失败返回 []，不影响主流程
-    if (extraKws.length) candidates = retrieveCandidates(query, extraKws);
+// 只取 code 数组，便于分层加权合并
+function codesFor(text) {
+  if (!text) return [];
+  return retrieveCandidates(String(text)).map(c => c.code);
+}
+
+// 章节兜底：在指定章内按词检索；无词或无命中时取该章前若干条
+function codesInChapter(chapter, word) {
+  const ch = String(chapter).replace(/\D/g, '').slice(0, 2);
+  if (ch.length !== 2) return [];
+  if (word) {
+    const rows = db.prepare('SELECT code FROM hs_code WHERE code LIKE ? AND name LIKE ? LIMIT 30')
+      .all(ch + '%', '%' + word + '%');
+    if (rows.length) return rows.map(r => r.code);
   }
-  return candidates;
+  return db.prepare('SELECT code FROM hs_code WHERE code LIKE ? LIMIT 12').all(ch + '%').map(r => r.code);
+}
+
+const PLAN_WEIGHT = { base: 2, core: 3, alt: 2, chapter: 1.5, structure: 2, material: 0.5, param: 1 };
+
+function pickDiverseCodes(ranked, limit = 16, perHeadingLimit = 6) {
+  const perHeading = new Map();
+  const picked = [];
+  for (const [code] of ranked) {
+    const heading = code.slice(0, 4);
+    const count = perHeading.get(heading) || 0;
+    if (count >= perHeadingLimit) continue;
+    perHeading.set(heading, count + 1);
+    picked.push(code);
+    if (picked.length >= limit) break;
+  }
+  return picked;
+}
+
+function mergeCandidateCodes(plan, baseCodes, lookupCodes = codesFor, lookupChapterCodes = codesInChapter) {
+  const score = new Map();
+  const bump = (codes, weight) => (codes || []).forEach((code, index) => {
+    if (!code) return;
+    score.set(code, (score.get(code) || 0) + weight * (1 - Math.min(index, 20) * 0.02));
+  });
+
+  bump(baseCodes, PLAN_WEIGHT.base);
+  bump(lookupCodes(plan.core.word), PLAN_WEIGHT.core);
+  plan.core.alt.forEach(word => bump(lookupCodes(word), PLAN_WEIGHT.alt));
+  plan.core.chapters.forEach(chapter =>
+    bump(lookupChapterCodes(chapter, plan.core.word || plan.structure.word), PLAN_WEIGHT.chapter));
+  bump(lookupCodes(plan.structure.word), PLAN_WEIGHT.structure);
+  bump(lookupCodes(plan.material.word), PLAN_WEIGHT.material);
+  plan.params.filter(param => param.affectsCode && param.value)
+    .forEach(param => bump(lookupCodes(param.value), PLAN_WEIGHT.param));
+
+  const ranked = [...score.entries()].sort((a, b) => b[1] - a[1]);
+  return { ranked, picked: pickDiverseCodes(ranked) };
+}
+
+// 检索候选：AI 四层规划与原始字面检索并行发起，分别检索后加权合并
+async function candidatesFor(query) {
+  const t0 = Date.now();
+  const [plan, base] = await Promise.all([
+    llmPlan(query).catch(e => { console.warn('[plan]', e.message); return null; }),
+    Promise.resolve(retrieveCandidates(query))
+  ]);
+  if (!plan) return base;
+
+  const merged = mergeCandidateCodes(plan, base.map(c => c.code));
+  console.log('[plan]', JSON.stringify(plan), (Date.now() - t0) + 'ms');
+  const rows = merged.picked.map(getHsRow).filter(Boolean);
+  return rows.length ? rows : base;
 }
 
 const classifyCache = new Map(); // query -> {ts, payload}（P1 结果缓存）
@@ -449,7 +546,7 @@ const MIME = {
   '.ico': 'image/x-icon', '.woff2': 'font/woff2'
 };
 
-http.createServer((req, res) => {
+function handleRequest(req, res) {
   const url = new URL(req.url, 'http://x');
   // API 路由
   const m = url.pathname.match(/^\/api\/hs\/([\d.]+)$/);
@@ -486,6 +583,22 @@ http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': MIME[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-cache' });
     res.end(buf);
   });
-}).listen(PORT, HOST, () => {
-  console.log(`HS Copilot dev server: http://${HOST}:${PORT}/`);
-});
+}
+
+function startServer() {
+  return http.createServer(handleRequest).listen(PORT, HOST, () => {
+    console.log(`HS Copilot dev server: http://${HOST}:${PORT}/`);
+  });
+}
+
+if (require.main === module) startServer();
+
+module.exports = {
+  startServer,
+  normalizePlan,
+  mergeCandidateCodes,
+  pickDiverseCodes,
+  retrieveCandidates,
+  sanitizePhase1,
+  sanitizePhase2
+};
