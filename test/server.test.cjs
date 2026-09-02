@@ -100,3 +100,30 @@ test('AI-planned terms can bypass the literal single-character head boost', () =
   const focused = server.retrieveCandidates('保温杯', [], { useHeadBoost: false });
   assert.equal(focused[0].code.startsWith('9617'), true);
 });
+
+test('scoreConcentration uses heading score share instead of candidate counts', () => {
+  const concentration = server.scoreConcentration([
+    ['9617001100', 9],
+    ['9617001900', 8],
+    ['7013370000', 2]
+  ]);
+  assert.equal(concentration, 17 / 19);
+  assert.equal(server.scoreConcentration([]), 0);
+});
+
+test('round two trusts medium confidence and only broadens low-confidence diffuse plans', () => {
+  const diffuse = [
+    ['9617001100', 2],
+    ['7013370000', 2],
+    ['7323930000', 2]
+  ];
+  const focused = [
+    ['9617001100', 8],
+    ['9617001900', 7],
+    ['7013370000', 1]
+  ];
+  assert.equal(server.shouldRunRound2(diffuse, 'low'), true);
+  assert.equal(server.shouldRunRound2(diffuse, 'medium'), false);
+  assert.equal(server.shouldRunRound2(diffuse, 'high'), false);
+  assert.equal(server.shouldRunRound2(focused, 'low'), false);
+});
