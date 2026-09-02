@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HS Copilot · 描述商品，就能开始归类</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo" id="logoHome">
+    <span class="logo-mark">HS</span><span class="logo-name">HS Copilot</span>
+  </div>
+  <nav class="topnav">
+    <a class="tnav" id="navHistory"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>历史记录</a>
+    <a class="tnav" id="navHelp"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.8 2.1c-.8.5-1.3 1-1.3 1.9"/><circle cx="12" cy="17" r=".5"/></svg>帮助</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ================= Page 1 · 首页 / 新建归类 ================= -->
+  <section class="view" id="view-home">
+    <div class="home-wrap">
+      <h1 class="home-title">描述商品，就能开始归类</h1>
+      <p class="home-sub">输入商品名、描述、链接或已有 HS 编码</p>
+
+      <div class="composer-card">
+        <textarea id="homeInput" placeholder="描述商品、粘贴商品链接，或输入 HS 编码" rows="3"></textarea>
+        <div class="composer-foot">
+          <button class="icon-btn" title="添加图片 / 文件" id="attachBtn">
+            <svg viewBox="0 0 24 24"><path d="M21.4 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.2-9.19a4 4 0 0 1 5.65 5.66l-9.2 9.19a2 2 0 0 1-2.82-2.83l8.49-8.48"/></svg>
+          </button>
+          <span class="flex-spacer"></span>
+          <span class="enter-hint">Enter 发送</span>
+          <button class="send-btn" id="homeSend" title="发送">
+            <svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="chips">
+        <button class="chip" data-q="不锈钢真空保温杯 500ml，带杯盖，保温 12 小时">不锈钢真空保温杯</button>
+        <button class="chip" data-q="铝合金 iPad 触控笔，PILOT G-2 0.5mm，可更换笔尖">铝合金 iPad 触控笔</button>
+        <button class="chip" data-q="8517703000 对吗？">8517703000 对吗？</button>
+      </div>
+
+      <div class="recent">
+        <div class="recent-title">最近查询</div>
+        <div class="table-card">
+          <div class="tr th">
+            <span>商品</span><span>推荐编码</span><span>状态</span><span>时间</span><span></span>
+          </div>
+          <div id="recentBody"></div>
+        </div>
+      </div>
+
+      <div class="home-note">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        结果附官方依据，可继续核验
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Page 2 · 关键确认 ================= -->
+  <section class="view hidden" id="view-confirm">
+    <div class="page-grid">
+      <div class="card product-card">
+        <div class="card-title">商品信息</div>
+        <div class="product-head">
+          <div class="product-thumb">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#9AA1AD" stroke-width="1.4">
+              <path d="M4 20l1.2-3.2L16.5 5.5a2.1 2.1 0 0 1 3 3L8.2 19.8 4 20z"/>
+              <path d="M14.5 7.5l3 3"/><circle cx="18.8" cy="5.2" r=".6" fill="#9AA1AD"/>
+            </svg>
+          </div>
+          <div>
+            <div class="product-name" id="cfProdName">铝合金 iPad 触控笔</div>
+            <div class="product-meta">HS 编码（推荐）</div>
+            <div class="product-code" id="cfProdCode">9608.99.20.00</div>
+          </div>
+        </div>
+        <ul class="attr-list" id="attrList">
+          <li><span>用途</span><b>平板触控</b></li>
+          <li><span>材质</span><b>铝合金</b></li>
+          <li><span>无线通信</span><b class="pending">待确认</b></li>
+          <li><span>笔尖</span><b class="pending">待确认</b></li>
+        </ul>
+        <a class="link-blue" id="editProduct">
+          <svg viewBox="0 0 24 24"><path d="M17 3a2.8 2.8 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+          编辑商品信息
+        </a>
+      </div>
+
+      <div class="card question-card">
+        <div class="q-kicker">还需要确认 <em id="qCount">1</em> 个信息</div>
+        <h2 class="q-title" id="qTitle">该触控笔是否包含无线通信功能？</h2>
+        <p class="q-sub" id="qSub">例如蓝牙、Wi-Fi、NFC</p>
+
+        <div class="q-options" id="qOptions">
+          <label class="q-opt"><input type="radio" name="wireless" value="no"><span class="q-radio"></span>不包含，仅用于电容触控</label>
+          <label class="q-opt"><input type="radio" name="wireless" value="yes"><span class="q-radio"></span>包含无线通信模块</label>
+          <label class="q-opt"><input type="radio" name="wireless" value="unsure"><span class="q-radio"></span>不确定</label>
+        </div>
+
+        <button class="why-box" id="whyBox">
+          <span id="whyText"><b>为什么要问？</b>无线通信功能可能改变所属品目</span>
+          <svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="why-detail hidden" id="whyDetail">
+          无线通信能力可能改变所属品目，当前主要用于区分 <b>9608（笔及类似品）</b> 与 <b>8517（通信设备）</b>，两者税率与监管条件不同。
+        </div>
+
+        <div class="ai-progress hidden" id="aiProgress"></div>
+
+        <div class="q-foot">
+          <button class="btn-primary" id="confirmNext" disabled>继续</button>
+          <div class="q-foot-note">选择后可自动进入下一步</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Page 3 · 归类建议 ================= -->
+  <section class="view hidden" id="view-decision">
+    <div class="page-grid decision-grid">
+      <div class="card decision-card">
+        <div class="card-title" id="decisionTitle">归类建议</div>
+        <div class="code-hero">
+          <span class="code-big" id="decisionCode">9608.99.20.00</span>
+          <button class="icon-btn" id="copyCodeBtn" title="Copy HS Code">
+            <svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          </button>
+        </div>
+        <div class="code-name" id="decisionName">其他笔及类似品</div>
+        <div class="badge-ok" id="decisionBadge">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
+          关键属性已确认
+        </div>
+
+        <div class="sec-title" id="secWhy">为什么推荐这个编码？</div>
+        <ul class="reason-list" id="reasonList">
+          <li><i>01</i><div><b>主要功能：</b>用于平板触控输入</div></li>
+          <li><i>02</i><div><b>通信功能：</b>不包含蓝牙、Wi-Fi 等无线通信模块</div></li>
+          <li><i>03</i><div><b>商品形态：</b>为完整笔状商品，而不是替换零件</div></li>
+        </ul>
+
+        <div class="sec-title" id="secCf">什么情况下结果会改变？</div>
+        <ul class="cf-list" id="cfList">
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="19.5" r="1"/></svg>
+            <span>如果包含无线通信模块</span>
+            <a class="link-blue" id="cf8517">建议重新检查 8517</a>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M4 20l1.2-3.2L16.5 5.5a2.1 2.1 0 0 1 3 3L8.2 19.8 4 20z"/></svg>
+            <span>如果只是替换笔尖</span>
+            <a class="link-blue" id="cfPart">需要重新判断零件编码</a>
+          </li>
+        </ul>
+
+        <div class="alt-box" id="altBox">
+          <div class="alt-head">其他可能</div>
+          <div class="alt-code" id="altCode">9608.10.00.00</div>
+          <div class="alt-why" id="altWhy">未选择原因：该品目要求书写装置</div>
+        </div>
+
+        <div class="action-row">
+          <button class="btn-primary" id="toDeclare">继续完善申报信息</button>
+          <button class="btn-ghost" id="viewPath">查看完整归类路径<span>›</span></button>
+        </div>
+      </div>
+
+      <aside class="evidence-rail">
+        <div class="rail-title">官方依据</div>
+
+        <div id="evClassify">
+        <div class="ev-card">
+          <div class="ev-head">
+            <span class="ev-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg></span>
+            <b id="ev1t">海关税则 · 96.08</b>
+          </div>
+          <p id="ev1p">本品目包括各种笔，包括钢笔、圆珠笔、毡头笔、铅芯笔、记号笔、走珠笔、自动铅笔及其他笔，以及笔尖。</p>
+        </div>
+
+        <div class="ev-card">
+          <div class="ev-head">
+            <span class="ev-icon"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></span>
+            <b id="ev2t">品目注释 · 96.08</b>
+          </div>
+          <p id="ev2p">本品目不包括仅为书写装置的零件（品目 96.10）或具有无线通信功能的设备（品目 85.17）。</p>
+        </div>
+
+        <div class="ev-card">
+          <div class="ev-head">
+            <span class="ev-icon red"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg></span>
+            <b id="ev3t">排除其他候选 · 8517.xx</b>
+          </div>
+          <p id="ev3p">本商品不含无线通信模块，不符合品目 85.17 的归类要求。</p>
+        </div>
+        </div>
+
+        <div id="evVerify" class="hidden">
+          <div class="ev-card">
+            <div class="ev-head">
+              <span class="ev-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></span>
+              <b>编码核验结果</b>
+            </div>
+            <p id="evVerifyText">该编码存在于 2026 年版进出口税则，名称、税率、监管条件与申报要素均来自结构化数据库。</p>
+          </div>
+          <div class="ev-card">
+            <div class="ev-head">
+              <span class="ev-icon"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></span>
+              <b>所属章节</b>
+            </div>
+            <p id="evVerifyChapter">—</p>
+          </div>
+        </div>
+
+        <a class="link-blue verify-link" id="verifyLink">在海关官网核验
+          <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
+        </a>
+        <div class="data-version">数据版本：<span id="dataVersion">2026-08-23</span></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ================= Page 5 · 申报信息 ================= -->
+  <section class="view hidden" id="view-declare">
+    <div class="declare-wrap">
+      <h1 class="declare-title">申报信息</h1>
+      <div class="declare-code" id="declareCode">9608.99.20.00</div>
+      <p class="declare-sub">AI 已预填 <b id="filledCount">5</b><span id="declareTotal"> / 6 项，</span>还需要确认 <em id="todoCount">1 项</em></p>
+
+      <div class="declare-grid">
+        <div>
+          <div class="card declare-card">
+            <div class="card-title">申报要素</div>
+            <ul class="declare-list" id="declareList">
+              <li data-key="品牌类型"><span class="d-label">品牌类型</span><span class="d-value">境内自主品牌</span><i class="check ok"></i><span class="d-arrow">›</span></li>
+              <li data-key="品牌"><span class="d-label">品牌</span><span class="d-value">PILOT（百乐）</span><i class="check ok"></i><span class="d-arrow">›</span></li>
+              <li data-key="型号"><span class="d-label">型号</span><span class="d-value">G-2 0.5mm</span><i class="check ok"></i><span class="d-arrow">›</span></li>
+              <li data-key="材质"><span class="d-label">材质</span><span class="d-value">铝合金、塑料</span><i class="check ok"></i><span class="d-arrow">›</span></li>
+              <li data-key="用途"><span class="d-label">用途</span><span class="d-value">平板触控输入</span><i class="check ok"></i><span class="d-arrow">›</span></li>
+              <li data-key="GTIN" class="todo"><span class="d-label">GTIN</span><span class="d-value"><input id="gtinInput" placeholder="输入 GTIN"></span><span class="todo-tag">待补充</span><span class="d-arrow">›</span></li>
+            </ul>
+          </div>
+          <div class="todo-note" id="todoNote">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><circle cx="12" cy="16.5" r=".5"/></svg>
+            还有 <b id="todoNoteCount">1</b> 项待补充
+          </div>
+        </div>
+
+        <div>
+          <div class="card tax-card">
+            <div class="card-title">税率与条件</div>
+            <ul class="tax-list">
+              <li><span>最惠国税率</span><b id="rateMfn">12%</b></li>
+              <li><span>增值税</span><b id="rateVat">13%</b></li>
+              <li><span>出口退税</span><b>13%</b></li>
+              <li><span>监管条件</span><b id="regCond">无</b></li>
+            </ul>
+            <div class="tax-src">海关总署 · <span id="taxDate">2026-08-23</span></div>
+          </div>
+
+          <div class="copy-wrap">
+            <button class="btn-primary btn-block" id="copyDeclareBtn">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>
+              复制申报要素
+              <svg class="caret" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="copy-menu hidden" id="copyMenu">
+              <button data-fmt="text">复制为文本</button>
+              <button data-fmt="table">复制为表格</button>
+              <button disabled title="即将支持">单一窗口格式<span class="soon">即将支持</span></button>
+            </div>
+          </div>
+          <div class="copy-format">复制格式： 文本 / 表格 / 单一窗口</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 归类路径浮层 ================= -->
+  <div class="modal-backdrop hidden" id="pathModal">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <div class="modal-title">完整归类路径</div>
+          <div class="modal-sub">逐级核验 · 每一级都可独立检查</div>
+        </div>
+        <button class="icon-btn" id="pathClose" title="关闭">
+          <svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="path-chain">
+        <div class="path-row">
+          <div class="path-code">96</div>
+          <div class="path-info">
+            <b>第 96 章 · 杂项制品</b>
+            <p>触控笔为笔状手持输入工具，不属于机器设备，首先定位于杂项制品章。</p>
+          </div>
+        </div>
+        <div class="path-row">
+          <div class="path-code">9608</div>
+          <div class="path-info">
+            <b>品目 96.08 · 圆珠笔、毡尖笔及其他笔</b>
+            <p>符合品目 96.08 条文范围；因不含无线通信模块，排除品目 85.17（通信设备）。</p>
+            <div class="path-excluded">已排除分支：85.17 · 电话机及通信设备 —— 要求具备无线通信功能</div>
+          </div>
+        </div>
+        <div class="path-row">
+          <div class="path-code">9608.99</div>
+          <div class="path-info">
+            <b>子目 9608.99 · 其他</b>
+            <p>非圆珠笔、毡尖笔、自来水笔等列名品类，归入「其他」。</p>
+            <div class="path-excluded">已排除分支：9608.10 · 圆珠笔 —— 要求书写装置结构</div>
+          </div>
+        </div>
+        <div class="path-row final">
+          <div class="path-code">9608.99.20.00</div>
+          <div class="path-info">
+            <b>本国子目 · 其他笔及类似品</b>
+            <p>参照归类决定〔2023-045〕：电容式触控笔按「其他笔」归入本国子目 9608.99.20。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-foot">
+        <span class="modal-note">路径依据：海关税则 · 品目注释 · 归类决定（数据版本 2026-08-23）</span>
+        <button class="btn-primary" id="pathOk">知道了</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>

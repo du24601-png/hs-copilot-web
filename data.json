@@ -1,0 +1,25 @@
+{
+  "code": "9608992000",
+  "codeDisplay": "9608.99.20.00",
+  "name": "蜡纸铁笔,钢笔杆,铅笔杆等",
+  "regConditions": "无",
+  "rates": {
+    "general": 0.8,
+    "mfn": 0.12,
+    "export": 0.0,
+    "excise": 0.0,
+    "vat": 0.13
+  },
+  "declareElements": [
+    "品牌类型",
+    "出口享惠情况",
+    "种类",
+    "品牌（中文或外文名称）",
+    "型号",
+    "GTIN",
+    "CAS",
+    "其他"
+  ],
+  "dataVersion": "2026-08-23",
+  "source": "海关总署"
+}

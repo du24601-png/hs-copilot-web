@@ -1,0 +1,9 @@
+{
+  "name": "hs-copilot-web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "HS Copilot - 智能归类工作台前端",
+  "scripts": {
+    "dev": "node server.js"
+  }
+}
