@@ -66,11 +66,8 @@ function apiHsCode(res, raw) {
   send(res, 200, row);
 }
 
-// GET /api/search?q=触控笔 | 圆珠笔 | 9608
-function apiSearch(res, q) {
-  if (!db) return send(res, 503, { error: '数据库未连接' });
+function searchHs(q) {
   q = (q || '').trim();
-  if (!q) return send(res, 400, { error: '缺少关键词' });
   let rows;
   if (/^\d{2,10}$/.test(q)) {
     // 数字前缀：查不到就逐级缩短（HS 版本更迭后旧前缀可能失效，如 851770 → 851779）
@@ -81,10 +78,19 @@ function apiSearch(res, q) {
     }
     if (!rows || !rows.length) rows = [];
   } else if (q.length >= 3) {
-    rows = db.prepare("SELECT code,name FROM hs_fts WHERE hs_fts MATCH ? LIMIT 20").all('"' + q.replace(/"/g, '') + '"');
+    rows = retrieveCandidates(q).map(candidate => ({ code: candidate.code, name: candidate.name }));
   } else {
     rows = db.prepare('SELECT code,name FROM hs_code WHERE name LIKE ? LIMIT 20').all('%' + q + '%');
   }
+  return rows || [];
+}
+
+// GET /api/search?q=触控笔 | 圆珠笔 | 9608
+function apiSearch(res, q) {
+  if (!db) return send(res, 503, { error: '数据库未连接' });
+  q = (q || '').trim();
+  if (!q) return send(res, 400, { error: '缺少关键词' });
+  const rows = searchHs(q);
   send(res, 200, { results: rows.map(r => ({ code: r.code, codeDisplay: fmtCode(r.code), name: r.name })) });
 }
 
@@ -114,9 +120,46 @@ if (process.env.KIMI_AGENT_GW_KEY) LLM_PROVIDERS.push({
 });
 const LLM_KEY = LLM_PROVIDERS.length ? 'configured' : '';
 
+function bestNgramMatches(run, hitsOf) {
+  const matches = [];
+  for (let length = Math.min(4, run.length); length >= 2; length--) {
+    let best = null;
+    for (let index = 0; index + length <= run.length; index++) {
+      const word = run.slice(index, index + length);
+      const rows = hitsOf(word);
+      if (!rows.length) continue;
+      const score = (rows.length <= 12 ? 1 : 0.3) * length;
+      if (!best || score > best.score) best = { word, rows, score };
+    }
+    if (best) matches.push(best);
+  }
+  return matches;
+}
+
+function pickRetrievalGroups(byHeading, headingLimit = 6, totalLimit = 16, primaryLimit = 8) {
+  const groups = [...byHeading.values()]
+    .map(list => list.sort((a, b) => b[1] - a[1]))
+    .sort((a, b) => b.reduce((total, item) => total + item[1], 0) - a.reduce((total, item) => total + item[1], 0))
+    .slice(0, headingLimit);
+  if (!groups.length) return [];
+
+  const picked = groups[0].slice(0, primaryLimit);
+  // 先让其余每个品目至少占一个名额，再按轮次补第二条，确保“前 6 组”不是名义扩容。
+  for (let round = 0; picked.length < totalLimit; round++) {
+    let added = false;
+    for (let groupIndex = 1; groupIndex < groups.length && picked.length < totalLimit; groupIndex++) {
+      if (!groups[groupIndex][round]) continue;
+      picked.push(groups[groupIndex][round]);
+      added = true;
+    }
+    if (!added) break;
+  }
+  return picked.slice(0, totalLimit);
+}
+
 // 从商品描述检索候选编码：中文按 n-gram + 单字拆分，对品名做 LIKE 打分；
 // extraKws 为查询扩展词（近义词/上位词，来自 LLM）；命中数太多的词降权（IDF 思路）
-function retrieveCandidates(query, extraKws = []) {
+function retrieveCandidates(query, extraKws = [], options = {}) {
   const runs = query.match(/[一-鿿]+/g) || [];
   // 中心词：最后一个中文段的最后 1-2 字（触控笔→笔）——决定商品大类，大幅加权
   const lastRun = runs[runs.length - 1] || '';
@@ -138,22 +181,17 @@ function retrieveCandidates(query, extraKws = []) {
       score.set(r.code, (score.get(r.code) || 0) + w * posBonus);
     }
   };
-  // 每个中文段只取“能命中的最长子串”计一次分，避免子串叠加淹没中心词
+  // 同一长度只取最优子串，跨长度累加，避免长材质词吃掉更关键的商品中心词。
   for (const run of runs) {
-    let matched = false;
-    for (let n = Math.min(4, run.length); n >= 2 && !matched; n--) {
-      for (let i = 0; i + n <= run.length; i++) {
-        const g = run.slice(i, i + n);
-        const rows = hitsOf(g);
-        if (rows.length) { addRows(g, rows, 1); matched = true; break; }
-      }
-    }
+    bestNgramMatches(run, hitsOf).forEach(match => addRows(match.word, match.rows, 1));
   }
   extraKws.forEach(k => { const rows = hitsOf(String(k).trim()); if (rows.length) addRows(String(k).trim(), rows, 1); });
   (query.match(/[a-zA-Z][a-zA-Z0-9-]*/g) || []).forEach(w0 => { const rows = hitsOf(w0.toLowerCase()); if (rows.length) addRows(w0, rows, 1); });
   // 中心词高权：商品大类信号远强于材质/修饰词（如"铝合金"会命中大量原材料编码），中心词不做 IDF 降权
-  if (headChars[1] && headChars[1].length === 2) { const rows = hitsOf(headChars[1]); if (rows.length) addRows(headChars[1], rows, 5, false); }
-  if (headChars[0]) { const rows = hitsOf(headChars[0]); if (rows.length) addRows(headChars[0], rows, 10, false); }
+  if (options.useHeadBoost !== false) {
+    if (headChars[1] && headChars[1].length === 2) { const rows = hitsOf(headChars[1]); if (rows.length) addRows(headChars[1], rows, 5, false); }
+    if (headChars[0]) { const rows = hitsOf(headChars[0]); if (rows.length) addRows(headChars[0], rows, 10, false); }
+  }
 
   // CIQ 俗名表：口语商品名（台灯、耳机）直接映射 HS 编码，命中是强信号（同样按命中数降权）
   const ciqStmt = db.prepare('SELECT DISTINCT hs_code FROM ciq_code WHERE goods_name LIKE ? LIMIT 40');
@@ -178,13 +216,8 @@ function retrieveCandidates(query, extraKws = []) {
     if (!byHeading.has(h)) byHeading.set(h, []);
     byHeading.get(h).push([code, s]);
   }
-  const groups = [...byHeading.values()]
-    .map(list => list.sort((a, b) => b[1] - a[1]))
-    // 按整组总分排序：9608 笔类（12 个编码合计更高）比 9603 画笔更能代表"笔"这个大类
-    .sort((a, b) => b.reduce((t, x) => t + x[1], 0) - a.reduce((t, x) => t + x[1], 0))
-    .slice(0, 4);
-  const picked = groups.flatMap((g, gi) => gi === 0 ? g.slice(0, 12) : g.slice(0, 2));
-  return picked.map(([code]) => code).slice(0, 16)
+  const picked = pickRetrievalGroups(byHeading);
+  return picked.map(([code]) => code)
     .map(getHsRow)
     .filter(Boolean);
 }
@@ -405,7 +438,8 @@ function sanitizePhase2(raw, candidates) {
 // 只取 code 数组，便于分层加权合并
 function codesFor(text) {
   if (!text) return [];
-  return retrieveCandidates(String(text)).map(c => c.code);
+  // AI 已明确拆出商品核心/同义税则词，不再让末尾单字（如“杯”）覆盖模型语义。
+  return retrieveCandidates(String(text), [], { useHeadBoost: false }).map(c => c.code);
 }
 
 // 章节兜底：在指定章内按词检索；无词或无命中时取该章前若干条
@@ -598,6 +632,9 @@ module.exports = {
   normalizePlan,
   mergeCandidateCodes,
   pickDiverseCodes,
+  bestNgramMatches,
+  pickRetrievalGroups,
+  searchHs,
   retrieveCandidates,
   sanitizePhase1,
   sanitizePhase2

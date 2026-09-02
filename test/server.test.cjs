@@ -63,3 +63,40 @@ test('mergeCandidateCodes boosts plan terms while retaining literal candidates',
   assert.equal(merged.picked.includes('7013370000'), true);
   assert.equal(merged.picked.length <= 16, true);
 });
+
+test('bestNgramMatches keeps the strongest match at every substring length', () => {
+  const rowsByWord = {
+    '不锈钢': [{ code: '7219' }],
+    '保温': [{ code: '9617' }],
+    '真空': Array.from({ length: 20 }, (_, index) => ({ code: 'x' + index }))
+  };
+  const matches = server.bestNgramMatches('不锈钢真空保温杯', word => rowsByWord[word] || []);
+  assert.deepEqual(matches.map(match => match.word), ['不锈钢', '保温']);
+});
+
+test('pickRetrievalGroups guarantees representation from six headings', () => {
+  const byHeading = new Map();
+  for (let heading = 1; heading <= 7; heading++) {
+    const prefix = String(heading).padStart(4, '0');
+    byHeading.set(prefix, Array.from({ length: 12 }, (_, index) => [
+      prefix + String(index).padStart(6, '0'),
+      100 - heading * 5 - index
+    ]));
+  }
+  const picked = server.pickRetrievalGroups(byHeading);
+  assert.equal(picked.length, 16);
+  assert.equal(new Set(picked.map(([code]) => code.slice(0, 4))).size, 6);
+  assert.equal(picked.filter(([code]) => code.startsWith('0001')).length, 8);
+  assert.equal(picked.some(([code]) => code.startsWith('0007')), false);
+});
+
+test('searchHs reuses candidate retrieval for long Chinese descriptions', () => {
+  const rows = server.searchHs('不锈钢保温杯');
+  assert.equal(rows.length >= 3, true);
+  assert.equal(rows.every(row => /^\d{10}$/.test(row.code)), true);
+});
+
+test('AI-planned terms can bypass the literal single-character head boost', () => {
+  const focused = server.retrieveCandidates('保温杯', [], { useHeadBoost: false });
+  assert.equal(focused[0].code.startsWith('9617'), true);
+});
