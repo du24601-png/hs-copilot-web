@@ -1,0 +1,217 @@
+{
+  "startedAt": "2026-09-03T02:45:52.917Z",
+  "completedAt": "2026-09-03T02:47:44.104Z",
+  "baseUrl": "http://127.0.0.1:7100",
+  "method": "description -> classify -> ignore questions -> decide with empty answers -> exact selectedCode match",
+  "summary": {
+    "total": 20,
+    "correct": 3,
+    "exactMatchRate": 0.15,
+    "refuses": 10,
+    "errors": 0,
+    "meanLatencyMs": 10538,
+    "p95LatencyMs": 14713
+  },
+  "results": [
+    {
+      "id": "real-001",
+      "productName": "碎干辣椒",
+      "expectedCode": "0904220000",
+      "finalCode": "0904210000",
+      "correct": false,
+      "status": "decided",
+      "latencyMs": 10010,
+      "detail": ""
+    },
+    {
+      "id": "real-002",
+      "productName": "复合微生物肥料液",
+      "expectedCode": "3105909000",
+      "finalCode": null,
+      "correct": false,
+      "status": "refused",
+      "latencyMs": 10720,
+      "detail": "候选编码均与商品不符：商品为微生物菌剂肥料，含枯草芽孢杆菌等，应归入税号31章或38章肥料项下，但候选列表仅含汽车、杀菌剂、药品等，且3002493020虽含枯草芽孢杆菌但属于单一菌种培养物，与本商品复合菌加营养素不同；380892项下为杀"
+    },
+    {
+      "id": "real-003",
+      "productName": "低养分腐植酸钾颗粒",
+      "expectedCode": "3824999999",
+      "finalCode": null,
+      "correct": false,
+      "status": "refused",
+      "latencyMs": 13116,
+      "detail": "候选列表未包含与商品实际成分（腐植酸钾）相符的编码。商品为腐植酸钾，主要用作工业添加剂，而候选均为无机盐、肥料或金属制品，无法通过HS归类规则将腐植酸钾归入上述任何编码。需补充包含腐植酸钾或类似化学混合物的候选编码（查看38章或28章），或"
+    },
+    {
+      "id": "real-004",
+      "productName": "车载充电板共模电感",
+      "expectedCode": "8504500000",
+      "finalCode": "8548000001",
+      "correct": false,
+      "status": "decided",
+      "latencyMs": 11085,
+      "detail": ""
+    },
+    {
+      "id": "real-005",
+      "productName": "10G 光发射次模块 TOSA",
+      "expectedCode": "8517799000",
+      "finalCode": "8517795000",
+      "correct": false,
+      "status": "decided",
+      "latencyMs": 14099,
+      "detail": ""
+    },
+    {
+      "id": "real-006",
+      "productName": "人工膝关节股骨髁假体",
+      "expectedCode": "9021310000",
+      "finalCode": null,
+      "correct": false,
+      "status": "refused",
+      "latencyMs": 9922,
+      "detail": "候选编码均为计算机、机械工具、陶瓷型芯等，与人工膝关节股骨髁假体（材质铸造钴铬钼合金、医用植入物）明显不符，无法选出合适编码。可能需要检索第90章医疗及外科器械下的编码。"
+    },
+    {
+      "id": "real-007",
+      "productName": "脱水苹果粒",
+      "expectedCode": "0813300000",
+      "finalCode": "0813300000",
+      "correct": true,
+      "status": "decided",
+      "latencyMs": 8587,
+      "detail": ""
+    },
+    {
+      "id": "real-008",
+      "productName": "烘烤脱荚绿豆",
+      "expectedCode": "2005519900",
+      "finalCode": "0713319000",
+      "correct": false,
+      "status": "decided",
+      "latencyMs": 14807,
+      "detail": ""
+    },
+    {
+      "id": "real-009",
+      "productName": "20% 食用醋精",
+      "expectedCode": "2106909090",
+      "finalCode": null,
+      "correct": false,
+      "status": "refused-before-decision",
+      "latencyMs": 4093,
+      "detail": "候选编码均为车辆、杀虫剂、抗萌剂、诊断试剂、熔断器、糖水溶液等，没有食醋或食品相关编码，商品与所有候选明显无关。"
+    },
+    {
+      "id": "real-010",
+      "productName": "预烧制牙科氧化锆块",
+      "expectedCode": "6914900000",
+      "finalCode": null,
+      "correct": false,
+      "status": "refused-before-decision",
+      "latencyMs": 4159,
+      "detail": "描述的商品是氧化锆陶瓷预烧坯块，用于加工牙冠，属于材料或半成品，而候选编码均为机器、监视器、假牙、螺钉等，与描述明显无关。"
+    },
+    {
+      "id": "real-011",
+      "productName": "未烧制牙科氧化锆块",
+      "expectedCode": "3824999999",
+      "finalCode": null,
+      "correct": false,
+      "status": "refused",
+      "latencyMs": 10678,
+      "detail": "候选列表中没有适用于未烧结氧化锆坯的品目。氧化锆坯属于陶瓷材料，应归入品目69.09，但候选列表无此类编码；且候选列表中包含矿砂、石墨制品、食品、贵金属合金等明显无关的编码，无法形成可靠归类。"
+    },
+    {
+      "id": "real-012",
+      "productName": "霍尔速度编码器",
+      "expectedCode": "8543709990",
+      "finalCode": "8541511900",
+      "correct": false,
+      "status": "decided",
+      "latencyMs": 9084,
+      "detail": ""
+    },
+    {
+      "id": "real-013",
+      "productName": "电动三轮液压自卸车",
+      "expectedCode": "8711600000",
+      "finalCode": null,
+      "correct": false,
+      "status": "refused",
+      "latencyMs": 12646,
+      "detail": "候选编码中无匹配商品。该车为纯电驱动、最高时速25km/h、总重570kg的载货三轮车，但候选均为汽车零件、货车（柴油/汽油）或铁道车辆等，未包含电动三轮车相应品目（如8711或8712等），且用户描述中缺少关键归类要素（如是否按非公路自卸"
+    },
+    {
+      "id": "real-014",
+      "productName": "块状马苏里拉鲜乳酪",
+      "expectedCode": "0406100000",
+      "finalCode": "0406900000",
+      "correct": false,
+      "status": "decided",
+      "latencyMs": 12680,
+      "detail": ""
+    },
+    {
+      "id": "real-015",
+      "productName": "不带导管的输液三通",
+      "expectedCode": "8481802990",
+      "finalCode": "8481909000",
+      "correct": false,
+      "status": "refused",
+      "latencyMs": 14713,
+      "detail": "候选列表中没有明确适用于医用三通旋塞的编码，且商品是否作为完整装置或零件状态不明确。候选中的8481809000可能适用，但需要确认其是否构成完整的旋塞。同时，未提供材质和专用性信息，无法在医疗仪器（9032章）或塑料制品（3926章）等其"
+    },
+    {
+      "id": "real-016",
+      "productName": "儿童尺寸迷你电动全地形车",
+      "expectedCode": "8703101100",
+      "finalCode": "8703101100",
+      "correct": true,
+      "status": "decided",
+      "latencyMs": 9706,
+      "detail": ""
+    },
+    {
+      "id": "real-017",
+      "productName": "葡萄糖脱氢酶血糖试纸",
+      "expectedCode": "3822190090",
+      "finalCode": null,
+      "correct": false,
+      "status": "refused",
+      "latencyMs": 7332,
+      "detail": "候选列表均为与家用血糖试纸无关的商品（如兽用诊断制品、计算机、激素、油漆、胶合板、杂环化合物等），无医疗器械或诊断试纸相关编码，无法匹配商品属性。"
+    },
+    {
+      "id": "real-018",
+      "productName": "单边框钢化玻璃淋浴门组件",
+      "expectedCode": "7020009990",
+      "finalCode": "7007190000",
+      "correct": false,
+      "status": "decided",
+      "latencyMs": 11542,
+      "detail": ""
+    },
+    {
+      "id": "real-019",
+      "productName": "全不锈钢框架弧形玻璃淋浴房",
+      "expectedCode": "7308300000",
+      "finalCode": null,
+      "correct": false,
+      "status": "refused",
+      "latencyMs": 9310,
+      "detail": "候选列表中没有与商品（钢化玻璃弧形门及金属框架组成的淋浴房）相符的编码。所有候选均为木制门窗、家具坐具、钢铁制门窗或塑料门窗等，无适用于玻璃淋浴房或淋浴房部件的编码。"
+    },
+    {
+      "id": "real-020",
+      "productName": "电动腔镜切割吻合器",
+      "expectedCode": "9018909911",
+      "finalCode": "9018909911",
+      "correct": true,
+      "status": "decided",
+      "latencyMs": 12469,
+      "detail": ""
+    }
+  ]
+}

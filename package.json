@@ -5,6 +5,7 @@
   "description": "HS Copilot - 智能归类工作台前端",
   "scripts": {
     "dev": "node server.js",
-    "test": "node --test --test-isolation=none test/*.test.cjs"
+    "test": "node --test --test-isolation=none test/*.test.cjs",
+    "test:real20": "node tools/test-real-products-20.cjs"
   }
 }

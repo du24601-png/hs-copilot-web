@@ -2,3 +2,4 @@ llm.config.json
 server.log
 *.db-shm
 *.db-wal
+tools/_*
