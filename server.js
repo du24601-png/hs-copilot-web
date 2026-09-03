@@ -531,16 +531,19 @@ function codesFor(text) {
   return retrieveCandidates(String(text), [], { useHeadBoost: false, suffixOnly: true }).map(c => c.code);
 }
 
-// 章节兜底：在指定章内按词检索；无词或无命中时取该章前若干条
-function codesInChapter(chapter, word) {
+// 章节兜底：依次用 核心词 → 税则同义词 → 结构词 在章内检索，全部落空则放弃本章。
+// （曾回退为「该章前 12 条」：难例消融显示 34 个规划章节里 30 个词面全落空，
+//   回退等于以权重 1.5 往候选池灌无关编码；同义词序检索在简单例上救回 9/30 章。）
+function codesInChapter(chapter, words) {
   const ch = String(chapter).replace(/\D/g, '').slice(0, 2);
   if (ch.length !== 2) return [];
-  if (word) {
+  const list = (Array.isArray(words) ? words : [words]).filter(Boolean);
+  for (const word of list) {
     const rows = db.prepare('SELECT code FROM hs_code WHERE code LIKE ? AND name LIKE ? LIMIT 30')
       .all(ch + '%', '%' + word + '%');
     if (rows.length) return rows.map(r => r.code);
   }
-  return db.prepare('SELECT code FROM hs_code WHERE code LIKE ? LIMIT 12').all(ch + '%').map(r => r.code);
+  return [];
 }
 
 const PLAN_WEIGHT = { base: 2, core: 3, alt: 2.5, chapter: 1.5, structure: 2, material: 0.5, param: 1 };
@@ -582,7 +585,7 @@ function mergeCandidateCodes(plan, baseCodes, lookupCodes = codesFor, lookupChap
   // 同义词和章节各是一个信号层：重复命中取最强贡献，避免模型多写近义词就把某个偏离品目叠高。
   bumpLayer(plan.core.alt.map(word => lookupCodes(word)), weights.alt);
   bumpLayer(plan.core.chapters.map(chapter =>
-    lookupChapterCodes(chapter, plan.core.word || plan.structure.word)), weights.chapter);
+    lookupChapterCodes(chapter, [plan.core.word, ...plan.core.alt, plan.structure.word])), weights.chapter);
   bump(lookupCodes(plan.structure.word), weights.structure);
   bump(lookupCodes(plan.material.word), weights.material);
   plan.params.filter(param => param.affectsCode && param.value)
@@ -750,5 +753,6 @@ module.exports = {
   sanitizeFreeTextForRetrieval,
   collectUnconfirmed,
   finalizeUnconfirmed,
-  noCandidateDecision
+  noCandidateDecision,
+  codesInChapter
 };

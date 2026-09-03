@@ -79,6 +79,17 @@ test('synonym aliases contribute once per layer instead of stacking duplicate hi
   assert.equal(merged.ranked[0][1], 2);
 });
 
+test('codesInChapter tries plan words in order and drops the first-12 fallback', () => {
+  // 核心词查不到时，税则同义词能救回该章（保温杯 → 保温瓶）
+  const rescued = server.codesInChapter('96', ['保温杯', '保温瓶']);
+  assert.equal(rescued.length > 0, true);
+  assert.equal(rescued.every(code => code.startsWith('96')), true);
+  assert.equal(rescued.some(code => code.startsWith('9617')), true);
+  // 全部词落空时返回空数组，不再回退成该章前 12 条噪声
+  assert.deepEqual(server.codesInChapter('96', ['不存在的词xyz']), []);
+  assert.deepEqual(server.codesInChapter('96', []), []);
+});
+
 test('bestNgramMatches keeps the strongest match at every substring length', () => {
   const rowsByWord = {
     '不锈钢': [{ code: '7219' }],
