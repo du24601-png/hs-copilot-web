@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "node server.js",
     "test": "node --test --test-isolation=none test/*.test.cjs",
+    "test:data": "python -m unittest test.test_legal_knowledge_import -v",
+    "test:all": "npm run test:data && npm test",
     "test:real20": "node tools/test-real-products-20-v2.cjs"
   }
 }

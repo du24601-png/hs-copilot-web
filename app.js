@@ -3,6 +3,7 @@
   const $ = s => document.querySelector(s);
   const $$ = s => [...document.querySelectorAll(s)];
   const confirmLogic = window.HSConfirm;
+  const decisionLogic = window.HSDecision;
 
   /* ================= 数据层 ================= */
   // 所有编码/税率/申报要素数值只来自 /api（SQLite 只读），界面层不编造数值。
@@ -69,6 +70,7 @@
   }
   function saveHistory(list) { localStorage.setItem(HKEY, JSON.stringify(list)); }
   function upsertRecord(rec) {
+    if (!decisionLogic.shouldPersistRecord(rec)) return;
     const list = loadHistory();
     const i = list.findIndex(r => r.id === rec.id);
     if (i >= 0) list[i] = rec; else list.unshift(rec);
@@ -121,12 +123,21 @@
   async function openRecord(rec) {
     if (rec.mode === 'classify') {
       session = rec;
-      if (rec.result && rec.result.p2 && rec.result.p2.hs) {
-        hsData = rec.result.p2.hs;
-        showDecisionLLM(rec.result);
+      const storedResult = decisionLogic.getStoredClassificationResult(rec);
+      if (storedResult) {
+        hsData = storedResult.p2.hs;
+        showDecisionLLM(storedResult);
       } else {
         hsData = rec.code ? await apiHs(rec.code).catch(() => null) : null;
-        showDecisionClassify();
+        if (!hsData) {
+          toast('这条历史记录未保存完整结果，请重新查询');
+          $('#homeInput').value = rec.input || rec.name || '';
+          go('home');
+          return;
+        }
+        const legacyResult = decisionLogic.buildLegacyClassificationResult(rec, hsData);
+        showDecisionLLM(legacyResult);
+        toast('这条旧记录未保存完整理由，当前仅展示真实编码核验信息');
       }
       go('decision');
     } else {
@@ -232,7 +243,6 @@
         session.code = p1.provisionalCode;
         session.codeDisplay = p1.provisional.codeDisplay;
       }
-      upsertRecord(session);
       renderConfirmDynamic();
     } catch (e) {
       classifyFallback(input, e);
@@ -437,10 +447,33 @@
       if (session) {
         session.status = '已完成';
         session.prefill = PREFILL;
+        session.result = {
+          p1,
+          p2: {
+            selectedCode: '9608992000',
+            hs: hsData,
+            reasons: [
+              '主要功能：用于平板触控输入',
+              '通信功能：不包含蓝牙、Wi-Fi 等无线通信模块',
+              '商品形态：为完整笔状商品，而不是替换零件'
+            ],
+            counterfactuals: [
+              { condition: '如果包含无线通信模块', advice: '建议重新检查 8517' },
+              { condition: '如果只是替换笔尖', advice: '需要重新判断零件编码' }
+            ],
+            alternatives: [
+              { code: '9608100000', codeDisplay: '9608.10.00.00', whyNot: '该品目要求书写装置' }
+            ],
+            unconfirmed: [],
+            legalReferences: [],
+            complianceNotices: []
+          },
+          answers
+        };
         upsertRecord(session);
       }
       hideProgress();
-      showDecisionClassify();
+      showDecisionLLM(session.result);
       go('decision');
       return;
     }
@@ -477,9 +510,6 @@
   $('#editProduct').addEventListener('click', () => go('home'));
 
   /* ================= Page 3 · 归类建议 / 编码核验 ================= */
-  const CLASSIFY_DEFAULTS = {
-    title: '归类建议', name: '其他笔及类似品', badge: '关键属性已确认', why: '为什么推荐这个编码？'
-  };
   const CF_ICONS = [
     '<svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="19.5" r="1"/></svg>',
     '<svg viewBox="0 0 24 24"><path d="M4 20l1.2-3.2L16.5 5.5a2.1 2.1 0 0 1 3 3L8.2 19.8 4 20z"/></svg>'
@@ -548,6 +578,7 @@
 
   // 归类页后续板块：先压住，理由打完后浮现
   const REVEAL_SELS = ['#unconfirmedBox', '#secCf', '#cfList', '#altBox', '.action-row', '.evidence-rail'];
+  let currentDecisionResult = null;
   function holdReveal() {
     REVEAL_SELS.forEach(sel => { const el = $(sel); if (el) { el.classList.remove('reveal-in'); el.classList.add('reveal-wait'); } });
   }
@@ -562,23 +593,29 @@
   function showDecisionLLM(result) {
     const p2 = result.p2;
     const d = p2.hs;
+    const reasons = Array.isArray(p2.reasons) ? p2.reasons : [];
+    const counterfactuals = Array.isArray(p2.counterfactuals) ? p2.counterfactuals : [];
+    const alternatives = Array.isArray(p2.alternatives) ? p2.alternatives : [];
+    currentDecisionResult = result;
     setDecisionMode('classify');
     $('#decisionTitle').textContent = '归类建议';
     $('#decisionCode').textContent = d ? d.codeDisplay : fmtCode(p2.selectedCode);
     $('#decisionName').textContent = d ? d.name : '';
     // 徽章固定文案：20 例难例实测证明 AI 自评置信度会「自信地错」（候选缺正确答案仍报 high），不再分级展示
-    $('#decisionBadge').lastChild.textContent = ' 预归类建议 · 需人工复核';
+    $('#decisionBadge').lastChild.textContent = result.legacy
+      ? ' 历史记录 · 仅保留编码'
+      : ' 预归类建议 · 需人工复核';
     if (p2.degraded) toast('AI 规划失败，本次为降级检索：结论偏差风险较高，请务必人工复核');
     $('#secWhy').textContent = '为什么推荐这个编码？';
     const unconfirmed = Array.isArray(p2.unconfirmed) ? p2.unconfirmed : [];
     $('#unconfirmedText').textContent = unconfirmed.join('、');
     $('#unconfirmedBox').classList.toggle('hidden', !unconfirmed.length);
     holdReveal();
-    renderReasons(p2.reasons.length ? p2.reasons : ['综合商品属性与税则条文比对得出'], doReveal);
+    renderReasons(reasons.length ? reasons : ['综合商品属性与税则条文比对得出'], doReveal);
 
     // 反事实：什么情况下结果会改变
-    if (p2.counterfactuals.length) {
-      $('#cfList').innerHTML = p2.counterfactuals.map((c, i) => `
+    if (counterfactuals.length) {
+      $('#cfList').innerHTML = counterfactuals.map((c, i) => `
         <li>
           ${CF_ICONS[i % CF_ICONS.length]}
           <span>${esc(c.condition)}</span>
@@ -590,7 +627,7 @@
     }
 
     // 备选编码
-    const alt = p2.alternatives[0];
+    const alt = alternatives[0];
     if (alt) {
       $('#altBox').classList.remove('hidden');
       $('#altCode').textContent = alt.codeDisplay || fmtCode(alt.code);
@@ -605,7 +642,10 @@
       $('#ev1p').textContent = d.note || d.name;
       $('#ev2t').textContent = '所属章节 · 第 ' + d.code.slice(0, 2) + ' 章';
       $('#ev2p').textContent = (d.chapter || '—') + '；申报要素共 ' + d.declareElements.length + ' 项';
-      if (alt) {
+      if (result.legacy) {
+        $('#ev3t').textContent = '历史记录说明';
+        $('#ev3p').textContent = '旧记录未保存当时的归类理由和排除候选，因此不再用演示模板补齐。';
+      } else if (alt) {
         $('#ev3t').textContent = '排除候选 · ' + (alt.codeDisplay || fmtCode(alt.code));
         $('#ev3p').textContent = alt.whyNot || '该候选编码与本商品已确认的属性不符。';
       } else {
@@ -616,48 +656,8 @@
     }
   }
 
-  // 静态兜底（演示数据）
-  function showDecisionClassify() {
-    setDecisionMode('classify');
-    clearUnconfirmed();
-    $('#decisionTitle').textContent = CLASSIFY_DEFAULTS.title;
-    $('#decisionCode').textContent = '9608.99.20.00';
-    $('#decisionName').textContent = hsData ? hsData.name : CLASSIFY_DEFAULTS.name;
-    $('#decisionBadge').lastChild.textContent = ' ' + CLASSIFY_DEFAULTS.badge;
-    $('#secWhy').textContent = CLASSIFY_DEFAULTS.why;
-    holdReveal();
-    renderReasons([
-      '主要功能：用于平板触控输入',
-      '通信功能：不包含蓝牙、Wi-Fi 等无线通信模块',
-      '商品形态：为完整笔状商品，而不是替换零件'
-    ], doReveal);
-    // 恢复静态反事实（可能被 LLM 渲染覆盖过）
-    $('#secCf').classList.remove('hidden');
-    $('#cfList').classList.remove('hidden');
-    $('#cfList').innerHTML = `
-      <li>
-        ${CF_ICONS[0]}
-        <span>如果包含无线通信模块</span>
-        <a class="link-blue cf-advice" data-advice="若含无线通信模块：建议归入 8517 项下，需重新评估">建议重新检查 8517</a>
-      </li>
-      <li>
-        ${CF_ICONS[1]}
-        <span>如果只是替换笔尖</span>
-        <a class="link-blue cf-advice" data-advice="若仅为替换笔尖：按零件重新判断编码">需要重新判断零件编码</a>
-      </li>`;
-    $('#altBox').classList.remove('hidden');
-    $('#altCode').textContent = '9608.10.00.00';
-    $('#altWhy').textContent = '未选择原因：该品目要求书写装置';
-    $('#ev1t').textContent = '海关税则 · 96.08';
-    $('#ev1p').textContent = '本品目包括各种笔，包括钢笔、圆珠笔、毡头笔、铅芯笔、记号笔、走珠笔、自动铅笔及其他笔，以及笔尖。';
-    $('#ev2t').textContent = '品目注释 · 96.08';
-    $('#ev2p').textContent = '本品目不包括仅为书写装置的零件（品目 96.10）或具有无线通信功能的设备（品目 85.17）。';
-    $('#ev3t').textContent = '排除其他候选 · 8517.xx';
-    $('#ev3p').textContent = '本商品不含无线通信模块，不符合品目 85.17 的归类要求。';
-    applyRates(hsData);
-  }
-
   function showDecisionVerify(d) {
+    currentDecisionResult = null;
     setDecisionMode('verify');
     // 核验是纯数据库查询，应即时呈现：清除打字机阶段的压住状态
     REVEAL_SELS.forEach(sel => { const el = $(sel); if (el) el.classList.remove('reveal-wait', 'reveal-in'); });
@@ -704,7 +704,28 @@
   /* ---------- 归类路径浮层 ---------- */
   const pathModal = $('#pathModal');
   const closePath = () => pathModal.classList.add('hidden');
-  $('#viewPath').addEventListener('click', () => pathModal.classList.remove('hidden'));
+  function renderClassificationPath(result) {
+    const path = decisionLogic.buildClassificationPath(result);
+    if (!path.nodes.length) return false;
+    $('#pathChain').innerHTML = path.nodes.map(node => `
+      <div class="path-row${node.final ? ' final' : ''}">
+        <div class="path-code">${esc(node.code)}</div>
+        <div class="path-info">
+          <b>${esc(node.title)}</b>
+          <p>${esc(node.description)}</p>
+          ${node.excluded ? `<div class="path-excluded">${esc(node.excluded)}</div>` : ''}
+        </div>
+      </div>`).join('');
+    $('#pathNote').textContent = path.sourceNote;
+    return true;
+  }
+  $('#viewPath').addEventListener('click', () => {
+    if (!renderClassificationPath(currentDecisionResult)) {
+      toast('当前结果没有可展示的完整归类路径');
+      return;
+    }
+    pathModal.classList.remove('hidden');
+  });
   $('#pathClose').addEventListener('click', closePath);
   $('#pathOk').addEventListener('click', closePath);
   pathModal.addEventListener('click', e => { if (e.target === pathModal) closePath(); });

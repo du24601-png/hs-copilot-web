@@ -302,41 +302,10 @@
         </button>
       </div>
 
-      <div class="path-chain">
-        <div class="path-row">
-          <div class="path-code">96</div>
-          <div class="path-info">
-            <b>第 96 章 · 杂项制品</b>
-            <p>触控笔为笔状手持输入工具，不属于机器设备，首先定位于杂项制品章。</p>
-          </div>
-        </div>
-        <div class="path-row">
-          <div class="path-code">9608</div>
-          <div class="path-info">
-            <b>品目 96.08 · 圆珠笔、毡尖笔及其他笔</b>
-            <p>符合品目 96.08 条文范围；因不含无线通信模块，排除品目 85.17（通信设备）。</p>
-            <div class="path-excluded">已排除分支：85.17 · 电话机及通信设备 —— 要求具备无线通信功能</div>
-          </div>
-        </div>
-        <div class="path-row">
-          <div class="path-code">9608.99</div>
-          <div class="path-info">
-            <b>子目 9608.99 · 其他</b>
-            <p>非圆珠笔、毡尖笔、自来水笔等列名品类，归入「其他」。</p>
-            <div class="path-excluded">已排除分支：9608.10 · 圆珠笔 —— 要求书写装置结构</div>
-          </div>
-        </div>
-        <div class="path-row final">
-          <div class="path-code">9608.99.20.00</div>
-          <div class="path-info">
-            <b>本国子目 · 其他笔及类似品</b>
-            <p>参照归类决定〔2023-045〕：电容式触控笔按「其他笔」归入本国子目 9608.99.20。</p>
-          </div>
-        </div>
-      </div>
+      <div class="path-chain" id="pathChain"></div>
 
       <div class="modal-foot">
-        <span class="modal-note">路径依据：海关税则 · 品目注释 · 归类决定（数据版本 2026-08-23）</span>
+        <span class="modal-note" id="pathNote">路径依据：海关税则数据库</span>
         <button class="btn-primary" id="pathOk">知道了</button>
       </div>
     </div>
@@ -346,6 +315,7 @@
 
 <div class="toast" id="toast"></div>
 <script src="confirm-logic.js"></script>
+<script src="decision-logic.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

@@ -2,6 +2,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 
 process.env.PORT = '0';
+process.env.LLM_API_KEY = process.env.LLM_API_KEY || 'unit-test-key';
 const handlesBeforeImport = new Set(process._getActiveHandles());
 const server = require('../server.js');
 const importedListeners = () => process._getActiveHandles().filter(handle =>
@@ -122,6 +123,14 @@ test('sanitizeComparison drops clarification when the question is malformed', ()
   assert.equal(result.question, null);
 });
 
+test('sanitizeComparison only keeps rule ids present in database context', () => {
+  const result = server.sanitizeComparison({
+    plausible_candidates: [{ code: '9617001900', reason: '真空结构' }],
+    relevant_rule_ids: ['cn_tariff_2026:gri:01', 'cn_tariff_2026:invented:99']
+  }, [{ code: '9617001900' }], ['cn_tariff_2026:gri:01']);
+  assert.deepEqual(result.relevantRuleIds, ['cn_tariff_2026:gri:01']);
+});
+
 test('sanitizeDecision clamps codes, exposes nature-change flag, refuses without selection', () => {
   const candidates = [{ code: '9617001900' }, { code: '9617009000' }];
   const result = server.sanitizeDecision({
@@ -144,6 +153,62 @@ test('sanitizeDecision clamps codes, exposes nature-change flag, refuses without
   const refused = server.sanitizeDecision({ selectedCode: '9999999999' }, candidates);
   assert.equal(refused.selectedCode, null);
   assert.equal(refused.refuse, true);
+});
+
+test('sanitizeDecision only keeps applied rule ids present in database context', () => {
+  const result = server.sanitizeDecision({
+    selectedCode: '9617001900',
+    applied_rule_ids: ['cn_tariff_2026:gri:01', 'cn_tariff_2026:invented:99']
+  }, [{ code: '9617001900' }], ['cn_tariff_2026:gri:01']);
+  assert.deepEqual(result.appliedRuleIds, ['cn_tariff_2026:gri:01']);
+});
+
+test('server legal lookup returns the scoped database context without another model call', () => {
+  const context = server.getLegalContext('鲜冻乳鸽肉', {
+    core_product: '乳鸽肉', search_terms: ['乳鸽肉'], hs_synonyms: []
+  }, [{ code: '0208901000', name: '鲜、冷、冻的乳鸽肉及食用杂碎' }]);
+  assert.equal(context.available, true);
+  assert.equal(context.griRules.length, 6);
+  assert.equal(context.scopedClauses.some(item => item.ruleType === 'national_subheading_note'), true);
+});
+
+test('candidate comparison sends the scoped rule context in its single existing model call', async () => {
+  const context = server.getLegalContext('鲜冻乳鸽肉', {
+    core_product: '乳鸽肉', search_terms: ['乳鸽肉'], hs_synonyms: []
+  }, [{ code: '0208901000', name: '鲜、冷、冻的乳鸽肉及食用杂碎' }]);
+  const national = context.scopedClauses.find(item => item.ruleType === 'national_subheading_note');
+  const originalFetch = global.fetch;
+  let callCount = 0;
+  let requestBody = null;
+  global.fetch = async (_url, options) => {
+    callCount++;
+    requestBody = JSON.parse(options.body);
+    return {
+      ok: true,
+      json: async () => ({ choices: [{ message: { content: JSON.stringify({
+        plausible_candidates: [{ code: '0208901000', reason: '本国子目定义直接命中' }],
+        key_differences: [],
+        missing_critical_information: [],
+        need_clarification: false,
+        clarification_question: null,
+        relevant_rule_ids: [national.ruleId]
+      }) } }] })
+    };
+  };
+
+  try {
+    const result = await server.compareCandidates(
+      '鲜冻乳鸽肉',
+      { core_product: '乳鸽肉', search_terms: ['乳鸽肉'], hs_synonyms: [] },
+      [{ code: '0208901000', name: '鲜、冷、冻的乳鸽肉及食用杂碎' }],
+      context
+    );
+    assert.equal(callCount, 1);
+    assert.equal(requestBody.messages[1].content.includes(national.ruleId), true);
+    assert.deepEqual(result.relevantRuleIds, [national.ruleId]);
+  } finally {
+    global.fetch = originalFetch;
+  }
 });
 
 test('sanitizeAnswers limits free text and collectUnconfirmed merges deterministic unknowns', () => {

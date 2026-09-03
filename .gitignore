@@ -5,3 +5,5 @@ server.log
 tools/_*
 tools/backup/
 tools/raw/*.pdf
+__pycache__/
+*.pyc
