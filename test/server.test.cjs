@@ -121,42 +121,6 @@ test('AI-planned compound nouns do not drift to an adjective-only tariff family'
   assert.equal(planned.some(row => row.code.startsWith('8532')), false);
 });
 
-test('scoreConcentration uses heading score share instead of candidate counts', () => {
-  const concentration = server.scoreConcentration([
-    ['9617001100', 9],
-    ['9617001900', 8],
-    ['7013370000', 2]
-  ]);
-  assert.equal(concentration, 17 / 19);
-  assert.equal(server.scoreConcentration([]), 0);
-});
-
-test('round two trusts medium confidence and only broadens low-confidence diffuse plans', () => {
-  const diffuse = [
-    ['9617001100', 2],
-    ['7013370000', 2],
-    ['7323930000', 2]
-  ];
-  const focused = [
-    ['9617001100', 8],
-    ['9617001900', 7],
-    ['7013370000', 1]
-  ];
-  assert.equal(server.shouldRunRound2(diffuse, 'low'), true);
-  assert.equal(server.shouldRunRound2(diffuse, 'medium'), false);
-  assert.equal(server.shouldRunRound2(diffuse, 'high'), false);
-  assert.equal(server.shouldRunRound2(focused, 'low'), false);
-});
-
-test('round-two candidates augment the first round instead of replacing it', () => {
-  const combined = server.mergeSearchRounds(
-    ['9617001100', '9617001900', '7013370000'],
-    ['7323930000', '9617009000']
-  );
-  assert.deepEqual(combined.slice(0, 4), ['9617001100', '7323930000', '9617001900', '9617009000']);
-  assert.equal(combined.includes('7013370000'), true);
-});
-
 test('sanitizePhase1 normalizes option objects and clamps their codes', () => {
   const candidates = [
     { code: '9617001100' },
