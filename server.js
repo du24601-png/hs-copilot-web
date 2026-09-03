@@ -254,7 +254,7 @@ try { LLM_FILE_CFG = JSON.parse(fs.readFileSync(LLM_FILE, 'utf-8')); } catch { /
 const LLM_PROVIDERS = [];
 if (Array.isArray(LLM_FILE_CFG.providers)) {
   for (const p of LLM_FILE_CFG.providers)
-    if (p && p.apiKey) LLM_PROVIDERS.push({ base: p.baseUrl, key: p.apiKey, models: p.models || [] });
+    if (p && p.apiKey) LLM_PROVIDERS.push({ base: p.baseUrl, key: p.apiKey, models: p.models || [], extraBody: p.extraBody || null });
 } else if (process.env.LLM_API_KEY || LLM_FILE_CFG.apiKey) {
   LLM_PROVIDERS.push({
     base: process.env.LLM_BASE_URL || LLM_FILE_CFG.baseUrl || 'https://opencode.ai/zen/v1',
@@ -431,6 +431,9 @@ function sanitizeDecision(raw, candidates, allowedRuleIds = []) {
 async function llmCall(provider, model, messages, useJsonMode, timeoutMs = 60000) {
   const body = { model, messages, temperature: 0 };
   if (useJsonMode) body.response_format = { type: 'json_object' };
+  // provider 可选 extraBody：合并进请求体，用于传厂商特定参数（如 DeepSeek V4 的
+  // thinking:{type:"disabled"} 关闭深度思考以提速）；默认无 extraBody 时行为不变。
+  if (provider && provider.extraBody) Object.assign(body, provider.extraBody);
   const r = await fetch(provider.base + '/chat/completions', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + provider.key },
