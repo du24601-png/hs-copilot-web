@@ -139,12 +139,18 @@
           关键属性已确认
         </div>
 
+        <div class="sec-title hidden" id="secAttrs">系统识别的商品属性</div>
+        <ul class="attr-recap hidden" id="attrRecap"></ul>
+
         <div class="sec-title" id="secWhy">为什么推荐这个编码？</div>
         <ul class="reason-list" id="reasonList">
           <li><i>01</i><div><b>主要功能：</b>用于平板触控输入</div></li>
           <li><i>02</i><div><b>通信功能：</b>不包含蓝牙、Wi-Fi 等无线通信模块</div></li>
           <li><i>03</i><div><b>商品形态：</b>为完整笔状商品，而不是替换零件</div></li>
         </ul>
+
+        <div class="sec-title hidden" id="secLegal">归类依据 · 税则原文</div>
+        <div class="legal-refs hidden" id="legalRefs"></div>
 
         <div class="unconfirmed-box hidden" id="unconfirmedBox" role="status">
           <b>仍需人工确认</b>
@@ -204,6 +210,23 @@
           </div>
           <p id="ev3p">本商品不含无线通信模块，不符合品目 85.17 的归类要求。</p>
         </div>
+        </div>
+
+        <div class="ev-card" id="evRates">
+          <div class="ev-head">
+            <span class="ev-icon"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg></span>
+            <b>税费与监管 · 2026版</b>
+          </div>
+          <ul class="tax-list" id="rateList"></ul>
+          <p class="reg-detail" id="regDetail"></p>
+        </div>
+
+        <div class="ev-card hidden" id="evCompliance">
+          <div class="ev-head">
+            <span class="ev-icon red"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></span>
+            <b>合规提示</b>
+          </div>
+          <p id="complianceText"></p>
         </div>
 
         <div id="evVerify" class="hidden">

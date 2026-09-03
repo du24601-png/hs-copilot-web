@@ -536,6 +536,52 @@
     $('#regCond').textContent = d.regConditions.length ? d.regConditions.map(r => r.code).join('') : '无';
     $('#taxDate').textContent = d.dataVersion;
     $('#dataVersion').textContent = d.dataVersion;
+    // P0：结果页完整税费（5 种）+ 监管证件名（此前结果页不展示税费/监管）
+    const rateList = $('#rateList');
+    if (rateList) {
+      const rows = [['普通税率', d.rates.general], ['最惠国税率', d.rates.mfn], ['出口税率', d.rates.export], ['消费税', d.rates.excise], ['增值税', d.rates.vat]];
+      rateList.innerHTML = rows.map(([k, v]) => `<li><span>${k}</span><b>${pct(v)}</b></li>`).join('');
+    }
+    const regDetail = $('#regDetail');
+    if (regDetail) regDetail.textContent = (d.regConditions && d.regConditions.length)
+      ? '监管条件：' + d.regConditions.map(r => r.code + '（' + r.name + '）').join('、')
+      : '监管条件：无';
+  }
+
+  // P0：结果页背景信息增强——商品属性回溯 + 归类依据原文 + 合规提示（数据 decide 已返回，此前未渲染）
+  const RULE_TYPE_LABELS = { gri: '归类总规则', section_note: '类注', chapter_note: '章注', national_subheading_note: '本国子目注释', compliance_notice: '合规提示' };
+  function renderDecisionExtras(result) {
+    const p1 = (result && result.p1) || {};
+    const p2 = (result && result.p2) || {};
+    const attrs = Array.isArray(p1.knownAttrs) ? p1.knownAttrs : [];
+    const attrBox = $('#attrRecap'), secAttrs = $('#secAttrs');
+    if (attrBox && secAttrs) {
+      if (attrs.length) {
+        attrBox.innerHTML = attrs.map(a => `<li><span>${esc(a.key)}</span><b>${esc(a.value)}</b></li>`).join('');
+        attrBox.classList.remove('hidden'); secAttrs.classList.remove('hidden');
+      } else { attrBox.classList.add('hidden'); secAttrs.classList.add('hidden'); }
+    }
+    const refs = Array.isArray(p2.legalReferences) ? p2.legalReferences : [];
+    const legalBox = $('#legalRefs'), secLegal = $('#secLegal');
+    if (legalBox && secLegal) {
+      if (refs.length) {
+        legalBox.innerHTML = refs.map(r => `
+          <div class="legal-ref">
+            <div class="legal-ref-head"><span class="legal-tag">${esc(RULE_TYPE_LABELS[r.ruleType] || r.ruleType || '规则')}</span><b>${esc(r.title || '')}</b></div>
+            ${r.excerpt ? `<p class="legal-ref-text">${esc(r.excerpt)}</p>` : ''}
+            <div class="legal-ref-src">${esc(r.sourceTitle || '海关税则数据库')}${(r.printPage || r.pdfPage) ? ' · 第 ' + esc(r.printPage || r.pdfPage) + ' 页' : ''}</div>
+          </div>`).join('');
+        legalBox.classList.remove('hidden'); secLegal.classList.remove('hidden');
+      } else { legalBox.classList.add('hidden'); secLegal.classList.add('hidden'); }
+    }
+    const notices = Array.isArray(p2.complianceNotices) ? p2.complianceNotices : [];
+    const compBox = $('#evCompliance'), compText = $('#complianceText');
+    if (compBox && compText) {
+      if (notices.length) {
+        compText.innerHTML = notices.map(n => esc(n.text || n.title || '')).join('<br>');
+        compBox.classList.remove('hidden');
+      } else { compBox.classList.add('hidden'); }
+    }
   }
 
   /* ---------- 打字机流式输出：理由一条条"写"出来 ---------- */
@@ -654,6 +700,7 @@
       }
       applyRates(d);
     }
+    renderDecisionExtras(result);
   }
 
   function showDecisionVerify(d) {
