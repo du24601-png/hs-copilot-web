@@ -146,6 +146,11 @@
           <li><i>03</i><div><b>商品形态：</b>为完整笔状商品，而不是替换零件</div></li>
         </ul>
 
+        <div class="unconfirmed-box hidden" id="unconfirmedBox" role="status">
+          <b>仍需人工确认</b>
+          <span id="unconfirmedText"></span>
+        </div>
+
         <div class="sec-title" id="secCf">什么情况下结果会改变？</div>
         <ul class="cf-list" id="cfList">
           <li>
@@ -338,6 +343,7 @@
 </main>
 
 <div class="toast" id="toast"></div>
+<script src="confirm-logic.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

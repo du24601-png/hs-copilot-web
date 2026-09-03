@@ -64,6 +64,21 @@ test('mergeCandidateCodes boosts plan terms while retaining literal candidates',
   assert.equal(merged.picked.length <= 16, true);
 });
 
+test('synonym aliases contribute once per layer instead of stacking duplicate hits', () => {
+  const plan = {
+    core: { word: '', alt: ['别名一', '别名二'], chapters: [] },
+    structure: { word: '' }, material: { word: '' }, params: [], confidence: 'high'
+  };
+  const merged = server.mergeCandidateCodes(
+    plan,
+    [],
+    () => ['7020009100'],
+    () => [],
+    { base: 0, core: 0, alt: 2, chapter: 0, structure: 0, material: 0, param: 0 }
+  );
+  assert.equal(merged.ranked[0][1], 2);
+});
+
 test('bestNgramMatches keeps the strongest match at every substring length', () => {
   const rowsByWord = {
     '不锈钢': [{ code: '7219' }],
@@ -101,6 +116,11 @@ test('AI-planned terms can bypass the literal single-character head boost', () =
   assert.equal(focused[0].code.startsWith('9617'), true);
 });
 
+test('AI-planned compound nouns do not drift to an adjective-only tariff family', () => {
+  const planned = server.retrieveCandidates('电容笔', [], { useHeadBoost: false, suffixOnly: true });
+  assert.equal(planned.some(row => row.code.startsWith('8532')), false);
+});
+
 test('scoreConcentration uses heading score share instead of candidate counts', () => {
   const concentration = server.scoreConcentration([
     ['9617001100', 9],
@@ -126,4 +146,106 @@ test('round two trusts medium confidence and only broadens low-confidence diffus
   assert.equal(server.shouldRunRound2(diffuse, 'medium'), false);
   assert.equal(server.shouldRunRound2(diffuse, 'high'), false);
   assert.equal(server.shouldRunRound2(focused, 'low'), false);
+});
+
+test('round-two candidates augment the first round instead of replacing it', () => {
+  const combined = server.mergeSearchRounds(
+    ['9617001100', '9617001900', '7013370000'],
+    ['7323930000', '9617009000']
+  );
+  assert.deepEqual(combined.slice(0, 4), ['9617001100', '7323930000', '9617001900', '9617009000']);
+  assert.equal(combined.includes('7013370000'), true);
+});
+
+test('sanitizePhase1 normalizes option objects and clamps their codes', () => {
+  const candidates = [
+    { code: '9617001100' },
+    { code: '9617001900' }
+  ];
+  const result = server.sanitizePhase1({
+    questions: [{
+      attr: '内胆材质',
+      question: '内胆是什么材质？',
+      hint: '',
+      hintPlaceholder: '   ',
+      options: [
+        { label: '玻璃内胆', codes: ['9617001100', '7323930000'] },
+        { label: '我不清楚这项', codes: ['9617001900'] }
+      ]
+    }],
+    converged: true
+  }, candidates);
+  assert.deepEqual(result.questions[0].options, [
+    { label: '玻璃内胆', codes: ['9617001100'] },
+    { label: '我不清楚这项', codes: [] }
+  ]);
+  assert.equal(result.questions[0].hintPlaceholder, '例如：请描述实际材质、结构或用途');
+  assert.equal(result.converged, false);
+});
+
+test('sanitizePhase1 only reports convergence when no valid questions remain', () => {
+  const result = server.sanitizePhase1({
+    questions: [{ question: '无效问题', options: [{ label: '' }, { label: '' }] }],
+    converged: false
+  }, []);
+  assert.deepEqual(result.questions, []);
+  assert.equal(result.converged, true);
+});
+
+test('sanitizeAnswers limits free text and collectUnconfirmed merges deterministic unknowns', () => {
+  const answers = server.sanitizeAnswers([
+    { attr: '内胆材质', answer: '以上都不是（我补充说明）', freeText: '' },
+    { attr: '功率', answer: '我不清楚这项', freeText: 'x'.repeat(260) },
+    { attr: '', answer: '无效' }
+  ]);
+  assert.equal(answers.length, 2);
+  assert.equal(answers[1].freeText.length, 200);
+  assert.deepEqual(server.collectUnconfirmed(['容量'], answers), ['内胆材质', '功率', '容量']);
+});
+
+test('deterministic unknowns take priority over model-provided unconfirmed values', () => {
+  const result = server.collectUnconfirmed(
+    ['模型1', '模型2', '模型3', '模型4', '模型5'],
+    [{ attr: '用户未确认', answer: '以上都不是', freeText: '' }]
+  );
+  assert.deepEqual(result, ['用户未确认', '模型1', '模型2', '模型3', '模型4']);
+});
+
+test('unconfirmed attributes prevent a contradictory high-confidence result', () => {
+  const result = server.finalizeUnconfirmed(
+    { confidence: 'high', unconfirmed: [] },
+    [{ attr: '内胆材质', answer: '我不清楚这项', freeText: '' }]
+  );
+  assert.equal(result.confidence, 'medium');
+  assert.deepEqual(result.unconfirmed, ['内胆材质']);
+});
+
+test('no-candidate refusal keeps the phase-two response contract', () => {
+  const result = server.noCandidateDecision([
+    { attr: '商品用途', answer: '我不清楚这项', freeText: '' }
+  ]);
+  assert.equal(result.selectedCode, null);
+  assert.equal(result.refuse, true);
+  assert.equal(result.confidence, 'low');
+  assert.deepEqual(result.unconfirmed, ['商品用途']);
+  assert.deepEqual(result.alternatives, []);
+  assert.equal(result.hs, null);
+});
+
+test('free-text retrieval removes claimed HS codes but keeps objective attributes', () => {
+  const safe = server.sanitizeFreeTextForRetrieval('客户说税则编码是 7323.93.00，HS 7323，HS号7323，税则号732393，HS：７３２３，HS Code 9608.99.20.00，建议归入732393；材质是不锈钢');
+  assert.equal(/7323|732393|9608|93\.00/.test(safe), false);
+  assert.equal(safe.includes('不锈钢'), true);
+});
+
+test('sanitizePhase2 clamps codes and exposes bounded unconfirmed attributes', () => {
+  const candidates = [{ code: '9617001900' }];
+  const result = server.sanitizePhase2({
+    selectedCode: '9617001900',
+    alternatives: [{ code: '7323930000', whyNot: '模型编造' }],
+    unconfirmed: ['内胆材质', '', 'x'.repeat(80)]
+  }, candidates);
+  assert.equal(result.selectedCode, '9617001900');
+  assert.deepEqual(result.alternatives, []);
+  assert.deepEqual(result.unconfirmed, ['内胆材质', 'x'.repeat(30)]);
 });

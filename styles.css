@@ -181,6 +181,12 @@ a.tr:hover{background:#FAFBFC}
 .q-opt.sel{border-color:var(--blue);background:var(--blue-soft)}
 .q-opt.sel .q-radio{border-color:var(--blue)}
 .q-opt.sel .q-radio::after{content:"";width:8.5px;height:8.5px;border-radius:50%;background:var(--blue)}
+.q-free-text{margin-top:2px;padding:12px;background:var(--bg);border:1px solid var(--line-soft);border-radius:10px}
+.q-free-text textarea{
+  width:100%;min-height:76px;resize:vertical;border:1px solid var(--line);border-radius:8px;
+  padding:10px 12px;background:var(--card);color:var(--ink);font:inherit;line-height:1.55;outline:none;
+}
+.q-free-text textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft)}
 .why-box{
   width:100%;margin-top:16px;padding:12px 15px;border:1px solid var(--line);border-radius:10px;
   background:var(--card);display:flex;align-items:center;justify-content:space-between;
@@ -219,6 +225,12 @@ a.tr:hover{background:#FAFBFC}
 .reason-list b{font-weight:700}
 .reason-list div{color:var(--ink-2)}
 .reason-list div b{color:var(--ink)}
+.unconfirmed-box{
+  display:flex;gap:10px;align-items:flex-start;margin-top:14px;padding:12px 14px;
+  border:1px solid #F2D2A4;border-radius:10px;background:#FFF8ED;color:#8A5A16;font-size:12.5px;line-height:1.6;
+}
+.unconfirmed-box.hidden{display:none}
+.unconfirmed-box b{white-space:nowrap;color:#7A4B0D}
 .cf-list{list-style:none;display:flex;flex-direction:column;gap:6px}
 .cf-list li{
   display:flex;align-items:center;gap:11px;padding:11px 14px;font-size:13px;

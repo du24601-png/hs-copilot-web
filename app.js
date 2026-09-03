@@ -2,6 +2,7 @@
 (function () {
   const $ = s => document.querySelector(s);
   const $$ = s => [...document.querySelectorAll(s)];
+  const confirmLogic = window.HSConfirm;
 
   /* ================= 数据层 ================= */
   // 所有编码/税率/申报要素数值只来自 /api（SQLite 只读），界面层不编造数值。
@@ -224,7 +225,7 @@
         go('home');
         return;
       }
-      dyn = { p1, qi: 0, answers: [] };
+      dyn = { p1, qi: 0, answers: [], remainingCandidates: (p1.candidates || []).slice(), candidateHistory: [], freeTextDrafts: [] };
       session.name = p1.productName || input.slice(0, 20);
       if (p1.provisional) {
         session.code = p1.provisionalCode;
@@ -245,7 +246,7 @@
       return;
     }
     toast('大模型暂不可用，已切换为演示数据');
-    dyn = { p1: STYLUS_P1, qi: 0, answers: [] };
+    dyn = { p1: STYLUS_P1, qi: 0, answers: [], remainingCandidates: [], candidateHistory: [], freeTextDrafts: [] };
     session.name = STYLUS_P1.productName;
     session.code = STYLUS_P1.provisionalCode;
     session.codeDisplay = '9608.99.20.00';
@@ -327,16 +328,21 @@
     dyn.qi = i;
     const p1 = dyn.p1;
     const q = p1.questions[i];
+    dyn.candidateHistory[i] = dyn.remainingCandidates.slice();
+    if (dyn.freeTextDrafts[i] === undefined) dyn.freeTextDrafts[i] = '';
     $('#qCount').textContent = p1.questions.length - i;
     $('#qTitle').textContent = q.question;
     $('#qSub').textContent = q.hint || '请选择最符合实际情况的一项';
-    $('#qOptions').innerHTML = q.options.map((o, j) =>
-      `<label class="q-opt"><input type="radio" name="dynq" value="${j}"><span class="q-radio"></span>${esc(o)}</label>`
-    ).join('');
+    $('#qOptions').innerHTML = q.options.map((rawOption, j) => {
+      const option = confirmLogic.normalizeOption(rawOption);
+      return `<label class="q-opt"><input type="radio" name="dynq" value="${j}"><span class="q-radio"></span>${esc(option.label)}</label>`;
+    }).join('') + '<div class="q-free-text hidden" id="qFreeTextWrap"><textarea id="qFreeText" maxlength="200" aria-label="补充说明"></textarea></div>';
+    $('#qFreeText').placeholder = q.hintPlaceholder || q.hint || '例如：请描述实际材质、结构或用途';
     $('#whyText').innerHTML = '<b>为什么要问？</b>' + esc(q.why || '该属性可能影响归类结果');
     $('#whyDetail').textContent = q.whyDetail || q.why || '';
     $('#whyDetail').classList.add('hidden');
     $('#whyBox').classList.remove('hidden', 'open');
+    $('.q-foot-note').textContent = '选择后可自动进入下一步';
     nextBtn.disabled = true;
     nextBtn.textContent = i === p1.questions.length - 1 ? '查看归类建议' : '继续';
   }
@@ -345,25 +351,50 @@
   $('#qOptions').addEventListener('click', e => {
     const opt = e.target.closest('.q-opt');
     if (!opt || !dyn) return;
+    clearTimeout(autoTimer);
+    const freeTextField = $('#qFreeText');
+    if (freeTextField) dyn.freeTextDrafts[dyn.qi] = freeTextField.value.slice(0, 200);
     $$('#qOptions .q-opt').forEach(o => o.classList.remove('sel'));
     opt.classList.add('sel');
     const q = dyn.p1.questions[dyn.qi];
-    const answer = q.options[Number(opt.querySelector('input').value)];
-    dyn.answers[dyn.qi] = { attr: q.attr, answer };
+    const option = confirmLogic.normalizeOption(q.options[Number(opt.querySelector('input').value)]);
+    const answer = option.label;
+    const freeText = confirmLogic.freeTextForOption(option, dyn.freeTextDrafts[dyn.qi]);
+    dyn.answers[dyn.qi] = { attr: q.attr, answer, freeText };
+    dyn.remainingCandidates = confirmLogic.applyAnswer(dyn.candidateHistory[dyn.qi] || [], option);
     const w = $('#dynAttr' + dyn.qi);
     if (w) {
       w.textContent = answer;
-      w.classList.toggle('pending', /不确定/.test(answer));
+      w.classList.toggle('pending', confirmLogic.isUnknownAnswer(answer));
     }
+    const needsFreeText = confirmLogic.isFreeTextAnswer(answer);
+    $('#qFreeTextWrap').classList.toggle('hidden', !needsFreeText);
+    $('.q-foot-note').textContent = needsFreeText ? '可补充说明，也可直接继续' : '选择后可自动进入下一步';
     nextBtn.disabled = false;
-    clearTimeout(autoTimer);
-    autoTimer = setTimeout(stepConfirm, 600);
+    if (needsFreeText) {
+      $('#qFreeText').value = freeText;
+      $('#qFreeText').focus();
+    }
+    else autoTimer = setTimeout(stepConfirm, 600);
+  });
+
+  $('#qOptions').addEventListener('input', e => {
+    if (!dyn || e.target.id !== 'qFreeText') return;
+    dyn.freeTextDrafts[dyn.qi] = e.target.value.slice(0, 200);
+    const answer = dyn.answers[dyn.qi];
+    if (answer) answer.freeText = confirmLogic.freeTextForOption(answer, dyn.freeTextDrafts[dyn.qi]);
   });
 
   function stepConfirm() {
     clearTimeout(autoTimer);
     if (!dyn) return;
-    if (dyn.qi < dyn.p1.questions.length - 1) {
+    const answers = dyn.answers.filter(Boolean);
+    const stop = confirmLogic.shouldStopConfirm({
+      remaining: dyn.remainingCandidates,
+      answers,
+      answeredCount: answers.length
+    });
+    if (!stop && dyn.qi < dyn.p1.questions.length - 1) {
       renderQuestion(dyn.qi + 1);
     } else {
       // 最后一题答完：切换为「生成归类建议」进度
@@ -373,12 +404,16 @@
   }
   nextBtn.addEventListener('click', stepConfirm);
 
-  // 申报要素预填：答案含「不确定」的跳过；先精确匹配，再（key≥3 字）包含匹配
+  // 申报要素预填：不清楚的答案跳过；“以上都不是”仅使用用户实际补充的文本。
   function buildPrefill(elements, knownAttrs, answers) {
     const map = {};
     const src = [];
     (knownAttrs || []).forEach(a => src.push(a));
-    (answers || []).forEach(a => { if (a && !/不确定/.test(a.answer)) src.push({ key: a.attr, value: a.answer }); });
+    (answers || []).forEach(a => {
+      if (!a || confirmLogic.isUnknownAnswer(a)) return;
+      const value = confirmLogic.isFreeTextAnswer(a) ? String(a.freeText || '').trim() : a.answer;
+      if (value) src.push({ key: a.attr, value });
+    });
     (elements || []).forEach(el => {
       const core = el.replace(/（.*?）/g, '');
       for (const s of src) {
@@ -449,12 +484,18 @@
     '<svg viewBox="0 0 24 24"><path d="M4 20l1.2-3.2L16.5 5.5a2.1 2.1 0 0 1 3 3L8.2 19.8 4 20z"/></svg>'
   ];
 
+  function clearUnconfirmed() {
+    $('#unconfirmedText').textContent = '';
+    $('#unconfirmedBox').classList.add('hidden');
+  }
+
   function setDecisionMode(mode) {
     const isClassify = mode === 'classify';
     ['secCf', 'cfList', 'altBox'].forEach(id => $('#' + id).classList.toggle('hidden', !isClassify));
     $('#evClassify').classList.toggle('hidden', !isClassify);
     $('#evVerify').classList.toggle('hidden', isClassify);
     $('#viewPath').style.display = isClassify ? '' : 'none';
+    if (!isClassify) clearUnconfirmed();
   }
 
   function applyRates(d) {
@@ -505,7 +546,7 @@
   }
 
   // 归类页后续板块：先压住，理由打完后浮现
-  const REVEAL_SELS = ['#secCf', '#cfList', '#altBox', '.action-row', '.evidence-rail'];
+  const REVEAL_SELS = ['#unconfirmedBox', '#secCf', '#cfList', '#altBox', '.action-row', '.evidence-rail'];
   function holdReveal() {
     REVEAL_SELS.forEach(sel => { const el = $(sel); if (el) { el.classList.remove('reveal-in'); el.classList.add('reveal-wait'); } });
   }
@@ -527,6 +568,9 @@
     const badgeMap = { high: '关键属性已确认', medium: '建议人工复核', low: '低置信度 · 请人工复核' };
     $('#decisionBadge').lastChild.textContent = ' ' + (badgeMap[p2.confidence] || badgeMap.low);
     $('#secWhy').textContent = '为什么推荐这个编码？';
+    const unconfirmed = Array.isArray(p2.unconfirmed) ? p2.unconfirmed : [];
+    $('#unconfirmedText').textContent = unconfirmed.join('、');
+    $('#unconfirmedBox').classList.toggle('hidden', !unconfirmed.length);
     holdReveal();
     renderReasons(p2.reasons.length ? p2.reasons : ['综合商品属性与税则条文比对得出'], doReveal);
 
@@ -573,6 +617,7 @@
   // 静态兜底（演示数据）
   function showDecisionClassify() {
     setDecisionMode('classify');
+    clearUnconfirmed();
     $('#decisionTitle').textContent = CLASSIFY_DEFAULTS.title;
     $('#decisionCode').textContent = '9608.99.20.00';
     $('#decisionName').textContent = hsData ? hsData.name : CLASSIFY_DEFAULTS.name;
