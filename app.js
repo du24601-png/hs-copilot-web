@@ -561,18 +561,24 @@
         attrBox.classList.remove('hidden'); secAttrs.classList.remove('hidden');
       } else { attrBox.classList.add('hidden'); secAttrs.classList.add('hidden'); }
     }
+    // B：归类依据优先展示 codeBasis（本国子目注释 + 章注点名该品目的条款，具体可核验）；
+    // 无针对性依据时依次回退 LLM 引用的非 GRI 规则、GRI（通用方法）；都无则诚实提示。
+    const basis = Array.isArray(p2.codeBasis) ? p2.codeBasis : [];
     const refs = Array.isArray(p2.legalReferences) ? p2.legalReferences : [];
+    let items = basis.map(b => ({ label: b.label, title: b.title, text: b.text, page: b.printPage || b.pdfPage }));
+    if (!items.length) items = refs.filter(r => r.ruleType !== 'gri').map(r => ({ label: RULE_TYPE_LABELS[r.ruleType] || r.ruleType, title: r.title, text: r.excerpt, page: r.printPage || r.pdfPage }));
+    if (!items.length) items = refs.filter(r => r.ruleType === 'gri').map(r => ({ label: '归类总规则（通用方法）', title: r.title, text: r.excerpt, page: r.printPage || r.pdfPage }));
     const legalBox = $('#legalRefs'), secLegal = $('#secLegal');
     if (legalBox && secLegal) {
-      if (refs.length) {
-        legalBox.innerHTML = refs.map(r => `
+      legalBox.innerHTML = items.length
+        ? items.map(r => `
           <div class="legal-ref">
-            <div class="legal-ref-head"><span class="legal-tag">${esc(RULE_TYPE_LABELS[r.ruleType] || r.ruleType || '规则')}</span><b>${esc(r.title || '')}</b></div>
-            ${r.excerpt ? `<p class="legal-ref-text">${esc(r.excerpt)}</p>` : ''}
-            <div class="legal-ref-src">${esc(r.sourceTitle || '海关税则数据库')}${(r.printPage || r.pdfPage) ? ' · 第 ' + esc(r.printPage || r.pdfPage) + ' 页' : ''}</div>
-          </div>`).join('');
-        legalBox.classList.remove('hidden'); secLegal.classList.remove('hidden');
-      } else { legalBox.classList.add('hidden'); secLegal.classList.add('hidden'); }
+            <div class="legal-ref-head"><span class="legal-tag">${esc(r.label || '依据')}</span>${r.title ? `<b>${esc(r.title)}</b>` : ''}</div>
+            ${r.text ? `<p class="legal-ref-text">${esc(r.text)}</p>` : ''}
+            <div class="legal-ref-src">《中华人民共和国进出口税则（2026）》${r.page ? ' · 第 ' + esc(String(r.page)) + ' 页' : ''}</div>
+          </div>`).join('')
+        : `<div class="legal-ref"><p class="legal-ref-text">该编码暂无针对性的本国子目注释或章注条款；归类依据为其税目条文与商品名称。</p></div>`;
+      legalBox.classList.remove('hidden'); secLegal.classList.remove('hidden');
     }
     const notices = Array.isArray(p2.complianceNotices) ? p2.complianceNotices : [];
     const compBox = $('#evCompliance'), compText = $('#complianceText');

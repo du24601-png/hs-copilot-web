@@ -788,6 +788,10 @@ async function apiDecide(res, body) {
       return { ...a, codeDisplay: row ? row.codeDisplay : a.code, name: row ? row.name : '' };
     });
     decision.legalReferences = publicReferences(session.legalContext, decision.appliedRuleIds);
+    // B：按选中编码主动检索最具体的归类依据（本国子目注释 + 本章章注点名该品目的条款），
+    // 不依赖 LLM 引用的 appliedRuleIds，替代结果页泛泛的 GRI 总规则。
+    decision.codeBasis = (legalKnowledge.available && decision.selectedCode)
+      ? legalKnowledge.queryCodeBasis(decision.selectedCode) : [];
     decision.complianceNotices = publicNotices(session.legalContext);
     if (DEBUG) decision.stats = { llmCalls, reRetrieved, candidateCount: candidates.length };
     send(res, 200, decision);

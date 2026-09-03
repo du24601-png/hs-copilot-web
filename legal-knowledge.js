@@ -345,7 +345,35 @@ function createLegalKnowledgeRepository(db) {
     });
   }
 
-  return { available, queryForCandidates };
+  // B（归类依据增强）：针对选中编码，从现有数据库主动检索最具体的依据——
+  // ① 该 8 位子目的本国子目注释；② 本品目所属章的章注中点名该品目(如"85.17")的条款。
+  // 不依赖 LLM 引用的 appliedRuleIds，避免结果页只显示泛泛的 GRI 总规则。
+  function queryCodeBasis(selectedCode) {
+    const code = String(selectedCode || '').replace(/\D/g, '');
+    if (!available || code.length !== 10) return [];
+    const chapter = code.slice(0, 2), heading = code.slice(0, 4), sub8 = code.slice(0, 8);
+    const pat = chapter + '.' + heading.slice(2); // 如 "85.17"
+    const basis = [];
+    try {
+      const nat = db.prepare(
+        `SELECT r.rule_id,r.title,r.full_text,r.print_page,r.pdf_page
+         FROM legal_rule r JOIN legal_rule_scope s ON s.rule_id=r.rule_id
+         WHERE r.source_id=? AND r.rule_type='national_subheading_note' AND r.status='active'
+           AND s.scope_type='subheading8' AND s.scope_ref=?`).all(SOURCE_ID, sub8);
+      for (const n of nat) basis.push({ kind: 'national_subheading_note', label: '本国子目注释', ruleId: n.rule_id, title: n.title, text: n.full_text, printPage: n.print_page, pdfPage: n.pdf_page });
+    } catch { /* 表缺失或查询异常，忽略 */ }
+    try {
+      const chm = db.prepare(
+        `SELECT DISTINCT c.rule_id,c.clause_text,r.title,r.print_page,r.pdf_page
+         FROM legal_clause c JOIN legal_rule r ON r.rule_id=c.rule_id JOIN legal_rule_scope s ON s.rule_id=r.rule_id
+         WHERE r.source_id=? AND r.rule_type='chapter_note' AND r.status='active'
+           AND s.scope_type='chapter' AND s.scope_ref=? AND c.clause_text LIKE ?`).all(SOURCE_ID, chapter, '%' + pat + '%');
+      for (const c of chm) basis.push({ kind: 'chapter_note', label: '章注·第' + Number(chapter) + '章', ruleId: c.rule_id, title: c.title, text: c.clause_text, printPage: c.print_page, pdfPage: c.pdf_page });
+    } catch { /* 忽略 */ }
+    return basis;
+  }
+
+  return { available, queryForCandidates, queryCodeBasis };
 }
 
 function formatLegalContext(context) {
