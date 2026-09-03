@@ -601,19 +601,21 @@ function mergeCandidateCodes(plan, baseCodes, lookupCodes = codesFor, lookupChap
    消融实验（node tools/ablation.cjs）累计 3 次触发、0 次改变候选排名，故删除。
    恢复条件：30 条真值集上出现「正确品目完全不进候选池」且确认是词面脱节所致时，再考虑加回。 */
 
-// 检索候选：AI 四层规划与原始字面检索并行发起，分别检索后加权合并
+// 检索候选：AI 四层规划与原始字面检索并行发起，分别检索后加权合并。
+// 返回 { rows, degraded }：degraded=true 表示 AI 规划失败、已退化为纯字面检索，
+// 调用方需把该标记透传给前端（真实案例：规划 JSON 解析失败时候选全是无关品目）。
 async function candidatesFor(query) {
   const t0 = Date.now();
   const [plan, base] = await Promise.all([
     llmPlan(query).catch(e => { console.warn('[plan]', e.message); return null; }),
     Promise.resolve(retrieveCandidates(query))
   ]);
-  if (!plan) return base;
+  if (!plan) return { rows: base, degraded: true };
 
   const merged = mergeCandidateCodes(plan, base.map(c => c.code));
   console.log('[plan]', JSON.stringify(plan), (Date.now() - t0) + 'ms');
   const rows = merged.picked.map(getHsRow).filter(Boolean);
-  return rows.length ? rows : base;
+  return { rows: rows.length ? rows : base, degraded: false };
 }
 
 const classifyCache = new Map(); // query -> {ts, payload}（P1 结果缓存）
@@ -629,7 +631,7 @@ async function apiClassify(res, query) {
   if (hit && Date.now() - hit.ts < 86400e3) return send(res, 200, hit.payload);
 
   try {
-    const candidates = await candidatesFor(query);
+    const { rows: candidates, degraded } = await candidatesFor(query);
     if (!candidates.length)
       return send(res, 200, { refuse: true, refuseReason: '数据库中检索不到相关候选编码，请补充更具体的商品描述', candidates: [], questions: [], knownAttrs: [], converged: false });
     const raw = await llmPhase1(query, candidates);
@@ -637,6 +639,7 @@ async function apiClassify(res, query) {
     result.candidates = candidates.map(c => ({ code: c.code, codeDisplay: c.codeDisplay, name: c.name }));
     // 预选编码的权威数据从数据库取
     result.provisional = result.provisionalCode ? getHsRow(result.provisionalCode) : null;
+    result.degraded = degraded;
     classifyCache.set(query, { ts: Date.now(), payload: result });
     send(res, 200, result);
   } catch (e) {
@@ -659,12 +662,13 @@ async function apiDecide(res, body) {
   try {
     const supplements = answers.map(answer => sanitizeFreeTextForRetrieval(answer.freeText)).filter(Boolean).join(' ');
     const retrievalQuery = supplements ? query + '\n补充属性：' + supplements : query;
-    const candidates = await candidatesFor(retrievalQuery);
+    const { rows: candidates, degraded } = await candidatesFor(retrievalQuery);
     if (!candidates.length)
       return send(res, 200, noCandidateDecision(answers));
     const raw = await llmPhase2(query, knownAttrs, answers, candidates);
     const result = sanitizePhase2(raw, candidates);
     finalizeUnconfirmed(result, answers);
+    result.degraded = degraded;
     // 结论编码的权威数据（名称/税率/要素）从数据库取，不采用 LLM 的任何数值
     result.hs = result.selectedCode ? getHsRow(result.selectedCode) : null;
     result.alternatives = result.alternatives.map(a => {

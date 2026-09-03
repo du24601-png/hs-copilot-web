@@ -226,6 +226,7 @@
         return;
       }
       dyn = { p1, qi: 0, answers: [], remainingCandidates: (p1.candidates || []).slice(), candidateHistory: [], freeTextDrafts: [] };
+      if (p1.degraded) toast('AI 规划失败，已降级为字面检索：候选可能偏差较大，建议缩短描述后重试');
       session.name = p1.productName || input.slice(0, 20);
       if (p1.provisional) {
         session.code = p1.provisionalCode;
@@ -565,8 +566,9 @@
     $('#decisionTitle').textContent = '归类建议';
     $('#decisionCode').textContent = d ? d.codeDisplay : fmtCode(p2.selectedCode);
     $('#decisionName').textContent = d ? d.name : '';
-    const badgeMap = { high: '关键属性已确认', medium: '建议人工复核', low: '低置信度 · 请人工复核' };
-    $('#decisionBadge').lastChild.textContent = ' ' + (badgeMap[p2.confidence] || badgeMap.low);
+    // 徽章固定文案：20 例难例实测证明 AI 自评置信度会「自信地错」（候选缺正确答案仍报 high），不再分级展示
+    $('#decisionBadge').lastChild.textContent = ' 预归类建议 · 需人工复核';
+    if (p2.degraded) toast('AI 规划失败，本次为降级检索：结论偏差风险较高，请务必人工复核');
     $('#secWhy').textContent = '为什么推荐这个编码？';
     const unconfirmed = Array.isArray(p2.unconfirmed) ? p2.unconfirmed : [];
     $('#unconfirmedText').textContent = unconfirmed.join('、');
