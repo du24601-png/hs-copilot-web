@@ -1,16 +1,16 @@
 {
-  "startedAt": "2026-09-03T02:45:52.917Z",
-  "completedAt": "2026-09-03T02:47:44.104Z",
+  "startedAt": "2026-09-03T04:19:23.333Z",
+  "completedAt": "2026-09-03T04:20:20.486Z",
   "baseUrl": "http://127.0.0.1:7100",
   "method": "description -> classify -> ignore questions -> decide with empty answers -> exact selectedCode match",
   "summary": {
     "total": 20,
-    "correct": 3,
-    "exactMatchRate": 0.15,
+    "correct": 2,
+    "exactMatchRate": 0.1,
     "refuses": 10,
     "errors": 0,
-    "meanLatencyMs": 10538,
-    "p95LatencyMs": 14713
+    "meanLatencyMs": 5540,
+    "p95LatencyMs": 8793
   },
   "results": [
     {
@@ -20,7 +20,7 @@
       "finalCode": "0904210000",
       "correct": false,
       "status": "decided",
-      "latencyMs": 10010,
+      "latencyMs": 8549,
       "detail": ""
     },
     {
@@ -30,8 +30,8 @@
       "finalCode": null,
       "correct": false,
       "status": "refused",
-      "latencyMs": 10720,
-      "detail": "候选编码均与商品不符：商品为微生物菌剂肥料，含枯草芽孢杆菌等，应归入税号31章或38章肥料项下，但候选列表仅含汽车、杀菌剂、药品等，且3002493020虽含枯草芽孢杆菌但属于单一菌种培养物，与本商品复合菌加营养素不同；380892项下为杀"
+      "latencyMs": 6666,
+      "detail": "候选列表缺失微生物肥料或土壤调理剂编码，菌液符合HS3101或3824类，无法从现有候选中选择。"
     },
     {
       "id": "real-003",
@@ -40,8 +40,8 @@
       "finalCode": null,
       "correct": false,
       "status": "refused",
-      "latencyMs": 13116,
-      "detail": "候选列表未包含与商品实际成分（腐植酸钾）相符的编码。商品为腐植酸钾，主要用作工业添加剂，而候选均为无机盐、肥料或金属制品，无法通过HS归类规则将腐植酸钾归入上述任何编码。需补充包含腐植酸钾或类似化学混合物的候选编码（查看38章或28章），或"
+      "latencyMs": 4300,
+      "detail": "候选列表中的编码均为无机化学品、肥料或金属制品，而商品为褐煤与氢氧化钾反应生成的腐植酸钾类产品，其材质、成分和用途与所有候选明显不符，且用户未提供可对应到现有候选编码的属性。无法可靠归类ISO编码。"
     },
     {
       "id": "real-004",
@@ -50,7 +50,7 @@
       "finalCode": "8548000001",
       "correct": false,
       "status": "decided",
-      "latencyMs": 11085,
+      "latencyMs": 5475,
       "detail": ""
     },
     {
@@ -60,7 +60,7 @@
       "finalCode": "8517795000",
       "correct": false,
       "status": "decided",
-      "latencyMs": 14099,
+      "latencyMs": 9043,
       "detail": ""
     },
     {
@@ -70,8 +70,8 @@
       "finalCode": null,
       "correct": false,
       "status": "refused",
-      "latencyMs": 9922,
-      "detail": "候选编码均为计算机、机械工具、陶瓷型芯等，与人工膝关节股骨髁假体（材质铸造钴铬钼合金、医用植入物）明显不符，无法选出合适编码。可能需要检索第90章医疗及外科器械下的编码。"
+      "latencyMs": 3625,
+      "detail": "候选列表中没有与人工膝关节股骨髁假体相关的编码，所有编码均涉及计算机、工具、车辆零件、印刷设备、化学品等，与医疗器械无关。"
     },
     {
       "id": "real-007",
@@ -80,18 +80,18 @@
       "finalCode": "0813300000",
       "correct": true,
       "status": "decided",
-      "latencyMs": 8587,
+      "latencyMs": 4714,
       "detail": ""
     },
     {
       "id": "real-008",
       "productName": "烘烤脱荚绿豆",
       "expectedCode": "2005519900",
-      "finalCode": "0713319000",
+      "finalCode": null,
       "correct": false,
-      "status": "decided",
-      "latencyMs": 14807,
-      "detail": ""
+      "status": "refused",
+      "latencyMs": 8647,
+      "detail": "候选列表缺乏能涵盖烘烤绿豆且非罐头、非醋制的编码；现有0713仅限未烤干豆，第20章多为罐头或特定植物，均不适用"
     },
     {
       "id": "real-009",
@@ -100,7 +100,7 @@
       "finalCode": null,
       "correct": false,
       "status": "refused-before-decision",
-      "latencyMs": 4093,
+      "latencyMs": 2,
       "detail": "候选编码均为车辆、杀虫剂、抗萌剂、诊断试剂、熔断器、糖水溶液等，没有食醋或食品相关编码，商品与所有候选明显无关。"
     },
     {
@@ -110,7 +110,7 @@
       "finalCode": null,
       "correct": false,
       "status": "refused-before-decision",
-      "latencyMs": 4159,
+      "latencyMs": 2,
       "detail": "描述的商品是氧化锆陶瓷预烧坯块，用于加工牙冠，属于材料或半成品，而候选编码均为机器、监视器、假牙、螺钉等，与描述明显无关。"
     },
     {
@@ -120,8 +120,8 @@
       "finalCode": null,
       "correct": false,
       "status": "refused",
-      "latencyMs": 10678,
-      "detail": "候选列表中没有适用于未烧结氧化锆坯的品目。氧化锆坯属于陶瓷材料，应归入品目69.09，但候选列表无此类编码；且候选列表中包含矿砂、石墨制品、食品、贵金属合金等明显无关的编码，无法形成可靠归类。"
+      "latencyMs": 3737,
+      "detail": "候选列表中的编码均与商品明显不符：商品为未烧结的氧化锆坯（主要成分为氧化锆），候选编码仅包含石墨制品、玻璃毛坯、金属加工机械、矿砂、碳化钨、可可制品、肥皂、银合金、油类等，均非陶瓷或玻璃制品，且无氧化锆相关的品目。无法从列表中选出合适的10"
     },
     {
       "id": "real-012",
@@ -130,18 +130,18 @@
       "finalCode": "8541511900",
       "correct": false,
       "status": "decided",
-      "latencyMs": 9084,
+      "latencyMs": 5277,
       "detail": ""
     },
     {
       "id": "real-013",
       "productName": "电动三轮液压自卸车",
       "expectedCode": "8711600000",
-      "finalCode": null,
+      "finalCode": "8709119000",
       "correct": false,
-      "status": "refused",
-      "latencyMs": 12646,
-      "detail": "候选编码中无匹配商品。该车为纯电驱动、最高时速25km/h、总重570kg的载货三轮车，但候选均为汽车零件、货车（柴油/汽油）或铁道车辆等，未包含电动三轮车相应品目（如8711或8712等），且用户描述中缺少关键归类要素（如是否按非公路自卸"
+      "status": "decided",
+      "latencyMs": 8793,
+      "detail": ""
     },
     {
       "id": "real-014",
@@ -150,18 +150,18 @@
       "finalCode": "0406900000",
       "correct": false,
       "status": "decided",
-      "latencyMs": 12680,
+      "latencyMs": 8223,
       "detail": ""
     },
     {
       "id": "real-015",
       "productName": "不带导管的输液三通",
       "expectedCode": "8481802990",
-      "finalCode": "8481909000",
+      "finalCode": "8481809000",
       "correct": false,
-      "status": "refused",
-      "latencyMs": 14713,
-      "detail": "候选列表中没有明确适用于医用三通旋塞的编码，且商品是否作为完整装置或零件状态不明确。候选中的8481809000可能适用，但需要确认其是否构成完整的旋塞。同时，未提供材质和专用性信息，无法在医疗仪器（9032章）或塑料制品（3926章）等其"
+      "status": "decided",
+      "latencyMs": 5629,
+      "detail": ""
     },
     {
       "id": "real-016",
@@ -170,7 +170,7 @@
       "finalCode": "8703101100",
       "correct": true,
       "status": "decided",
-      "latencyMs": 9706,
+      "latencyMs": 5806,
       "detail": ""
     },
     {
@@ -180,18 +180,18 @@
       "finalCode": null,
       "correct": false,
       "status": "refused",
-      "latencyMs": 7332,
-      "detail": "候选列表均为与家用血糖试纸无关的商品（如兽用诊断制品、计算机、激素、油漆、胶合板、杂环化合物等），无医疗器械或诊断试纸相关编码，无法匹配商品属性。"
+      "latencyMs": 5045,
+      "detail": "候选列表中无任何与血糖试纸相关的编码，所选候选均涉及动物诊断制品、计算机、有机化学品、油漆等，明显不匹配。"
     },
     {
       "id": "real-018",
       "productName": "单边框钢化玻璃淋浴门组件",
       "expectedCode": "7020009990",
-      "finalCode": "7007190000",
+      "finalCode": null,
       "correct": false,
-      "status": "decided",
-      "latencyMs": 11542,
-      "detail": ""
+      "status": "refused",
+      "latencyMs": 5230,
+      "detail": "候选列表中缺乏与淋浴隔断相关的HS编码，所有编码均属于玻璃板、显示器、电子废弃物或钢铁卷板等，明显不满足商品属性。在未提供品目73.02、84.19或70.16等可能相关选项之前，无法可靠归类。"
     },
     {
       "id": "real-019",
@@ -200,17 +200,17 @@
       "finalCode": null,
       "correct": false,
       "status": "refused",
-      "latencyMs": 9310,
-      "detail": "候选列表中没有与商品（钢化玻璃弧形门及金属框架组成的淋浴房）相符的编码。所有候选均为木制门窗、家具坐具、钢铁制门窗或塑料门窗等，无适用于玻璃淋浴房或淋浴房部件的编码。"
+      "latencyMs": 5523,
+      "detail": "候选列表中均为木窗木门、金属门窗、塑料门窗、坐具、钢铁带材或车辆底盘等，并无对应淋浴房的品目。商品为玻璃淋浴房（含玻璃隔挡和金属框架），应考虑按玻璃制品或金属结构件归类，但候选无此类编码，无法从现有列表中选择。"
     },
     {
       "id": "real-020",
       "productName": "电动腔镜切割吻合器",
       "expectedCode": "9018909911",
-      "finalCode": "9018909911",
-      "correct": true,
+      "finalCode": "9018908000",
+      "correct": false,
       "status": "decided",
-      "latencyMs": 12469,
+      "latencyMs": 6511,
       "detail": ""
     }
   ]
