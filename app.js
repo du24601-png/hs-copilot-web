@@ -693,7 +693,13 @@
     const a = e.target.closest('.cf-advice');
     if (a) toast(a.dataset.advice);
   });
-  $('#verifyLink').addEventListener('click', () => toast('将跳转海关政务服务平台核验入口'));
+  // 海关官网核验：href 直达海关总署「进出口商品税率查询」（新标签）；
+  // 点击时顺手把当前编码复制到剪贴板，粘贴即可查询
+  $('#verifyLink').addEventListener('click', () => {
+    const digits = $('#decisionCode').textContent.replace(/\D/g, '');
+    if (digits.length === 10) copyText(digits, '已打开海关官网核验页，编码 ' + digits + ' 已复制，可直接粘贴查询');
+    else toast('已打开海关官网核验页');
+  });
 
   /* ---------- 归类路径浮层 ---------- */
   const pathModal = $('#pathModal');

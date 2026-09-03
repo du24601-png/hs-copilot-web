@@ -233,12 +233,12 @@ a.tr:hover{background:#FAFBFC}
 .unconfirmed-box b{white-space:nowrap;color:#7A4B0D}
 .cf-list{list-style:none;display:flex;flex-direction:column;gap:6px}
 .cf-list li{
-  display:flex;align-items:center;gap:11px;padding:11px 14px;font-size:13px;
+  display:flex;align-items:flex-start;flex-wrap:wrap;gap:4px 11px;padding:11px 14px;font-size:13px;
   background:#FAFBFC;border:1px solid var(--line-soft);border-radius:10px;
 }
-.cf-list li>svg{width:16px;height:16px;stroke:var(--ink-3);fill:none;stroke-width:1.6;flex:none}
-.cf-list li span{color:var(--ink-2)}
-.cf-list .link-blue{margin-left:auto;white-space:nowrap}
+.cf-list li>svg{width:16px;height:16px;stroke:var(--ink-3);fill:none;stroke-width:1.6;flex:none;margin-top:2px}
+.cf-list li span{color:var(--ink-2);flex:1;min-width:0;line-height:1.6}
+.cf-list .link-blue{flex:1 1 100%;margin-left:27px;white-space:normal;line-height:1.6}
 .alt-box{margin-top:14px;background:#FAFBFC;border:1px solid var(--line-soft);border-radius:10px;padding:14px 16px}
 .alt-head{font-size:12px;color:var(--ink-3);margin-bottom:6px}
 .alt-code{font-family:var(--mono);font-size:15px;font-weight:700}
