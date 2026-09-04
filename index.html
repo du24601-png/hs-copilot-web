@@ -137,14 +137,14 @@
   <section class="view hidden" id="view-decision">
     <div class="page-grid decision-grid">
       <div class="card decision-card">
-        <div class="card-title" id="decisionTitle">归类建议</div>
+        <div class="decision-eyebrow" id="decisionTitle">归类建议</div>
+        <div class="decision-name" id="decisionName">其他笔及类似品</div>
         <div class="code-hero">
           <span class="code-big" id="decisionCode">9608.99.20.00</span>
           <button class="icon-btn" id="copyCodeBtn" title="Copy HS Code">
             <svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
           </button>
         </div>
-        <div class="code-name" id="decisionName">其他笔及类似品</div>
         <div class="badge-ok" id="decisionBadge">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
           关键属性已确认
@@ -218,7 +218,7 @@
 
         <div class="ev-card">
           <div class="ev-head">
-            <span class="ev-icon red"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg></span>
+            <span class="ev-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg></span>
             <b id="ev3t">排除其他候选 · 8517.xx</b>
           </div>
           <p id="ev3p">本商品不含无线通信模块，不符合品目 85.17 的归类要求。</p>
@@ -232,6 +232,7 @@
           </div>
           <ul class="tax-list" id="rateList"></ul>
           <p class="reg-detail" id="regDetail"></p>
+          <div class="rate-src">数据来源：海关总署 · <span id="dataVersion">2026-08-23</span></div>
         </div>
 
         <div class="ev-card hidden" id="evCompliance">
@@ -264,7 +265,6 @@
            target="_blank" rel="noopener noreferrer">在海关官网核验
           <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
         </a>
-        <div class="data-version">数据版本：<span id="dataVersion">2026-08-23</span></div>
       </aside>
     </div>
   </section>
