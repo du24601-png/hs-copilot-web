@@ -1,0 +1,9 @@
+{
+  "providers": [
+    {
+      "baseUrl": "https://api.deepseek.com",
+      "apiKey": "",
+      "models": ["REPLACE_WITH_YOUR_MODEL_ID"]
+    }
+  ]
+}

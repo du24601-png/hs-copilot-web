@@ -1,12 +1,54 @@
-llm.config.json
-server.log
+# Local credentials (commit only the sanitized example)
+llm.config*.json
+!llm.config.example.json
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Dependencies, logs and generated output
+node_modules/
+*.log
+logs/
+coverage/
+dist/
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+
+# Keep hs_copilot.db: the application needs the read-only tariff data.
 *.db-shm
 *.db-wal
+*.db-journal
+*.sqlite-shm
+*.sqlite-wal
+
+# Local tools, data backups and research inputs
 tools/_*
 tools/backup/
 tools/raw/*.pdf
 __pycache__/
 *.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+.workbuddy/
+.codex/
+.agents/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Generated presentation/report work; preserve locally
+/docs/reports/
+
+# Preserve the already-reviewed benchmark evidence in version control
+!tools/ruling-ab-2026-09-04T01-59-46-041Z/*.log
 
 # 判例原始扫描件（体积巨大、与代码无关，不纳入版本控制）
 /15406802.pdf

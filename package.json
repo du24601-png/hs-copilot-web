@@ -3,9 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "description": "HS Copilot - 智能归类工作台前端",
+  "engines": {
+    "node": ">=24 <25"
+  },
   "scripts": {
+    "start": "node server.js",
     "dev": "node server.js",
-    "test": "node --test --test-isolation=none test/*.test.cjs",
+    "test": "node --require ./test/setup.cjs --test --test-isolation=none test/*.test.cjs",
     "test:data": "python -m unittest test.test_legal_knowledge_import test.test_ruling_knowledge_import -v",
     "test:all": "npm run test:data && npm test",
     "test:real20": "node tools/test-real-products-20-v2.cjs",

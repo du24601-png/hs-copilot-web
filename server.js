@@ -930,13 +930,58 @@ const MIME = {
   '.ico': 'image/x-icon', '.woff2': 'font/woff2'
 };
 
+// 静态资源白名单：只放行前端真正用到的文件。
+// 注意：新增前端资源（新 css/js/图片）必须登记到这里，否则线上会返回 403。
+// 不放行 llm.config.json（含 API 密钥）、server.js 等后端源码、hs_copilot.db 数据库。
+const STATIC_ALLOW = new Set([
+  '/index.html', '/styles.css',
+  '/app.js', '/confirm-logic.js', '/decision-logic.js', '/ruling-view.js',
+  '/favicon.ico'
+]);
+
+/* ---------- 简易速率限制 ---------- */
+// 上线后接口是公开的，任何人都可以调用并消耗大模型额度。
+// 这里按 IP 做粗粒度限流，主要挡自动化刷量；正常人手速远低于此阈值。
+const RATE_WINDOW = 60_000;
+const RATE_MAX = 20;                  // 每个 IP 每分钟 20 次
+const rateHits = new Map();
+
+function clientIp(req) {
+  const xff = req.headers['x-forwarded-for'];
+  if (typeof xff === 'string' && xff) return xff.split(',')[0].trim();
+  return req.socket.remoteAddress || 'unknown';
+}
+
+function rateLimited(req) {
+  const now = Date.now();
+  const ip = clientIp(req);
+  const rec = rateHits.get(ip);
+  if (!rec || now > rec.resetAt) {
+    rateHits.set(ip, { count: 1, resetAt: now + RATE_WINDOW });
+    // 清理过期记录，避免 Map 无限增长
+    if (rateHits.size > 5000) {
+      for (const [k, v] of rateHits) if (now > v.resetAt) rateHits.delete(k);
+    }
+    return false;
+  }
+  rec.count += 1;
+  return rec.count > RATE_MAX;
+}
+
 function handleRequest(req, res) {
-  const url = new URL(req.url, 'http://x');
+  let url, p;
+  try {
+    url = new URL(req.url, 'http://x');
+    p = decodeURIComponent(url.pathname);
+  } catch {
+    return send(res, 400, { error: '请求路径无效' });
+  }
   // API 路由
   const m = url.pathname.match(/^\/api\/hs\/([\d.]+)$/);
   if (m) return apiHsCode(res, m[1]);
   if (url.pathname === '/api/search') return apiSearch(res, url.searchParams.get('q'));
   if (url.pathname === '/api/classify' && req.method === 'POST') {
+    if (rateLimited(req)) return send(res, 429, { error: '请求过于频繁，请稍后再试' });
     let body = '';
     req.on('data', c => { body += c; if (body.length > 4096) req.destroy(); });
     req.on('end', () => {
@@ -947,6 +992,7 @@ function handleRequest(req, res) {
     return;
   }
   if (url.pathname === '/api/decide' && req.method === 'POST') {
+    if (rateLimited(req)) return send(res, 429, { error: '请求过于频繁，请稍后再试' });
     let body = '';
     req.on('data', c => { body += c; if (body.length > 8192) req.destroy(); });
     req.on('end', () => {
@@ -960,8 +1006,8 @@ function handleRequest(req, res) {
     ...(DEBUG ? { runId: process.env.HS_RUN_ID || null } : {}),
     rulings: { enabled: rulingsEnabled(), available: rulingKnowledge.available, version: rulingKnowledge.version } });
   // 静态
-  let p = decodeURIComponent(url.pathname);
   if (p === '/') p = '/index.html';
+  if (!STATIC_ALLOW.has(p)) { res.writeHead(403); return res.end('Forbidden'); }
   const file = path.join(__dirname, path.normalize(p));
   if (!file.startsWith(__dirname)) { res.writeHead(403); return res.end('Forbidden'); }
   fs.readFile(file, (err, buf) => {
