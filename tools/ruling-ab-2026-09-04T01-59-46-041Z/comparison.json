@@ -1,0 +1,171 @@
+{
+  "completedAt": "2026-09-04T02:12:57.051Z",
+  "metadata": {
+    "codeHash": "a5c246b51e2ce7c4940e9280e1db2db6f25e012ebe0034bf9980f449b51f182d",
+    "databaseHash": "12bd2bc1d505867fd6997d49adf8105496298e0a2b15ac36d4dfab15cac8ea6c",
+    "configHash": "d5314d2b9712e9b4e6829e375f99210d30ba2154a8f5fa9616b7a74a7da421e2",
+    "nodeVersion": "v24.13.0",
+    "protocol": "ruling-ab-v1",
+    "corpusSize": 104
+  },
+  "productFlows": 80,
+  "recommendedEnabled": false,
+  "pairs": [
+    {
+      "dataset": "export",
+      "before": {
+        "total": 20,
+        "correct": 16,
+        "exactMatchRate": 0.8,
+        "refuses": 1,
+        "errors": 0,
+        "headingRecall": 20,
+        "hs10CandidateRecall": 18,
+        "caseHitCount": 0,
+        "caseCitationCount": 0,
+        "fallbackCases": 0,
+        "meanLatencyMs": 16270,
+        "p95LatencyMs": 21202,
+        "meanPoolSize": 33,
+        "meanLlmCalls": 3,
+        "subgroups": {
+          "covered": {
+            "total": 0,
+            "correct": 0
+          },
+          "notCovered": {
+            "total": 0,
+            "correct": 0
+          }
+        }
+      },
+      "after": {
+        "total": 20,
+        "correct": 15,
+        "exactMatchRate": 0.75,
+        "refuses": 0,
+        "errors": 0,
+        "headingRecall": 20,
+        "hs10CandidateRecall": 19,
+        "caseHitCount": 18,
+        "caseCitationCount": 9,
+        "fallbackCases": 0,
+        "meanLatencyMs": 16748,
+        "p95LatencyMs": 20439,
+        "meanPoolSize": 38.8,
+        "meanLlmCalls": 3,
+        "subgroups": {
+          "covered": {
+            "total": 0,
+            "correct": 0
+          },
+          "notCovered": {
+            "total": 0,
+            "correct": 0
+          }
+        }
+      },
+      "deltaCorrect": -1,
+      "improvements": [
+        "export-003",
+        "export-015"
+      ],
+      "regressions": [
+        "export-002",
+        "export-014",
+        "export-017"
+      ],
+      "incomparable": [],
+      "eligible": false,
+      "reasons": [
+        "精确正确数下降"
+      ]
+    },
+    {
+      "dataset": "difficult",
+      "before": {
+        "total": 20,
+        "correct": 7,
+        "exactMatchRate": 0.35,
+        "refuses": 1,
+        "errors": 0,
+        "headingRecall": 18,
+        "hs10CandidateRecall": 13,
+        "caseHitCount": 0,
+        "caseCitationCount": 0,
+        "fallbackCases": 0,
+        "meanLatencyMs": 15666,
+        "p95LatencyMs": 19200,
+        "meanPoolSize": 34.4,
+        "meanLlmCalls": 3,
+        "subgroups": {
+          "covered": {
+            "total": 14,
+            "correct": 3
+          },
+          "notCovered": {
+            "total": 6,
+            "correct": 4
+          }
+        }
+      },
+      "after": {
+        "total": 20,
+        "correct": 15,
+        "exactMatchRate": 0.75,
+        "refuses": 0,
+        "errors": 1,
+        "headingRecall": 20,
+        "hs10CandidateRecall": 19,
+        "caseHitCount": 19,
+        "caseCitationCount": 18,
+        "fallbackCases": 3,
+        "meanLatencyMs": 28872,
+        "p95LatencyMs": 97376,
+        "meanPoolSize": 40.5,
+        "meanLlmCalls": 2.85,
+        "subgroups": {
+          "covered": {
+            "total": 14,
+            "correct": 12
+          },
+          "notCovered": {
+            "total": 6,
+            "correct": 3
+          }
+        }
+      },
+      "deltaCorrect": 8,
+      "improvements": [
+        "real-009",
+        "real-010",
+        "real-011",
+        "real-013",
+        "real-015",
+        "real-016",
+        "real-017",
+        "real-018",
+        "real-019"
+      ],
+      "regressions": [
+        "real-005"
+      ],
+      "incomparable": [
+        "real-010",
+        "real-011",
+        "real-012",
+        "real-013"
+      ],
+      "eligible": false,
+      "reasons": [
+        "出现接口错误",
+        "存在模型降级、缺失遥测、判例层降级或不可比案例"
+      ]
+    }
+  ],
+  "limitations": [
+    "单轮小样本回归，不是总体业务准确率或统计显著性证明。",
+    "疑难集14例对应判例已入库，6例未入库；分别报告。",
+    "旧电商17/20使用标准编码反选选项，不与本次事实作答结果直接比较。"
+  ]
+}

@@ -46,7 +46,7 @@
   }
 
   /* ================= 视图路由 ================= */
-  const VIEWS = ['home', 'confirm', 'decision', 'declare'];
+  const VIEWS = ['home', 'confirm', 'decision', 'declare', 'history'];
   let twToken = 0; // 打字机会话号：切页时作废旧任务
   function go(name) {
     // 离开页面时才作废打字机；进入 decision 页时不能动，否则会杀掉刚启动的打字任务
@@ -56,10 +56,10 @@
   }
   $('#logoHome').addEventListener('click', () => go('home'));
   $('#navHistory').addEventListener('click', () => {
-    go('home');
-    setTimeout(() => $('.recent').scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+    renderFullHistory();
+    go('history');
   });
-  $('#navHelp').addEventListener('click', () => toast('帮助中心（演示环境未开启）'));
+  $('#navHelp').addEventListener('click', () => openFaq());
 
   /* ================= 历史记录（localStorage） ================= */
   const HKEY = 'hs_copilot_history_v1';
@@ -92,11 +92,21 @@
     saveHistory([
       { id: 'seed-stylus', mode: 'classify', input: '铝合金 iPad 触控笔', name: '铝合金触控笔', code: '9608992000', codeDisplay: '9608.99.20.00', status: '已完成', ts: now - 12 * 60e3 },
       { id: 'seed-lamp', mode: 'verify', input: '9405210090', name: 'LED 台灯', code: '9405210090', codeDisplay: '9405.21.00.90', status: '待确认', ts: now - 86400e3 },
-      { id: 'seed-bottle', mode: 'verify', input: '9617001100', name: '不锈钢真空保温杯', code: '9617001100', codeDisplay: '9617.00.11.00', status: '已完成', ts: now - 2 * 86400e3 }
+      { id: 'seed-bottle', mode: 'verify', input: '9617001900', name: '不锈钢真空保温杯', code: '9617001900', codeDisplay: '9617.00.19.00', status: '已完成', ts: now - 2 * 86400e3 }
     ]);
     localStorage.setItem(SEED_FLAG, '1');
   }
 
+  // 历史行模板：首页“最近查询”与“全部历史记录页”共用同一渲染
+  function historyRowHtml(r) {
+    return `<a class="tr" data-id="${r.id}">
+        <span class="t-name">${esc(r.name)}</span>
+        <span class="t-code">${esc(r.codeDisplay)}</span>
+        <span><i class="dot ${r.status === '已完成' ? 'ok' : 'wait'}"></i>${r.status}</span>
+        <span class="t-time">${relTime(r.ts)}</span>
+        <span class="t-arrow">›</span>
+      </a>`;
+  }
   function renderRecent() {
     const list = loadHistory();
     const box = $('#recentBody');
@@ -104,20 +114,36 @@
       box.innerHTML = '<div class="recent-empty">还没有查询记录，从上方输入商品开始</div>';
       return;
     }
-    box.innerHTML = list.slice(0, 6).map(r => `
-      <a class="tr" data-id="${r.id}">
-        <span class="t-name">${esc(r.name)}</span>
-        <span class="t-code">${esc(r.codeDisplay)}</span>
-        <span><i class="dot ${r.status === '已完成' ? 'ok' : 'wait'}"></i>${r.status}</span>
-        <span class="t-time">${relTime(r.ts)}</span>
-        <span class="t-arrow">›</span>
-      </a>`).join('');
+    box.innerHTML = list.slice(0, 6).map(historyRowHtml).join('');
   }
-  $('#recentBody').addEventListener('click', e => {
-    const row = e.target.closest('.tr[data-id]');
-    if (!row) return;
-    const rec = loadHistory().find(r => r.id === row.dataset.id);
-    if (rec) openRecord(rec);
+  // 全部历史记录页：展示所有已保存记录（不止首页最近 6 条）
+  function renderFullHistory() {
+    const box = $('#historyBody');
+    if (!box) return;
+    const list = loadHistory();
+    box.innerHTML = list.length
+      ? list.map(historyRowHtml).join('')
+      : '<div class="recent-empty">还没有查询记录，从首页输入商品或编码开始</div>';
+  }
+  // 首页最近区与全部历史页共用同一套点击重放逻辑
+  function bindHistoryOpen(sel) {
+    const el = $(sel);
+    if (!el) return;
+    el.addEventListener('click', e => {
+      const row = e.target.closest('.tr[data-id]');
+      if (!row) return;
+      const rec = loadHistory().find(r => r.id === row.dataset.id);
+      if (rec) openRecord(rec);
+    });
+  }
+  bindHistoryOpen('#recentBody');
+  bindHistoryOpen('#historyBody');
+  $('#clearHistory').addEventListener('click', () => {
+    if (!loadHistory().length) { toast('历史记录已经是空的'); return; }
+    saveHistory([]);
+    renderFullHistory();
+    renderRecent();
+    toast('已清空全部历史记录');
   });
 
   async function openRecord(rec) {
@@ -126,7 +152,7 @@
       const storedResult = decisionLogic.getStoredClassificationResult(rec);
       if (storedResult) {
         hsData = storedResult.p2.hs;
-        showDecisionLLM(storedResult);
+        showDecisionLLM(storedResult, true);
       } else {
         hsData = rec.code ? await apiHs(rec.code).catch(() => null) : null;
         if (!hsData) {
@@ -136,7 +162,7 @@
           return;
         }
         const legacyResult = decisionLogic.buildLegacyClassificationResult(rec, hsData);
-        showDecisionLLM(legacyResult);
+        showDecisionLLM(legacyResult, true);
         toast('这条旧记录未保存完整理由，当前仅展示真实编码核验信息');
       }
       go('decision');
@@ -526,7 +552,12 @@
     $('#evClassify').classList.toggle('hidden', !isClassify);
     $('#evVerify').classList.toggle('hidden', isClassify);
     $('#viewPath').style.display = isClassify ? '' : 'none';
-    if (!isClassify) clearUnconfirmed();
+    if (!isClassify) {
+      clearUnconfirmed();
+      // Direct code verification has no product session or historical-case claim.
+      ['secCases', 'caseRefs', 'secAttrs', 'attrRecap', 'secLegal', 'legalRefs', 'evCompliance']
+        .forEach(id => $('#' + id).classList.add('hidden'));
+    }
   }
 
   function applyRates(d) {
@@ -553,6 +584,11 @@
   function renderDecisionExtras(result) {
     const p1 = (result && result.p1) || {};
     const p2 = (result && result.p2) || {};
+    const caseBox = $('#caseRefs'), secCases = $('#secCases');
+    if (caseBox && secCases && window.HSRulings) {
+      caseBox.innerHTML = window.HSRulings.render(p2);
+      caseBox.classList.remove('hidden'); secCases.classList.remove('hidden');
+    }
     const attrs = Array.isArray(p1.knownAttrs) ? p1.knownAttrs : [];
     const attrBox = $('#attrRecap'), secAttrs = $('#secAttrs');
     if (attrBox && secAttrs) {
@@ -607,7 +643,8 @@
   }
 
   // 理由逐条打字，全部打完后执行 onDone（浮现后续板块）
-  function renderReasons(reasons, onDone) {
+  // instant=true：跳过打字机动画，直接完整呈现（历史记录回放场景）
+  function renderReasons(reasons, onDone, instant) {
     const token = ++twToken;
     const box = $('#reasonList');
     box.innerHTML = '';
@@ -615,6 +652,15 @@
       const m = String(r).match(/^([^：:]{2,12})[：:]([\s\S]+)$/);
       return { dim: m ? m[1] : '', body: m ? m[2].trim() : String(r) };
     });
+    if (instant) {
+      items.forEach((it, i) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<i>0${i + 1}</i><div>${it.dim ? `<b>${esc(it.dim)}：</b>` : ''}<span class="tw">${esc(it.body)}</span></div>`;
+        box.appendChild(li);
+      });
+      if (onDone) onDone();
+      return;
+    }
     let i = 0;
     (function next() {
       if (token !== twToken) return;
@@ -634,15 +680,17 @@
   function holdReveal() {
     REVEAL_SELS.forEach(sel => { const el = $(sel); if (el) { el.classList.remove('reveal-in'); el.classList.add('reveal-wait'); } });
   }
-  function doReveal() {
+  function doReveal(instant) {
     REVEAL_SELS.forEach((sel, i) => {
       const el = $(sel);
-      if (el) setTimeout(() => { el.classList.remove('reveal-wait'); el.classList.add('reveal-in'); }, i * 120);
+      if (!el) return;
+      if (instant) { el.classList.remove('reveal-wait'); el.classList.add('reveal-in'); }
+      else setTimeout(() => { el.classList.remove('reveal-wait'); el.classList.add('reveal-in'); }, i * 120);
     });
   }
 
   // LLM 动态结论
-  function showDecisionLLM(result) {
+  function showDecisionLLM(result, instant) {
     const p2 = result.p2;
     const d = p2.hs;
     const reasons = Array.isArray(p2.reasons) ? p2.reasons : [];
@@ -662,8 +710,14 @@
     const unconfirmed = Array.isArray(p2.unconfirmed) ? p2.unconfirmed : [];
     $('#unconfirmedText').textContent = unconfirmed.join('、');
     $('#unconfirmedBox').classList.toggle('hidden', !unconfirmed.length);
-    holdReveal();
-    renderReasons(reasons.length ? reasons : ['综合商品属性与税则条文比对得出'], doReveal);
+    if (instant) {
+      // 历史记录回放：不压住、不打字，一次性完整呈现
+      REVEAL_SELS.forEach(sel => { const el = $(sel); if (el) el.classList.remove('reveal-wait', 'reveal-in'); });
+      renderReasons(reasons.length ? reasons : ['综合商品属性与税则条文比对得出'], null, true);
+    } else {
+      holdReveal();
+      renderReasons(reasons.length ? reasons : ['综合商品属性与税则条文比对得出'], () => doReveal(false));
+    }
 
     // 反事实：什么情况下结果会改变
     if (counterfactuals.length) {
@@ -783,6 +837,43 @@
   $('#pathOk').addEventListener('click', closePath);
   pathModal.addEventListener('click', e => { if (e.target === pathModal) closePath(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closePath(); });
+
+  /* ---------- 常见问题浮层（右上角“帮助”）---------- */
+  const FAQ_ITEMS = [
+    { q: 'HS 编码是什么？', a: ['HS 编码（Harmonized System Code，商品名称及编码协调制度）是由世界海关组织（WCO）制定的国际通用商品分类编码，用于进出口货物的统一识别、征税和统计。全球 200 多个国家和地区采用 HS 编码，前 6 位全球统一，后几位由各国自行扩展。'] },
+    { q: '如何查询 HS 编码？', a: ['在 HS归类通 的搜索框输入商品名称（中文或英文）、关键词、或编码数字，即可快速查询。支持模糊匹配和全文搜索。本站收录 12,087 个 10 位商品编号，覆盖 97 个章、1,231 个品目，查询结果展示完整编码、商品名称、税率、申报要素、监管条件等信息。'] },
+    { q: '10 位商品编号和 HS 编码有什么区别？', a: ['中国海关的商品编号是 10 位：前 6 位是国际 HS 编码（全球统一），前 8 位是税则号列（用于确定税率），10 位用于报关申报。部分商品还有 13 位 CIQ 编码，用于检验检疫细分。'] },
+    { q: '申报要素是什么？', a: ['申报要素是海关总署规定的、报关时必须填写的商品特征信息（如品牌、型号、规格、用途等），用于海关估价和归类。不同 HS 编码要求的申报要素不同，通常为 5-15 项。HS归类通 每个编码详情页展示完整申报要素清单。'] },
+    { q: '监管条件代码 A、B、P、Q 分别代表什么？', a: ['监管条件代码是海关规定的证件要求。常见代码 — A：入境货物通关单（进口检验检疫）；B：出境货物通关单（出口检验检疫）；P：进境动植物、动植物产品检疫；Q：出境动植物、动植物产品检疫。其他常见代码包括 4（两用物项许可证）、5（药品通关单）、O（自动进口许可证）等。具体每个商品编码的监管要求在详情页可查。'] },
+    { q: '最惠国税率、普通税率、协定税率有什么区别？', a: ['最惠国税率：适用于 WTO 成员国，是绝大多数进口商品的通用税率（较低）。', '普通税率：适用于未与中国签订最惠国待遇的国家（税率最高）。', '协定税率：适用于与中国签订自由贸易协定的特定国家/地区（如 RCEP、东盟、中日韩等），通常比最惠国税率更低，但需提供原产地证。'] },
+    { q: '出口退税率怎么查？', a: ['可在每个 HS 编码详情页的“税率信息”卡片里展示“出口退税率”字段。输入商品编号或关键词即可查询具体退税率。'] }
+  ];
+  const faqModal = $('#faqModal');
+  function renderFaq() {
+    $('#faqList').innerHTML = FAQ_ITEMS.map((it, i) => `
+      <div class="faq-item open" data-idx="${i}">
+        <button class="faq-q" type="button">
+          <span>${esc(it.q)}</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg>
+        </button>
+        <div class="faq-a"><div>${it.a.map(p => `<p>${esc(p)}</p>`).join('')}</div></div>
+      </div>`).join('');
+  }
+  function openFaq() {
+    if (!$('#faqList').childElementCount) renderFaq();
+    faqModal.classList.remove('hidden');
+  }
+  const closeFaq = () => faqModal.classList.add('hidden');
+  // 事件委托：点击问题标题切换展开/收起
+  $('#faqList').addEventListener('click', e => {
+    const q = e.target.closest('.faq-q');
+    if (!q) return;
+    q.closest('.faq-item').classList.toggle('open');
+  });
+  $('#faqClose').addEventListener('click', closeFaq);
+  $('#faqFeedback').addEventListener('click', () => toast('建议反馈渠道（演示环境未开启）'));
+  faqModal.addEventListener('click', e => { if (e.target === faqModal) closeFaq(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFaq(); });
 
   /* ================= Page 5 · 申报信息 ================= */
   // 申报要素清单来自数据库（hsData.declareElements），值允许用户行内编辑

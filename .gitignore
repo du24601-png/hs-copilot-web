@@ -7,3 +7,7 @@ tools/backup/
 tools/raw/*.pdf
 __pycache__/
 *.pyc
+
+# 判例原始扫描件（体积巨大、与代码无关，不纳入版本控制）
+/15406802.pdf
+/15407048.pdf

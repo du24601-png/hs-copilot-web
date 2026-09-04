@@ -6,7 +6,7 @@ process.env.LLM_API_KEY = process.env.LLM_API_KEY || 'unit-test-key';
 const handlesBeforeImport = new Set(process._getActiveHandles());
 const server = require('../server.js');
 const importedListeners = () => process._getActiveHandles().filter(handle =>
-  handle && handle.constructor && handle.constructor.name === 'Server' && !handlesBeforeImport.has(handle));
+  handle && handle.constructor && handle.constructor.name === 'Server' && handle.listening && !handlesBeforeImport.has(handle));
 
 test.after(async () => {
   await new Promise(resolve => setImmediate(resolve));

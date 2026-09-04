@@ -1,0 +1,4652 @@
+{
+  "startedAt": "2026-09-04T02:02:30.624Z",
+  "completedAt": "2026-09-04T02:05:19.449Z",
+  "dataset": "export",
+  "baseUrl": "http://127.0.0.1:49718",
+  "method": "description -> classify -> fixed description facts in freeText -> decide -> exact HS10",
+  "metadata": {
+    "codeHash": "a5c246b51e2ce7c4940e9280e1db2db6f25e012ebe0034bf9980f449b51f182d",
+    "databaseHash": "12bd2bc1d505867fd6997d49adf8105496298e0a2b15ac36d4dfab15cac8ea6c",
+    "configHash": "d5314d2b9712e9b4e6829e375f99210d30ba2154a8f5fa9616b7a74a7da421e2",
+    "nodeVersion": "v24.13.0",
+    "protocol": "ruling-ab-v1",
+    "corpusSize": 104,
+    "enabled": true,
+    "runId": "e3535d73-3ea9-4a73-b405-c0f540682788",
+    "sourceVersion": "cn_rulings_2023_2025:80adab77952f020a8851961ed30a4e38c3254a2e4f61acc92b7aa27f1d602913",
+    "fixtureHash": "a090f47ae48600b9d0fa1af31806f9b4722554a0e37b7b579928513900702c4f",
+    "concurrency": 2,
+    "timeoutMs": 120000
+  },
+  "summary": {
+    "total": 20,
+    "correct": 15,
+    "exactMatchRate": 0.75,
+    "refuses": 0,
+    "errors": 0,
+    "headingRecall": 20,
+    "hs10CandidateRecall": 19,
+    "caseHitCount": 18,
+    "caseCitationCount": 9,
+    "fallbackCases": 0,
+    "meanLatencyMs": 16748,
+    "p95LatencyMs": 20439,
+    "meanPoolSize": 38.8,
+    "meanLlmCalls": 3,
+    "subgroups": {
+      "covered": {
+        "total": 0,
+        "correct": 0
+      },
+      "notCovered": {
+        "total": 0,
+        "correct": 0
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "export-001",
+      "productName": "不锈钢真空保温杯",
+      "expectedCode": "9617001900",
+      "finalCode": "9617009000",
+      "correct": false,
+      "status": "decided",
+      "coveredByCorpus": null,
+      "headingHit": true,
+      "hs10Hit": true,
+      "poolSize": 41,
+      "poolCodes": [
+        "9617009000",
+        "9617001100",
+        "7020009100",
+        "9617001900",
+        "8422909010",
+        "8514320010",
+        "8535900040",
+        "8544601210",
+        "8609001100",
+        "8609002100",
+        "8414100060",
+        "7008001000",
+        "8414100010",
+        "8414100020",
+        "8414100030",
+        "8414100040",
+        "8414100050",
+        "8414100090",
+        "8477409000",
+        "8479899930",
+        "8508600000",
+        "8508709000",
+        "8514200010",
+        "8514320090",
+        "7204210090",
+        "7218100000",
+        "7218910000",
+        "7218990010",
+        "7218990090",
+        "7219110000",
+        "7323930000",
+        "7323949000",
+        "7310100090",
+        "7310219000",
+        "7013490000",
+        "7013410000",
+        "7308300000",
+        "7010200000",
+        "8507600020",
+        "8507600030",
+        "8507600090"
+      ],
+      "finalPoolCodes": [
+        "9617009000",
+        "9617001100",
+        "7020009100",
+        "9617001900",
+        "8422909010",
+        "8514320010",
+        "8535900040",
+        "8544601210",
+        "8609001100",
+        "8609002100",
+        "8414100060",
+        "7008001000",
+        "8414100010",
+        "8414100020",
+        "8414100030",
+        "8414100040",
+        "8414100050",
+        "8414100090",
+        "8477409000",
+        "8479899930",
+        "8508600000",
+        "8508709000",
+        "8514200010",
+        "8514320090",
+        "7204210090",
+        "7218100000",
+        "7218910000",
+        "7218990010",
+        "7218990090",
+        "7219110000",
+        "7323930000",
+        "7323949000",
+        "7310100090",
+        "7310219000",
+        "7013490000",
+        "7013410000",
+        "7308300000",
+        "7010200000",
+        "8507600020",
+        "8507600030",
+        "8507600090"
+      ],
+      "asked": false,
+      "answers": [],
+      "questions": [],
+      "llmCalls": 3,
+      "modelTrace": [
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "understand"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "compare"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "decide"
+        }
+      ],
+      "retrievedCaseIds": [
+        "cn_ruling:J2025-0004",
+        "cn_ruling:W2023-19",
+        "cn_ruling:Z2023-0025",
+        "cn_ruling:Z2023-0012",
+        "cn_ruling:Z2023-0013",
+        "cn_ruling:Z2023-0014"
+      ],
+      "addedCodes": [
+        "7308300000",
+        "7010200000",
+        "8507600020",
+        "8507600030",
+        "8507600090"
+      ],
+      "caseReferences": [],
+      "caseKnowledgeStatus": {
+        "status": "ready",
+        "available": true,
+        "enabled": true,
+        "version": "cn_rulings_2023_2025:80adab77952f020a8851961ed30a4e38c3254a2e4f61acc92b7aa27f1d602913",
+        "matchedCount": 6,
+        "truncated": true,
+        "expansionCount": 5,
+        "expansionTruncated": false
+      },
+      "reRetrieved": false,
+      "reasons": [
+        "主要功能：保温杯具有保温保冷功能，属于真空容器，符合品目9617的条文。",
+        "材质：内胆为304不锈钢，非玻璃内胆，因此排除9617001100（玻璃内胆制保温瓶）。",
+        "用途：用于户外和通勤喝水，属于个人携带的保温容器，而非餐桌或厨房器具，因此排除7323930000。"
+      ],
+      "detail": "",
+      "degraded": false,
+      "latencyMs": 18844
+    },
+    {
+      "id": "export-002",
+      "productName": "TWS真无线蓝牙耳机",
+      "expectedCode": "8517629400",
+      "finalCode": "8518300000",
+      "correct": false,
+      "status": "decided",
+      "coveredByCorpus": null,
+      "headingHit": true,
+      "hs10Hit": true,
+      "poolSize": 31,
+      "poolCodes": [
+        "8517629400",
+        "8518300000",
+        "8517623710",
+        "8517623790",
+        "8517623990",
+        "8517699000",
+        "8517793000",
+        "8543709950",
+        "8517141011",
+        "8517141021",
+        "8517141090",
+        "8517149000",
+        "8517629200",
+        "8517629300",
+        "8517691091",
+        "8517691099",
+        "8524912020",
+        "8524922020",
+        "8525500000",
+        "8525601000",
+        "8525609000",
+        "8526911000",
+        "8526919090",
+        "8527190000",
+        "8527290000",
+        "8529101000",
+        "8529109090",
+        "8529902010",
+        "8529905000",
+        "8543709920",
+        "8518290000"
+      ],
+      "finalPoolCodes": [
+        "8517629400",
+        "8518300000",
+        "8517623710",
+        "8517623790",
+        "8517623990",
+        "8517699000",
+        "8517793000",
+        "8543709950",
+        "8517141011",
+        "8517141021",
+        "8517141090",
+        "8517149000",
+        "8517629200",
+        "8517629300",
+        "8517691091",
+        "8517691099",
+        "8524912020",
+        "8524922020",
+        "8525500000",
+        "8525601000",
+        "8525609000",
+        "8526911000",
+        "8526919090",
+        "8527190000",
+        "8527290000",
+        "8529101000",
+        "8529109090",
+        "8529902010",
+        "8529905000",
+        "8543709920",
+        "8518290000"
+      ],
+      "asked": false,
+      "answers": [],
+      "questions": [],
+      "llmCalls": 3,
+      "modelTrace": [
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "understand"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "compare"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "decide"
+        }
+      ],
+      "retrievedCaseIds": [
+        "cn_ruling:Z2024-0014"
+      ],
+      "addedCodes": [],
+      "caseReferences": [],
+      "caseKnowledgeStatus": {
+        "status": "ready",
+        "available": true,
+        "enabled": true,
+        "version": "cn_rulings_2023_2025:80adab77952f020a8851961ed30a4e38c3254a2e4f61acc92b7aa27f1d602913",
+        "matchedCount": 1,
+        "truncated": false,
+        "expansionCount": 0,
+        "expansionTruncated": false
+      },
+      "reRetrieved": false,
+      "reasons": [
+        "主要功能：TWS真无线蓝牙耳机主要用于音频播放和通话，属于耳机、耳塞机，符合8518.30的列名。",
+        "形态结构：入耳式设计，带充电仓，触控操作，是典型的耳机产品，而非独立的无线通信设备。",
+        "归类规则：根据GRI规则一，税目8518.30明确列名“耳机、耳塞机”，比8517的无线通信设备更具体，应优先归入8518.30。"
+      ],
+      "detail": "",
+      "degraded": false,
+      "latencyMs": 17773
+    },
+    {
+      "id": "export-003",
+      "productName": "移动电源10000mAh",
+      "expectedCode": "8507600090",
+      "finalCode": "8507600090",
+      "correct": true,
+      "status": "decided",
+      "coveredByCorpus": null,
+      "headingHit": true,
+      "hs10Hit": true,
+      "poolSize": 54,
+      "poolCodes": [
+        "8703401110",
+        "8703401190",
+        "8703401210",
+        "8703401290",
+        "8703401310",
+        "8703401390",
+        "8703401910",
+        "8703401990",
+        "8703402110",
+        "8703402190",
+        "8703402210",
+        "8703402290",
+        "8703402310",
+        "8703402390",
+        "8703402910",
+        "8703402990",
+        "8703403110",
+        "8703403190",
+        "8703403210",
+        "8703403290",
+        "8703403310",
+        "8504210000",
+        "8504231100",
+        "8504231200",
+        "8504231300",
+        "8504232100",
+        "8504232900",
+        "8504319000",
+        "8504329000",
+        "8504339000",
+        "8507200000",
+        "8507300090",
+        "8506101910",
+        "8506101990",
+        "8507600020",
+        "8703223010",
+        "8711600000",
+        "9032891100",
+        "8705909930",
+        "8507600030",
+        "8703223090",
+        "9032891200",
+        "8705909990",
+        "8507600090",
+        "8703224010",
+        "9032891900",
+        "8703224090",
+        "9032899010",
+        "8703225010",
+        "9032899020",
+        "8703225090",
+        "9032899030",
+        "8703229010",
+        "9032899040"
+      ],
+      "finalPoolCodes": [
+        "8703401110",
+        "8703401190",
+        "8703401210",
+        "8703401290",
+        "8703401310",
+        "8703401390",
+        "8703401910",
+        "8703401990",
+        "8703402110",
+        "8703402190",
+        "8703402210",
+        "8703402290",
+        "8703402310",
+        "8703402390",
+        "8703402910",
+        "8703402990",
+        "8703403110",
+        "8703403190",
+        "8703403210",
+        "8703403290",
+        "8703403310",
+        "8504210000",
+        "8504231100",
+        "8504231200",
+        "8504231300",
+        "8504232100",
+        "8504232900",
+        "8504319000",
+        "8504329000",
+        "8504339000",
+        "8507200000",
+        "8507300090",
+        "8506101910",
+        "8506101990",
+        "8507600020",
+        "8703223010",
+        "8711600000",
+        "9032891100",
+        "8705909930",
+        "8507600030",
+        "8703223090",
+        "9032891200",
+        "8705909990",
+        "8507600090",
+        "8703224010",
+        "9032891900",
+        "8703224090",
+        "9032899010",
+        "8703225010",
+        "9032899020",
+        "8703225090",
+        "9032899030",
+        "8703229010",
+        "9032899040"
+      ],
+      "asked": true,
+      "answers": [
+        {
+          "attr": "关键确认",
+          "answer": "补充商品事实",
+          "freeText": "跨境专供10000mAh移动电源，双USB输出加Type-C快充，铝合金外壳带LED电量显示，给手机平板充电，支持OEM印logo和定制容量。核心是里面的锂离子电芯储能，本质是个大容量可充电锂电池组，不是插墙的充电器，也不是变压电源适配器。"
+        }
+      ],
+      "questions": [
+        {
+          "attr": "关键确认",
+          "question": "该移动电源的主要用途是什么？",
+          "hint": "该问题的答案直接决定候选编码取舍",
+          "hintPlaceholder": "例如：请补充实际材质、结构或用途",
+          "options": [
+            {
+              "label": "给手机、平板等便携设备充电",
+              "codes": [
+                "8507600090"
+              ]
+            },
+            {
+              "label": "用于电动汽车或插电式混合动力汽车",
+              "codes": [
+                "8507600020"
+              ]
+            },
+            {
+              "label": "用于飞机",
+              "codes": [
+                "8507600030"
+              ]
+            },
+            {
+              "label": "以上都不是（我补充说明）",
+              "codes": []
+            },
+            {
+              "label": "我不清楚这项",
+              "codes": []
+            }
+          ],
+          "why": "该问题区分了8507600090（其他锂离子蓄电池）、8507600020（汽车用）和8507600030（飞机用）三个子目。",
+          "whyDetail": "移动电源的用途（手机平板充电 vs 汽车/飞机用）决定子目归属。；是否属于蓄电池（可充电）而非原电池，排除8506。；是否包含保护电路等辅助元件，影响是否构成完整蓄电池。"
+        }
+      ],
+      "llmCalls": 3,
+      "modelTrace": [
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "understand"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "compare"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "decide"
+        }
+      ],
+      "retrievedCaseIds": [
+        "cn_ruling:Z2023-0025",
+        "cn_ruling:W2023-22",
+        "cn_ruling:J2023-0001",
+        "cn_ruling:W2023-23",
+        "cn_ruling:Z2023-0028",
+        "cn_ruling:Z2023-0035"
+      ],
+      "addedCodes": [
+        "8507600020",
+        "8703223010",
+        "8711600000",
+        "9032891100",
+        "8705909930",
+        "8507600030",
+        "8703223090",
+        "9032891200",
+        "8705909990",
+        "8507600090",
+        "8703224010",
+        "9032891900",
+        "8703224090",
+        "9032899010",
+        "8703225010",
+        "9032899020",
+        "8703225090",
+        "9032899030",
+        "8703229010",
+        "9032899040"
+      ],
+      "caseReferences": [
+        {
+          "caseId": "cn_ruling:Z2023-0025",
+          "decisionNo": "Z2023-0025",
+          "productName": "锂离子充电电池芯",
+          "productDescription": "该商品呈长方形块状，不锈钢外壳，由正负极极片、隔膜、极耳、包装膜、电解液等组成，用于与充放电保护电路板、五金或塑料外壳组成锂离子充电电池，是电池的主要部件。该商品未配带充放电保护电路，不能进行充电及放电。",
+          "classificationDecision": "该电池芯是电池的主要部件，已构成锂离子充电电池整机基本特征，根据归类总规则二（一），应归入税则号列8507.6000。",
+          "ruleBasis": "归类总规则二（一）",
+          "historicalCode": "8507.6000",
+          "normalizedHistoricalCode": "85076000",
+          "codeLevel": "8位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 3,
+          "sourceFile": "6351691393903988.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:Z2023-0025",
+            "relation": "supports",
+            "matchedFacts": [
+              "锂离子电芯",
+              "可充电电池"
+            ],
+            "differingFacts": [
+              "判例为未配保护电路的电池芯，本商品为完整移动电源"
+            ],
+            "explanation": "判例确认锂离子电芯归入8507.6000，本商品为含电芯的完整蓄电池，符合8507.6000，支持归类。"
+          }
+        }
+      ],
+      "caseKnowledgeStatus": {
+        "status": "ready",
+        "available": true,
+        "enabled": true,
+        "version": "cn_rulings_2023_2025:80adab77952f020a8851961ed30a4e38c3254a2e4f61acc92b7aa27f1d602913",
+        "matchedCount": 6,
+        "truncated": true,
+        "expansionCount": 20,
+        "expansionTruncated": true
+      },
+      "reRetrieved": false,
+      "reasons": [
+        "主要功能：用户确认商品为移动电源，核心是锂离子电芯储能，本质为可充电锂电池组，符合税目8507蓄电池定义。",
+        "材质/结构：商品含锂离子电芯，属锂离子蓄电池，排除铅酸、镍镉等其他电极材质，符合8507.60子目。",
+        "用途：用于手机、平板充电，非汽车或飞机专用，故排除8507600020和8507600030，归入其他锂离子蓄电池8507600090。"
+      ],
+      "detail": "",
+      "degraded": false,
+      "latencyMs": 17934
+    },
+    {
+      "id": "export-004",
+      "productName": "LED球泡灯E27",
+      "expectedCode": "8539521000",
+      "finalCode": "8539521000",
+      "correct": true,
+      "status": "decided",
+      "coveredByCorpus": null,
+      "headingHit": true,
+      "hs10Hit": true,
+      "poolSize": 50,
+      "poolCodes": [
+        "9405410000",
+        "9405429000",
+        "8475100000",
+        "9405499000",
+        "9405500000",
+        "8512201000",
+        "8539221000",
+        "8539229000",
+        "8539291000",
+        "8539292000",
+        "8539293000",
+        "8539299100",
+        "8539299900",
+        "8539521000",
+        "8513109000",
+        "9405110000",
+        "8512100000",
+        "8512209000",
+        "8539324010",
+        "8539399090",
+        "8906903000",
+        "9006691000",
+        "9006990000",
+        "8539522000",
+        "9803004000",
+        "9803005000",
+        "3215110010",
+        "3215190010",
+        "8539510000",
+        "8539901000",
+        "8703223010",
+        "8479899910",
+        "9032899092",
+        "8481802910",
+        "8703223090",
+        "9405421000",
+        "8479899920",
+        "9032891100",
+        "8481802990",
+        "8703224010",
+        "8479899930",
+        "9032891200",
+        "8703224090",
+        "8479899940",
+        "9032891900",
+        "8703225010",
+        "8479899952",
+        "9032899010",
+        "8703225090",
+        "8479899953"
+      ],
+      "finalPoolCodes": [
+        "9405410000",
+        "9405429000",
+        "8475100000",
+        "9405499000",
+        "9405500000",
+        "8512201000",
+        "8539221000",
+        "8539229000",
+        "8539291000",
+        "8539292000",
+        "8539293000",
+        "8539299100",
+        "8539299900",
+        "8539521000",
+        "8513109000",
+        "9405110000",
+        "8512100000",
+        "8512209000",
+        "8539324010",
+        "8539399090",
+        "8906903000",
+        "9006691000",
+        "9006990000",
+        "8539522000",
+        "9803004000",
+        "9803005000",
+        "3215110010",
+        "3215190010",
+        "8539510000",
+        "8539901000",
+        "8703223010",
+        "8479899910",
+        "9032899092",
+        "8481802910",
+        "8703223090",
+        "9405421000",
+        "8479899920",
+        "9032891100",
+        "8481802990",
+        "8703224010",
+        "8479899930",
+        "9032891200",
+        "8703224090",
+        "8479899940",
+        "9032891900",
+        "8703225010",
+        "8479899952",
+        "9032899010",
+        "8703225090",
+        "8479899953"
+      ],
+      "asked": false,
+      "answers": [],
+      "questions": [],
+      "llmCalls": 3,
+      "modelTrace": [
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "understand"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "compare"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "decide"
+        }
+      ],
+      "retrievedCaseIds": [
+        "cn_ruling:W2023-22",
+        "cn_ruling:W2023-24",
+        "cn_ruling:W2023-21",
+        "cn_ruling:Z2023-0022",
+        "cn_ruling:W2023-23",
+        "cn_ruling:Z2025-0006"
+      ],
+      "addedCodes": [
+        "8703223010",
+        "8479899910",
+        "9032899092",
+        "8481802910",
+        "8703223090",
+        "9405421000",
+        "8479899920",
+        "9032891100",
+        "8481802990",
+        "8703224010",
+        "8479899930",
+        "9032891200",
+        "8703224090",
+        "8479899940",
+        "9032891900",
+        "8703225010",
+        "8479899952",
+        "9032899010",
+        "8703225090",
+        "8479899953"
+      ],
+      "caseReferences": [
+        {
+          "caseId": "cn_ruling:W2023-21",
+          "decisionNo": "W2023-21",
+          "productName": "灯带",
+          "productDescription": "灯带为24V室内用柔性LED带状灯，1.3W，冷白光。该灯带为可链接的模块化照明产品的单元模块，由18颗沿灯带长度方向排列的发光二极管（LED）组成。灯带的发光二极管（LED）连接在印刷电路板（PCB）上。沿灯带每隔102毫米（4英寸）有一个用以消除电压下降的恒流驱动器和一个内置连接器。灯带最大连接数量为50节，也可按每102毫米（4英寸）为单元切割成自定义长度。该商品报验时不带为其供电的24V驱动器或硬线盒，可用于如橱柜、背光区域和难以触及区域的工作照明和重点照明。",
+          "classificationDecision": null,
+          "ruleBasis": "归类总规则一【第八十五章注释十一（一）和第九十四章注释一（六）】及六",
+          "historicalCode": "8539.51",
+          "normalizedHistoricalCode": "853951",
+          "codeLevel": "6位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 1,
+          "sourceFile": "53371691393917063.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:W2023-21",
+            "relation": "supports",
+            "matchedFacts": [
+              "LED光源",
+              "用于照明"
+            ],
+            "differingFacts": [
+              "灯带无灯头设计",
+              "球泡灯有E27螺口灯头"
+            ],
+            "explanation": "该判例中灯带因无灯头设计被归入8539.51（LED模块），而本商品有灯头设计，符合8539.52（LED灯泡），两者区别在于灯头设计，故支持归入8539项下。"
+          }
+        },
+        {
+          "caseId": "cn_ruling:W2023-24",
+          "decisionNo": "W2023-24",
+          "productName": "描画灯箱",
+          "productDescription": "描画灯箱，由外壳为塑料的电池供电的LED灯箱组成。该灯箱的led光通过半透明的LED灯罩照亮放置在纸张下面的原始图像，可使使用者准确地描画纸上显现的图像的轮廓。该产品表面没有任何网格或图案，也不带任何辅助绘图的附件。可以用于绘画、描摹、剪贴或书法、丝印、刺绣、羽毛笔等创意活动，也可用于观看幻灯片或底片。箱体尺寸为250毫米×340毫米×25毫米。",
+          "classificationDecision": null,
+          "ruleBasis": "归类总规则一及六",
+          "historicalCode": "9405.42",
+          "normalizedHistoricalCode": "940542",
+          "codeLevel": "6位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 2,
+          "sourceFile": "53371691393917063.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:W2023-24",
+            "relation": "distinguishes",
+            "matchedFacts": [
+              "LED光源",
+              "照明功能"
+            ],
+            "differingFacts": [
+              "描画灯箱为灯具装置",
+              "球泡灯为独立光源"
+            ],
+            "explanation": "描画灯箱是完整的照明装置，归入9405；而球泡灯是独立光源，归入8539，故区别排除。"
+          }
+        }
+      ],
+      "caseKnowledgeStatus": {
+        "status": "ready",
+        "available": true,
+        "enabled": true,
+        "version": "cn_rulings_2023_2025:80adab77952f020a8851961ed30a4e38c3254a2e4f61acc92b7aa27f1d602913",
+        "matchedCount": 6,
+        "truncated": false,
+        "expansionCount": 20,
+        "expansionTruncated": true
+      },
+      "reRetrieved": false,
+      "reasons": [
+        "主要功能：商品为LED球泡灯，通电后发光照明，属于电光源，符合税目8539的灯泡定义。",
+        "结构：商品具有E27螺口灯头，便于安装和更换，符合第八十五章注释十一（二）对LED灯泡的定义，区别于LED模块。",
+        "用途：用于家庭和工程照明，属于通用照明用途，排除特殊用途如车辆、科研等。"
+      ],
+      "detail": "",
+      "degraded": false,
+      "latencyMs": 17143
+    },
+    {
+      "id": "export-005",
+      "productName": "硅胶手机壳",
+      "expectedCode": "3926909090",
+      "finalCode": "3926901000",
+      "correct": false,
+      "status": "decided",
+      "coveredByCorpus": null,
+      "headingHit": true,
+      "hs10Hit": false,
+      "poolSize": 46,
+      "poolCodes": [
+        "7003190002",
+        "7005290003",
+        "8517130000",
+        "9006610001",
+        "2811221000",
+        "7004900003",
+        "8517793000",
+        "3925300000",
+        "0508009010",
+        "0508009090",
+        "1504200011",
+        "1504200091",
+        "3004490091",
+        "8105209010",
+        "8412210090",
+        "8412310090",
+        "8412901020",
+        "8421919011",
+        "8479899940",
+        "8484200090",
+        "8506901000",
+        "8536300000",
+        "8543709950",
+        "8547901000",
+        "9704001000",
+        "9704009000",
+        "9803004000",
+        "9803005000",
+        "0207141900",
+        "3926901000",
+        "3926201900",
+        "8473290000",
+        "8473309000",
+        "8479899910",
+        "9023009000",
+        "8479899920",
+        "8479899930",
+        "8479899952",
+        "8479899953",
+        "8479899954",
+        "8479899955",
+        "8479899956",
+        "8479899957",
+        "8479899959",
+        "8479899960",
+        "8479899990"
+      ],
+      "finalPoolCodes": [
+        "7003190002",
+        "7005290003",
+        "8517130000",
+        "9006610001",
+        "2811221000",
+        "7004900003",
+        "8517793000",
+        "3925300000",
+        "0508009010",
+        "0508009090",
+        "1504200011",
+        "1504200091",
+        "3004490091",
+        "8105209010",
+        "8412210090",
+        "8412310090",
+        "8412901020",
+        "8421919011",
+        "8479899940",
+        "8484200090",
+        "8506901000",
+        "8536300000",
+        "8543709950",
+        "8547901000",
+        "9704001000",
+        "9704009000",
+        "9803004000",
+        "9803005000",
+        "0207141900",
+        "3926901000",
+        "3926201900",
+        "8473290000",
+        "8473309000",
+        "8479899910",
+        "9023009000",
+        "8479899920",
+        "8479899930",
+        "8479899952",
+        "8479899953",
+        "8479899954",
+        "8479899955",
+        "8479899956",
+        "8479899957",
+        "8479899959",
+        "8479899960",
+        "8479899990"
+      ],
+      "asked": true,
+      "answers": [
+        {
+          "attr": "关键确认",
+          "answer": "补充商品事实",
+          "freeText": "新款液态硅胶手机壳，适配iPhone 15和16系列，全包防摔内衬超细纤维，手感亲肤多色可选，支持来图定制。材质是硅胶TPU软胶（塑料类），纯粹起保护手机作用的壳子，不带支架电池或屏幕，不是手机内部零件，也不是工业橡胶密封件。"
+        }
+      ],
+      "questions": [
+        {
+          "attr": "关键确认",
+          "question": "该手机壳是专用于iPhone 15/16系列，还是通用型手机壳？",
+          "hint": "该问题的答案直接决定候选编码取舍",
+          "hintPlaceholder": "例如：请补充实际材质、结构或用途",
+          "options": [
+            {
+              "label": "专用于特定型号",
+              "codes": [
+                "8517793000",
+                "8473309000"
+              ]
+            },
+            {
+              "label": "通用型",
+              "codes": [
+                "3926901000"
+              ]
+            },
+            {
+              "label": "以上都不是（我补充说明）",
+              "codes": []
+            },
+            {
+              "label": "我不清楚这项",
+              "codes": []
+            }
+          ],
+          "why": "区分手机壳是否作为手机专用零件归类，还是作为普通塑料制品归类",
+          "whyDetail": "手机壳是塑料制品，应优先考虑第三十九章，而非第十六类机器零件；手机壳是否构成手机的专用零件，取决于其是否专用于特定手机型号；手机壳是否属于机器零件，需判断其是否用于机器或仪器的特定功能"
+        }
+      ],
+      "llmCalls": 3,
+      "modelTrace": [
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "understand"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "compare"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "decide"
+        }
+      ],
+      "retrievedCaseIds": [
+        "cn_ruling:Z2023-0017",
+        "cn_ruling:Z2023-0045",
+        "cn_ruling:W2023-18",
+        "cn_ruling:Z2023-0012",
+        "cn_ruling:Z2023-0013",
+        "cn_ruling:Z2023-0014"
+      ],
+      "addedCodes": [
+        "8479899910",
+        "9023009000",
+        "8479899920",
+        "8479899930",
+        "8479899952",
+        "8479899953",
+        "8479899954",
+        "8479899955",
+        "8479899956",
+        "8479899957",
+        "8479899959",
+        "8479899960",
+        "8479899990"
+      ],
+      "caseReferences": [
+        {
+          "caseId": "cn_ruling:Z2023-0017",
+          "decisionNo": "Z2023-0017",
+          "productName": "大位移量转轴式桥量伸缩装置",
+          "productDescription": "该商品由横梁、支撑连杆、滑动板、滑动支座、滑动支座连接轴、橡胶密封条、转轴组成，支撑连杆可以转动，工作横梁被置于支撑连杆上。由于斜拉桥的桥梁体处于漂浮状态，梁体移动时将对支撑连杆产生作用力，支撑连杆在此力作用下发生转动，推动所有横梁移动，使大型桥梁超大位移量得以调节。该商品安装在桥体的重要部位，最大位移可达1.4米，不是桥梁或桥梁体段，而是两个桥梁体段间用来缓冲受力不均的装置。一个桥梁根据跨度可由多个桥梁体段构成，但一个桥梁所需伸缩装置的数量，则视其所起的缓冲作用而定，有的桥梁可安装两个，有的可安装三个。桥梁体段与伸缩装置不论从数量还是从作用来看并非一一配套，在外力的作用下依靠连杆机构的转动、滑动产生位移，用于实现桥梁体段间的动态实时调节。",
+          "classificationDecision": "该商品为桥梁体段间的动态实时调节装置，根据其功能及用途，符合《税则》未列名的具有独立功能的机器描述，应归入税则号列8479.8999。",
+          "ruleBasis": "《税则》未列名的具有独立功能的机器描述",
+          "historicalCode": "8479.8999",
+          "normalizedHistoricalCode": "84798999",
+          "codeLevel": "8位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 13,
+          "sourceFile": "6351691393903988.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:Z2023-0017",
+            "relation": "distinguishes",
+            "matchedFacts": [],
+            "differingFacts": [
+              "商品为桥梁伸缩装置，具有独立功能",
+              "手机壳为保护壳，无独立功能"
+            ],
+            "explanation": "该判例商品为机器，归入8479，而手机壳为塑料制品，非机器，故不适用。"
+          }
+        },
+        {
+          "caseId": "cn_ruling:Z2023-0045",
+          "decisionNo": "Z2023-0045",
+          "productName": "旧恐龙模型",
+          "productDescription": "包括肿头龙、剑龙、翼龙等各种恐龙模型，按照成年恐龙和恐龙幼仔的大小比例做成，身体部分的主要材质是塑胶，有铁的支架和底座，部分恐龙有电动装置，能模仿真恐龙的动作，用于展览展示。",
+          "classificationDecision": "该商品为用于展览展示的模型，根据归类总规则一及六，应归入税则号列9023.0090。",
+          "ruleBasis": "归类总规则一及六",
+          "historicalCode": "9023.0090",
+          "normalizedHistoricalCode": "90230090",
+          "codeLevel": "8位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 1,
+          "sourceFile": "6351691393903988.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:Z2023-0045",
+            "relation": "distinguishes",
+            "matchedFacts": [
+              "材质为塑胶"
+            ],
+            "differingFacts": [
+              "恐龙模型用于展览，具有示范功能",
+              "手机壳用于保护手机，无示范功能"
+            ],
+            "explanation": "该判例商品归入9023，因用于展览示范，而手机壳无此用途，故不适用。"
+          }
+        },
+        {
+          "caseId": "cn_ruling:W2023-18",
+          "decisionNo": "W2023-18",
+          "productName": "溢流法制平板玻璃",
+          "productDescription": "溢流法制平板玻璃，是一种超薄的、光滑的、均匀的玻璃板，用于保护移动设备例如平板电脑、智能手机和其他电子设备的屏幕。该产品生产过程：将均匀搅拌的熔融玻璃浇注到一个称为“保温管”的V形槽中，直至其溢出，沿槽外侧形成两股均匀的熔融玻璃液，两股玻璃液在槽底部重新汇合。玻璃片基于重力的作用形成后，经与空气接触冷却，再切割至所需尺寸后包装。",
+          "classificationDecision": null,
+          "ruleBasis": "归类总规则一、四及六",
+          "historicalCode": "7004.90",
+          "normalizedHistoricalCode": "700490",
+          "codeLevel": "6位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 4,
+          "sourceFile": "53371691393917063.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:W2023-18",
+            "relation": "distinguishes",
+            "matchedFacts": [
+              "用于移动设备"
+            ],
+            "differingFacts": [
+              "玻璃板为屏幕保护材料",
+              "手机壳为塑料保护壳"
+            ],
+            "explanation": "该判例商品为玻璃板，归入第七十章，而手机壳为塑料制品，材质不同，故不适用。"
+          }
+        },
+        {
+          "caseId": "cn_ruling:Z2023-0012",
+          "decisionNo": "Z2023-0012",
+          "productName": "清扫车",
+          "productDescription": "该清扫车由使用电池供电的直流马达、液压驱动系统、行车/停车制动系统，以及扫地刷和强力吸尘系统组成，用于道路清洁，可骑乘驾驶。运行原理为：当车辆向前行走时，扫地刷便会将地上的垃圾带到车辆的中间，再由利用吸尘系统将垃圾抽吸进车辆。",
+          "classificationDecision": "该商品为道路清扫车，具有驱动引擎、驱动系统和全自动刹车系统，但不具有变速箱及换挡操纵装置，根据《税则注释》对品目84.79“独立功能”的规定，应归入税则号列8479.8999。",
+          "ruleBasis": "《税则注释》对品目84.79“独立功能”的规定",
+          "historicalCode": "8479.8999",
+          "normalizedHistoricalCode": "84798999",
+          "codeLevel": "8位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 13,
+          "sourceFile": "6351691393903988.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:Z2023-0012",
+            "relation": "distinguishes",
+            "matchedFacts": [],
+            "differingFacts": [
+              "清扫车为机器",
+              "手机壳为保护壳"
+            ],
+            "explanation": "该判例商品为机器，归入8479，而手机壳非机器，故不适用。"
+          }
+        },
+        {
+          "caseId": "cn_ruling:Z2023-0013",
+          "decisionNo": "Z2023-0013",
+          "productName": "管道污水调节装置",
+          "productDescription": "该套装置用于清除中央空调冷凝管道污垢，由阀门开关控制器（PLC）、回球控制器、球注入器、海绵小球、电子阀门和垫片等组装而成，运行原理为：与空调冷凝管构成一个小循环，利用原管道自身的水流和压力，带动海绵小球循环，海绵小球经过冷凝管道时通过摩擦将管道中的污垢擦除并带到指定的位置排放污水。",
+          "classificationDecision": "该商品为管道清洁装置，根据《税则注释》对品目84.79“独立功能”的规定，应归入税则号列8479.8999。",
+          "ruleBasis": "《税则注释》对品目84.79“独立功能”的规定",
+          "historicalCode": "8479.8999",
+          "normalizedHistoricalCode": "84798999",
+          "codeLevel": "8位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 13,
+          "sourceFile": "6351691393903988.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:Z2023-0013",
+            "relation": "distinguishes",
+            "matchedFacts": [],
+            "differingFacts": [
+              "管道清洁装置为机器",
+              "手机壳为保护壳"
+            ],
+            "explanation": "该判例商品为机器，归入8479，而手机壳非机器，故不适用。"
+          }
+        },
+        {
+          "caseId": "cn_ruling:Z2023-0014",
+          "decisionNo": "Z2023-0014",
+          "productName": "日晒牢度及气候试验机",
+          "productDescription": "该商品由氙灯、喷淋装置、温度控制装置等组成，用于模拟自然环境，检测纺织品品质。运行原理为：通过设备内的氙灯来模拟太阳光，并通过相应滤光片得到与太阳相近的光谱，还可模拟雨淋，调节实验的温度、湿度等，以此来测试样品经过日晒、雨淋、温度变化后颜色或其他性能的改变，测试完成后由人工通过肉眼对纺织品的褪色等情况做出判断。",
+          "classificationDecision": "该商品为模拟自然环境设备，根据《税则注释》对品目84.79“独立功能”的规定，应归入税则号列8479.8999。",
+          "ruleBasis": "《税则注释》对品目84.79“独立功能”的规定",
+          "historicalCode": "8479.8999",
+          "normalizedHistoricalCode": "84798999",
+          "codeLevel": "8位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 13,
+          "sourceFile": "6351691393903988.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:Z2023-0014",
+            "relation": "distinguishes",
+            "matchedFacts": [],
+            "differingFacts": [
+              "试验机为机器",
+              "手机壳为保护壳"
+            ],
+            "explanation": "该判例商品为机器，归入8479，而手机壳非机器，故不适用。"
+          }
+        }
+      ],
+      "caseKnowledgeStatus": {
+        "status": "ready",
+        "available": true,
+        "enabled": true,
+        "version": "cn_rulings_2023_2025:80adab77952f020a8851961ed30a4e38c3254a2e4f61acc92b7aa27f1d602913",
+        "matchedCount": 6,
+        "truncated": true,
+        "expansionCount": 13,
+        "expansionTruncated": false
+      },
+      "reRetrieved": false,
+      "reasons": [
+        "材质：商品为硅胶TPU软胶（塑料类），属于第三十九章塑料及其制品，符合税目39.26的塑料制品范围。",
+        "用途：商品为手机保护壳，纯粹起保护手机作用，非手机内部零件或机器零件，不归入第十六类。",
+        "归类规则：根据GRI规则一及第三十九章章注二（十八），塑料制品不归入第十六类，且商品非机器零件，故排除8517和8473，选择3926.9010。"
+      ],
+      "detail": "",
+      "degraded": false,
+      "latencyMs": 20439
+    },
+    {
+      "id": "export-006",
+      "productName": "帆布手提袋",
+      "expectedCode": "4202220000",
+      "finalCode": "4202220000",
+      "correct": true,
+      "status": "decided",
+      "coveredByCorpus": null,
+      "headingHit": true,
+      "hs10Hit": true,
+      "poolSize": 29,
+      "poolCodes": [
+        "4202210010",
+        "4202210090",
+        "4202220000",
+        "4202290000",
+        "5516940000",
+        "5211110019",
+        "5211110099",
+        "9803004000",
+        "9803005000",
+        "7010901000",
+        "5810100000",
+        "5810920000",
+        "5810990000",
+        "9704009000",
+        "1003100000",
+        "1201100000",
+        "4011809100",
+        "4202310010",
+        "4202310090",
+        "4202320000",
+        "4202390000",
+        "4202910010",
+        "4202910090",
+        "4202920000",
+        "4202990000",
+        "4203299010",
+        "4203299090",
+        "6305100000",
+        "6305330000"
+      ],
+      "finalPoolCodes": [
+        "4202210010",
+        "4202210090",
+        "4202220000",
+        "4202290000",
+        "5516940000",
+        "5211110019",
+        "5211110099",
+        "9803004000",
+        "9803005000",
+        "7010901000",
+        "5810100000",
+        "5810920000",
+        "5810990000",
+        "9704009000",
+        "1003100000",
+        "1201100000",
+        "4011809100",
+        "4202310010",
+        "4202310090",
+        "4202320000",
+        "4202390000",
+        "4202910010",
+        "4202910090",
+        "4202920000",
+        "4202990000",
+        "4203299010",
+        "4203299090",
+        "6305100000",
+        "6305330000"
+      ],
+      "asked": false,
+      "answers": [],
+      "questions": [],
+      "llmCalls": 3,
+      "modelTrace": [
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "understand"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "compare"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "decide"
+        }
+      ],
+      "retrievedCaseIds": [
+        "cn_ruling:W2023-17",
+        "cn_ruling:W2023-19"
+      ],
+      "addedCodes": [],
+      "caseReferences": [
+        {
+          "caseId": "cn_ruling:W2023-17",
+          "decisionNo": "W2023-17",
+          "productName": "被子袋",
+          "productDescription": "被子袋，正面由透明聚乙烯制成（厚度为0.10毫米），其他各面由人造纤维无纺织物（65克/平方米）制成，装有拉链、提手，并以无纺织物（75克/平方米）镶边，用于包装被子供出售。",
+          "classificationDecision": null,
+          "ruleBasis": "归类总规则一及六",
+          "historicalCode": "6305.39",
+          "normalizedHistoricalCode": "630539",
+          "codeLevel": "6位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 1,
+          "sourceFile": "53371691393917063.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:W2023-17",
+            "relation": "distinguishes",
+            "matchedFacts": [
+              "均为纺织材料制袋子",
+              "均带提手"
+            ],
+            "differingFacts": [
+              "判例为包装用被子袋，用于包装被子供出售",
+              "本商品为手提包，用于个人携带物品"
+            ],
+            "explanation": "判例中的被子袋属于货物包装袋，归入品目63.05；而本商品为手提包，用于个人携带，应归入品目42.02，因此判例不适用。"
+          }
+        }
+      ],
+      "caseKnowledgeStatus": {
+        "status": "ready",
+        "available": true,
+        "enabled": true,
+        "version": "cn_rulings_2023_2025:80adab77952f020a8851961ed30a4e38c3254a2e4f61acc92b7aa27f1d602913",
+        "matchedCount": 2,
+        "truncated": false,
+        "expansionCount": 0,
+        "expansionTruncated": false
+      },
+      "reRetrieved": false,
+      "reasons": [
+        "主要功能：手提包用于日常携带物品，符合品目42.02手提包的定义。",
+        "材质：棉帆布属于纺织材料，符合子目4202.22“以塑料片或纺织材料作面”的材质要求。",
+        "形态：带提手、单肩斜背两用，属于手提包类，且税目4202.22列名具体，优先于4202.92其他容器。"
+      ],
+      "detail": "",
+      "degraded": false,
+      "latencyMs": 18785
+    },
+    {
+      "id": "export-007",
+      "productName": "陶瓷马克杯",
+      "expectedCode": "6912001000",
+      "finalCode": "6912001000",
+      "correct": true,
+      "status": "decided",
+      "coveredByCorpus": null,
+      "headingHit": true,
+      "hs10Hit": true,
+      "poolSize": 36,
+      "poolCodes": [
+        "7013100000",
+        "9704009000",
+        "0901110000",
+        "0901120000",
+        "0901210000",
+        "0901220000",
+        "0901901000",
+        "0901902000",
+        "2101110000",
+        "2101120000",
+        "2101300000",
+        "3004490062",
+        "7013370000",
+        "7013410000",
+        "7013490000",
+        "8516711000",
+        "8516712000",
+        "8516713000",
+        "8516719000",
+        "9704001000",
+        "0603110000",
+        "0603120000",
+        "0603130000",
+        "0603140000",
+        "0603150000",
+        "0603190010",
+        "0603190090",
+        "0603900010",
+        "0603900090",
+        "6911101100",
+        "6911101900",
+        "6912001000",
+        "6912009000",
+        "6913100000",
+        "6913900000",
+        "9023009000"
+      ],
+      "finalPoolCodes": [
+        "7013100000",
+        "9704009000",
+        "0901110000",
+        "0901120000",
+        "0901210000",
+        "0901220000",
+        "0901901000",
+        "0901902000",
+        "2101110000",
+        "2101120000",
+        "2101300000",
+        "3004490062",
+        "7013370000",
+        "7013410000",
+        "7013490000",
+        "8516711000",
+        "8516712000",
+        "8516713000",
+        "8516719000",
+        "9704001000",
+        "0603110000",
+        "0603120000",
+        "0603130000",
+        "0603140000",
+        "0603150000",
+        "0603190010",
+        "0603190090",
+        "0603900010",
+        "0603900090",
+        "6911101100",
+        "6911101900",
+        "6912001000",
+        "6912009000",
+        "6913100000",
+        "6913900000",
+        "9023009000"
+      ],
+      "asked": true,
+      "answers": [
+        {
+          "attr": "关键确认",
+          "answer": "补充商品事实",
+          "freeText": "北欧风陶瓷马克杯，350ml，炻器材质釉下彩印花，带手柄可进微波炉洗碗机，咖啡杯水杯办公礼品，支持定制图案和礼盒。材质是陶和炻器（不是骨瓷），是喝水喝咖啡用的餐饮器皿，不是玻璃杯不锈钢杯，也不是纯装饰摆件。"
+        }
+      ],
+      "questions": [
+        {
+          "attr": "关键确认",
+          "question": "该马克杯的材质具体是陶、炻器还是瓷？",
+          "hint": "该问题的答案直接决定候选编码取舍",
+          "hintPlaceholder": "例如：请补充实际材质、结构或用途",
+          "options": [
+            {
+              "label": "陶",
+              "codes": [
+                "6912001000",
+                "6912009000"
+              ]
+            },
+            {
+              "label": "炻器",
+              "codes": [
+                "6912001000",
+                "6912009000"
+              ]
+            },
+            {
+              "label": "瓷（非骨瓷）",
+              "codes": [
+                "6911101900"
+              ]
+            },
+            {
+              "label": "骨瓷",
+              "codes": [
+                "6911101100"
+              ]
+            },
+            {
+              "label": "以上都不是（我补充说明）",
+              "codes": []
+            },
+            {
+              "label": "我不清楚这项",
+              "codes": []
+            }
+          ],
+          "why": "区分陶制餐具（6912）与瓷制餐具（6911）的关键在于材质，商品描述中陶和炻器均可能归入6912，但若实际为瓷则归入6911。",
+          "whyDetail": "材质是陶/炻器还是瓷（骨瓷或非骨瓷）决定归入6912还是6911。；用途是餐具还是厨房器具或装饰品决定具体子目。；是否带手柄不影响税目归类，但影响是否属于餐具。"
+        }
+      ],
+      "llmCalls": 3,
+      "modelTrace": [
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "understand"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "compare"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "decide"
+        }
+      ],
+      "retrievedCaseIds": [
+        "cn_ruling:Z2023-0045"
+      ],
+      "addedCodes": [
+        "9023009000"
+      ],
+      "caseReferences": [
+        {
+          "caseId": "cn_ruling:Z2023-0045",
+          "decisionNo": "Z2023-0045",
+          "productName": "旧恐龙模型",
+          "productDescription": "包括肿头龙、剑龙、翼龙等各种恐龙模型，按照成年恐龙和恐龙幼仔的大小比例做成，身体部分的主要材质是塑胶，有铁的支架和底座，部分恐龙有电动装置，能模仿真恐龙的动作，用于展览展示。",
+          "classificationDecision": "该商品为用于展览展示的模型，根据归类总规则一及六，应归入税则号列9023.0090。",
+          "ruleBasis": "归类总规则一及六",
+          "historicalCode": "9023.0090",
+          "normalizedHistoricalCode": "90230090",
+          "codeLevel": "8位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 1,
+          "sourceFile": "6351691393903988.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:Z2023-0045",
+            "relation": "distinguishes",
+            "matchedFacts": [],
+            "differingFacts": [
+              "商品为恐龙模型，材质塑胶，用于展览展示",
+              "本案商品为陶瓷马克杯，材质陶/炻器，用于饮水"
+            ],
+            "explanation": "判例商品为展览用模型，归入9023，与本案陶瓷餐具材质、用途完全不同，故不适用。"
+          }
+        }
+      ],
+      "caseKnowledgeStatus": {
+        "status": "ready",
+        "available": true,
+        "enabled": true,
+        "version": "cn_rulings_2023_2025:80adab77952f020a8851961ed30a4e38c3254a2e4f61acc92b7aa27f1d602913",
+        "matchedCount": 1,
+        "truncated": false,
+        "expansionCount": 1,
+        "expansionTruncated": false
+      },
+      "reRetrieved": false,
+      "reasons": [
+        "材质：用户确认材质为陶和炻器，非骨瓷或瓷，符合税目6912陶制餐具的范围。",
+        "用途：用户确认用于喝水、喝咖啡，属于餐饮器皿，符合税目6912下陶餐具的用途。",
+        "结构：带手柄的马克杯属于典型餐具，非厨房器具或装饰品，排除6912009000和6913900000。"
+      ],
+      "detail": "",
+      "degraded": false,
+      "latencyMs": 17571
+    },
+    {
+      "id": "export-008",
+      "productName": "男士纯棉短袖T恤",
+      "expectedCode": "6109100000",
+      "finalCode": "6109100000",
+      "correct": true,
+      "status": "decided",
+      "coveredByCorpus": null,
+      "headingHit": true,
+      "hs10Hit": true,
+      "poolSize": 30,
+      "poolCodes": [
+        "5205210000",
+        "5205220000",
+        "5205230000",
+        "5205240000",
+        "5205260000",
+        "5205270000",
+        "5205280000",
+        "5205410000",
+        "5205420000",
+        "5205430000",
+        "5205440000",
+        "5205460000",
+        "5205480000",
+        "8446211000",
+        "8446219000",
+        "8446290000",
+        "8446303000",
+        "8446309000",
+        "6109100000",
+        "6109901000",
+        "6109909000",
+        "6110110000",
+        "6110191000",
+        "6110192000",
+        "6110199000",
+        "6105100090",
+        "6105200090",
+        "6104192000",
+        "6104220000",
+        "6104390000"
+      ],
+      "finalPoolCodes": [
+        "5205210000",
+        "5205220000",
+        "5205230000",
+        "5205240000",
+        "5205260000",
+        "5205270000",
+        "5205280000",
+        "5205410000",
+        "5205420000",
+        "5205430000",
+        "5205440000",
+        "5205460000",
+        "5205480000",
+        "8446211000",
+        "8446219000",
+        "8446290000",
+        "8446303000",
+        "8446309000",
+        "6109100000",
+        "6109901000",
+        "6109909000",
+        "6110110000",
+        "6110191000",
+        "6110192000",
+        "6110199000",
+        "6105100090",
+        "6105200090",
+        "6104192000",
+        "6104220000",
+        "6104390000"
+      ],
+      "asked": true,
+      "answers": [
+        {
+          "attr": "关键确认",
+          "answer": "补充商品事实",
+          "freeText": "重磅纯棉男士短袖T恤，100%精梳棉圆领针织，180g和230g克重，纯色基础款可印花刺绣定制，出口批发。面料是纯棉针织（不是梭织布），是套头穿的T恤上衣，不是梭织衬衫，也不是背心内衣或化纤材质的T恤。"
+        }
+      ],
+      "questions": [
+        {
+          "attr": "关键确认",
+          "question": "该T恤是否有领子或扣子？",
+          "hint": "该问题的答案直接决定候选编码取舍",
+          "hintPlaceholder": "例如：请补充实际材质、结构或用途",
+          "options": [
+            {
+              "label": "无领无扣（典型T恤）",
+              "codes": [
+                "6109100000"
+              ]
+            },
+            {
+              "label": "有领有扣（如POLO衫）",
+              "codes": [
+                "6105100090"
+              ]
+            },
+            {
+              "label": "以上都不是（我补充说明）",
+              "codes": []
+            },
+            {
+              "label": "我不清楚这项",
+              "codes": []
+            }
+          ],
+          "why": "区分T恤（6109）与衬衫（6105）的关键在于是否有领和扣。",
+          "whyDetail": "T恤衫与衬衫的区别：T恤通常无领、无扣，而衬衫有领且全开襟或半开襟。；税目61.09与61.05的界限：61.09涵盖T恤衫、汗衫等，61.05涵盖衬衫，需确认商品是否有领、有扣。；商品为纯棉，排除化纤或其他材质，故6109909000不适用。"
+        }
+      ],
+      "llmCalls": 3,
+      "modelTrace": [
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "understand"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "compare"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "decide"
+        }
+      ],
+      "retrievedCaseIds": [],
+      "addedCodes": [],
+      "caseReferences": [],
+      "caseKnowledgeStatus": {
+        "status": "no_match",
+        "available": true,
+        "enabled": true,
+        "version": "cn_rulings_2023_2025:80adab77952f020a8851961ed30a4e38c3254a2e4f61acc92b7aa27f1d602913",
+        "matchedCount": 0,
+        "truncated": false,
+        "expansionCount": 0,
+        "expansionTruncated": false
+      },
+      "reRetrieved": false,
+      "reasons": [
+        "材质：用户确认商品为100%精梳棉，符合税目61.09棉制T恤衫的材质要求。",
+        "结构：用户确认商品为圆领、套头式、短袖针织T恤，无领无扣，符合T恤衫的定义，区别于衬衫。",
+        "用途：用户确认商品为男士日常穿着，属于税目61.09的T恤衫范畴。"
+      ],
+      "detail": "",
+      "degraded": false,
+      "latencyMs": 14371
+    },
+    {
+      "id": "export-009",
+      "productName": "折叠露营椅",
+      "expectedCode": "9401790000",
+      "finalCode": "9401790000",
+      "correct": true,
+      "status": "decided",
+      "coveredByCorpus": null,
+      "headingHit": true,
+      "hs10Hit": true,
+      "poolSize": 35,
+      "poolCodes": [
+        "9401711000",
+        "9401719000",
+        "9401790000",
+        "9401809091",
+        "9401690010",
+        "9401690090",
+        "4819200000",
+        "9401619010",
+        "9401619090",
+        "3925200000",
+        "0308901200",
+        "1211903400",
+        "1604130000",
+        "3207100000",
+        "4407270010",
+        "4407270090",
+        "4903000000",
+        "5516940000",
+        "6114200011",
+        "6601910000",
+        "7304511001",
+        "7304519001",
+        "7304591001",
+        "7304599001",
+        "7305110000",
+        "7305120000",
+        "7305190000",
+        "7307190000",
+        "8424410000",
+        "9403200000",
+        "9403300090",
+        "7326901100",
+        "7326901990",
+        "8705909930",
+        "8705909990"
+      ],
+      "finalPoolCodes": [
+        "9401711000",
+        "9401719000",
+        "9401790000",
+        "9401809091",
+        "9401690010",
+        "9401690090",
+        "4819200000",
+        "9401619010",
+        "9401619090",
+        "3925200000",
+        "0308901200",
+        "1211903400",
+        "1604130000",
+        "3207100000",
+        "4407270010",
+        "4407270090",
+        "4903000000",
+        "5516940000",
+        "6114200011",
+        "6601910000",
+        "7304511001",
+        "7304519001",
+        "7304591001",
+        "7304599001",
+        "7305110000",
+        "7305120000",
+        "7305190000",
+        "7307190000",
+        "8424410000",
+        "9403200000",
+        "9403300090",
+        "7326901100",
+        "7326901990",
+        "8705909930",
+        "8705909990"
+      ],
+      "asked": true,
+      "answers": [
+        {
+          "attr": "关键确认",
+          "answer": "补充商品事实",
+          "freeText": "户外便携折叠露营椅，铝合金和钢管框架，牛津布坐面可折叠收纳带提袋，钓鱼野餐沙滩用承重150kg，支持定制颜色logo。它是金属框架的坐具（椅子），布面只是座面，不是全塑料凳，也不是装厚软垫的沙发或儿童汽车安全座椅。"
+        }
+      ],
+      "questions": [
+        {
+          "attr": "关键确认",
+          "question": "该折叠露营椅的牛津布坐面下是否装有软垫（如海绵、泡沫等填充物）？",
+          "hint": "该问题的答案直接决定候选编码取舍",
+          "hintPlaceholder": "例如：请补充实际材质、结构或用途",
+          "options": [
+            {
+              "label": "是，装有软垫",
+              "codes": [
+                "9401719000",
+                "9401711000"
+              ]
+            },
+            {
+              "label": "否，无软垫",
+              "codes": [
+                "9401790000"
+              ]
+            },
+            {
+              "label": "以上都不是（我补充说明）",
+              "codes": []
+            },
+            {
+              "label": "我不清楚这项",
+              "codes": []
+            }
+          ],
+          "why": "区分装软垫的金属框架坐具（940171）与未装软垫的金属框架坐具（940179）。",
+          "whyDetail": "是否装软垫：940171和9401711要求装软垫，940179不要求。；座面材质：9401711要求皮革或再生皮革，本商品为牛津布。；归类层级：9401为坐具，9403为其他家具，9401更具体。；材质：金属框架与木框架（940169）不同。"
+        }
+      ],
+      "llmCalls": 3,
+      "modelTrace": [
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "understand"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "compare"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "decide"
+        }
+      ],
+      "retrievedCaseIds": [
+        "cn_ruling:Z2023-0036",
+        "cn_ruling:Z2024-0016",
+        "cn_ruling:Z2025-0005",
+        "cn_ruling:J2025-0004"
+      ],
+      "addedCodes": [
+        "8705909930",
+        "8705909990"
+      ],
+      "caseReferences": [],
+      "caseKnowledgeStatus": {
+        "status": "ready",
+        "available": true,
+        "enabled": true,
+        "version": "cn_rulings_2023_2025:80adab77952f020a8851961ed30a4e38c3254a2e4f61acc92b7aa27f1d602913",
+        "matchedCount": 4,
+        "truncated": false,
+        "expansionCount": 2,
+        "expansionTruncated": false
+      },
+      "reRetrieved": false,
+      "reasons": [
+        "主要功能：该商品为金属框架的坐具（椅子），符合税目9401的坐具定义，且用户确认其为金属框架坐具，非其他家具。",
+        "材质：框架为铝合金和钢管（金属），坐面为牛津布（纺织材料），非皮革或再生皮革，且未装软垫，排除9401711000和9401719000。",
+        "用途：户外便携折叠露营椅，用于钓鱼、野餐、沙滩等，属于其他金属框架坐具，符合9401790000的条文。"
+      ],
+      "detail": "",
+      "degraded": false,
+      "latencyMs": 14232
+    },
+    {
+      "id": "export-010",
+      "productName": "声波电动牙刷",
+      "expectedCode": "8509803000",
+      "finalCode": "8509803000",
+      "correct": true,
+      "status": "decided",
+      "coveredByCorpus": null,
+      "headingHit": true,
+      "hs10Hit": true,
+      "poolSize": 39,
+      "poolCodes": [
+        "8509803000",
+        "3306200000",
+        "9603210000",
+        "3306909000",
+        "6205200010",
+        "6205300091",
+        "6205300099",
+        "6401101000",
+        "6401109000",
+        "6401921000",
+        "6401929000",
+        "6401990000",
+        "8210000000",
+        "8414200000",
+        "8429401100",
+        "8443160001",
+        "8443170001",
+        "8449001001",
+        "8452109100",
+        "8456200000",
+        "8462421100",
+        "8482103010",
+        "8486304100",
+        "8509809000",
+        "8509900000",
+        "8511401010",
+        "8539399050",
+        "8708221200",
+        "9018121000",
+        "9018129110",
+        "9603100000",
+        "8703223010",
+        "8703223090",
+        "8703224010",
+        "8703224090",
+        "8703225010",
+        "8703225090",
+        "8703229010",
+        "8703229090"
+      ],
+      "finalPoolCodes": [
+        "8509803000",
+        "3306200000",
+        "9603210000",
+        "3306909000",
+        "6205200010",
+        "6205300091",
+        "6205300099",
+        "6401101000",
+        "6401109000",
+        "6401921000",
+        "6401929000",
+        "6401990000",
+        "8210000000",
+        "8414200000",
+        "8429401100",
+        "8443160001",
+        "8443170001",
+        "8449001001",
+        "8452109100",
+        "8456200000",
+        "8462421100",
+        "8482103010",
+        "8486304100",
+        "8509809000",
+        "8509900000",
+        "8511401010",
+        "8539399050",
+        "8708221200",
+        "9018121000",
+        "9018129110",
+        "9603100000",
+        "8703223010",
+        "8703223090",
+        "8703224010",
+        "8703224090",
+        "8703225010",
+        "8703225090",
+        "8703229010",
+        "8703229090"
+      ],
+      "asked": false,
+      "answers": [],
+      "questions": [],
+      "llmCalls": 3,
+      "modelTrace": [
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "understand"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "compare"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "decide"
+        }
+      ],
+      "retrievedCaseIds": [
+        "cn_ruling:W2023-22",
+        "cn_ruling:J2025-0008",
+        "cn_ruling:W2023-21",
+        "cn_ruling:Z2023-0043",
+        "cn_ruling:Z2024-0017",
+        "cn_ruling:Z2024-0018"
+      ],
+      "addedCodes": [
+        "8703223010",
+        "8703223090",
+        "8703224010",
+        "8703224090",
+        "8703225010",
+        "8703225090",
+        "8703229010",
+        "8703229090"
+      ],
+      "caseReferences": [],
+      "caseKnowledgeStatus": {
+        "status": "ready",
+        "available": true,
+        "enabled": true,
+        "version": "cn_rulings_2023_2025:80adab77952f020a8851961ed30a4e38c3254a2e4f61acc92b7aa27f1d602913",
+        "matchedCount": 6,
+        "truncated": false,
+        "expansionCount": 8,
+        "expansionTruncated": false
+      },
+      "reRetrieved": false,
+      "reasons": [
+        "主要功能：商品为声波电动牙刷，依靠内置电机震动清洁牙齿，属于电动器具，符合税目8509‘家用电动器具’的范围。",
+        "材质/结构：商品为电动器具，包含电机等电气部件，而非普通手动牙刷，因此不应归入税目9603的‘牙刷’。",
+        "用途：商品用于成人日常口腔清洁，属于家用电动器具，且8509.8030子目明确列名‘电动牙刷’，符合归类总规则一及六。"
+      ],
+      "detail": "",
+      "degraded": false,
+      "latencyMs": 14253
+    },
+    {
+      "id": "export-011",
+      "productName": "化妆刷套装",
+      "expectedCode": "9603290090",
+      "finalCode": "9603290090",
+      "correct": true,
+      "status": "decided",
+      "coveredByCorpus": null,
+      "headingHit": true,
+      "hs10Hit": true,
+      "poolSize": 35,
+      "poolCodes": [
+        "9603290090",
+        "9603290010",
+        "4417001000",
+        "4417009010",
+        "4417009020",
+        "4417009090",
+        "3304990021",
+        "3304990029",
+        "3304990031",
+        "3304990039",
+        "3304990041",
+        "3304990049",
+        "3304990091",
+        "3304990099",
+        "9603302010",
+        "9603309010",
+        "9803004000",
+        "9803005000",
+        "2404910010",
+        "2404910090",
+        "2404920000",
+        "2404990000",
+        "3001909020",
+        "3001909099",
+        "3215110090",
+        "3215190090",
+        "3307200000",
+        "4008110000",
+        "4008190000",
+        "4008210000",
+        "9616200000",
+        "9616100000",
+        "9609200000",
+        "9609101000",
+        "2404120000"
+      ],
+      "finalPoolCodes": [
+        "9603290090",
+        "9603290010",
+        "4417001000",
+        "4417009010",
+        "4417009020",
+        "4417009090",
+        "3304990021",
+        "3304990029",
+        "3304990031",
+        "3304990039",
+        "3304990041",
+        "3304990049",
+        "3304990091",
+        "3304990099",
+        "9603302010",
+        "9603309010",
+        "9803004000",
+        "9803005000",
+        "2404910010",
+        "2404910090",
+        "2404920000",
+        "2404990000",
+        "3001909020",
+        "3001909099",
+        "3215110090",
+        "3215190090",
+        "3307200000",
+        "4008110000",
+        "4008190000",
+        "4008210000",
+        "9616200000",
+        "9616100000",
+        "9609200000",
+        "9609101000",
+        "2404120000"
+      ],
+      "asked": true,
+      "answers": [
+        {
+          "attr": "关键确认",
+          "answer": "补充商品事实",
+          "freeText": "化妆刷套装10支和12支，动物毛加纤维毛木柄铝管，含散粉刷腮红刷眼影刷，配PU收纳包，美妆工具出口可定制logo和毛质。它是化妆用的毛刷（人体用刷），不是工业刷油漆刷，也不是电动美容仪或化妆海绵。"
+        }
+      ],
+      "questions": [
+        {
+          "attr": "关键确认",
+          "question": "请确认刷毛中动物毛的具体来源（是否含濒危动物毛）以及木柄的具体木材种类？",
+          "hint": "该问题的答案直接决定候选编码取舍",
+          "hintPlaceholder": "例如：请补充实际材质、结构或用途",
+          "options": [
+            {
+              "label": "动物毛非濒危，木柄非辐射松/拉敏木/濒危木",
+              "codes": [
+                "9603290090",
+                "4417009090"
+              ]
+            },
+            {
+              "label": "动物毛含濒危物种，木柄非辐射松/拉敏木/濒危木",
+              "codes": [
+                "9603290010",
+                "4417009090"
+              ]
+            },
+            {
+              "label": "动物毛非濒危，木柄为辐射松",
+              "codes": [
+                "9603290090",
+                "4417001000"
+              ]
+            },
+            {
+              "label": "动物毛非濒危，木柄为拉敏木",
+              "codes": [
+                "9603290090",
+                "4417009010"
+              ]
+            },
+            {
+              "label": "以上都不是（我补充说明）",
+              "codes": []
+            },
+            {
+              "label": "我不清楚这项",
+              "codes": []
+            }
+          ],
+          "why": "该问题区分了9603290010与9603290090（是否濒危毛），以及4417各子目（木柄材质），并影响最终归类",
+          "whyDetail": "刷头材质是否含濒危动物毛决定归入9603290010还是9603290090；木柄材质（辐射松、拉敏木、濒危木、其他）决定归入4417不同子目；成套化妆刷是否作为整体归类，还是刷头与刷柄分别归类；木柄是否构成基本特征，影响归入9603还是4417"
+        }
+      ],
+      "llmCalls": 3,
+      "modelTrace": [
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "understand"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "compare"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "decide"
+        }
+      ],
+      "retrievedCaseIds": [
+        "cn_ruling:W2023-7",
+        "cn_ruling:W2023-10",
+        "cn_ruling:Z2023-0006",
+        "cn_ruling:W2023-6",
+        "cn_ruling:W2023-8",
+        "cn_ruling:W2023-9"
+      ],
+      "addedCodes": [
+        "2404120000"
+      ],
+      "caseReferences": [],
+      "caseKnowledgeStatus": {
+        "status": "ready",
+        "available": true,
+        "enabled": true,
+        "version": "cn_rulings_2023_2025:80adab77952f020a8851961ed30a4e38c3254a2e4f61acc92b7aa27f1d602913",
+        "matchedCount": 6,
+        "truncated": false,
+        "expansionCount": 1,
+        "expansionTruncated": false
+      },
+      "reRetrieved": false,
+      "reasons": [
+        "主要功能：该商品为化妆用毛刷，用于涂抹散粉、腮红、眼影等，属于人体化妆刷，符合税目9603的范畴。",
+        "材质：刷头由动物毛和纤维毛混合制成，未明确为濒危动物毛，因此应归入非濒危动物毛制的子目9603290090。",
+        "用途：用户确认其为美妆工具，非工业刷或油漆刷，且非电动美容仪，进一步支持归入9603项下的人体化妆刷。"
+      ],
+      "detail": "",
+      "degraded": false,
+      "latencyMs": 16168
+    },
+    {
+      "id": "export-012",
+      "productName": "尼龙宠物牵引绳",
+      "expectedCode": "4201000090",
+      "finalCode": "4201000090",
+      "correct": true,
+      "status": "decided",
+      "coveredByCorpus": null,
+      "headingHit": true,
+      "hs10Hit": true,
+      "poolSize": 36,
+      "poolCodes": [
+        "4205009020",
+        "4201000010",
+        "4201000090",
+        "9803004000",
+        "9803005000",
+        "1207709100",
+        "1207709200",
+        "1212211010",
+        "1212213210",
+        "1212214210",
+        "1212217910",
+        "1212219010",
+        "2306500000",
+        "5407300000",
+        "6302211000",
+        "6302219000",
+        "6302221000",
+        "6302291000",
+        "6302292000",
+        "6302299000",
+        "8207130000",
+        "8501101000",
+        "8503001000",
+        "8539324010",
+        "9013901010",
+        "9503001000",
+        "9503002100",
+        "9503006000",
+        "9503008310",
+        "9503008390",
+        "4202111090",
+        "4202119090",
+        "7326901100",
+        "7326901990",
+        "6307901090",
+        "6307909000"
+      ],
+      "finalPoolCodes": [
+        "4205009020",
+        "4201000010",
+        "4201000090",
+        "9803004000",
+        "9803005000",
+        "1207709100",
+        "1207709200",
+        "1212211010",
+        "1212213210",
+        "1212214210",
+        "1212217910",
+        "1212219010",
+        "2306500000",
+        "5407300000",
+        "6302211000",
+        "6302219000",
+        "6302221000",
+        "6302291000",
+        "6302292000",
+        "6302299000",
+        "8207130000",
+        "8501101000",
+        "8503001000",
+        "8539324010",
+        "9013901010",
+        "9503001000",
+        "9503002100",
+        "9503006000",
+        "9503008310",
+        "9503008390",
+        "4202111090",
+        "4202119090",
+        "7326901100",
+        "7326901990",
+        "6307901090",
+        "6307909000"
+      ],
+      "asked": true,
+      "answers": [
+        {
+          "attr": "关键确认",
+          "answer": "补充商品事实",
+          "freeText": "宠物牵引绳尼龙织带金属扣，可伸缩和固定款配同色项圈，狗狗遛狗绳多色多尺寸，支持定制印花logo出口。它是牵遛宠物用的挽具（狗链项圈一类），不是普通捆绑绳子或线缆，也不是宠物玩具或宠物窝垫。"
+        }
+      ],
+      "questions": [
+        {
+          "attr": "关键确认",
+          "question": "该宠物牵引绳的主要材质是什么？",
+          "hint": "该问题的答案直接决定候选编码取舍",
+          "hintPlaceholder": "例如：请补充实际材质、结构或用途",
+          "options": [
+            {
+              "label": "尼龙为主，金属仅作扣件",
+              "codes": [
+                "4201000090"
+              ]
+            },
+            {
+              "label": "金属为主，尼龙仅作辅助",
+              "codes": [
+                "7326901990"
+              ]
+            },
+            {
+              "label": "皮革为主",
+              "codes": [
+                "4205009020"
+              ]
+            },
+            {
+              "label": "以上都不是（我补充说明）",
+              "codes": []
+            },
+            {
+              "label": "我不清楚这项",
+              "codes": []
+            }
+          ],
+          "why": "该问题区分了税目4201（挽具）与7326（钢铁制品）及4205（皮革制品）的归类。",
+          "whyDetail": "税目4201明确包括各种材料制成的挽具，而6307为其他纺织制成品，4201更具体。；4201000010限于濒危野生动物材料，4201000090为其他材料，商品为尼龙和金属，应归入后者。；4205009020为皮革制宠物用品，但商品主要材质为尼龙，不适用。；7326901990为钢铁制品，但商品整体为挽具，应优先考虑4201。"
+        }
+      ],
+      "llmCalls": 3,
+      "modelTrace": [
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "understand"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "compare"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "decide"
+        }
+      ],
+      "retrievedCaseIds": [
+        "cn_ruling:W2023-21"
+      ],
+      "addedCodes": [],
+      "caseReferences": [],
+      "caseKnowledgeStatus": {
+        "status": "ready",
+        "available": true,
+        "enabled": true,
+        "version": "cn_rulings_2023_2025:80adab77952f020a8851961ed30a4e38c3254a2e4f61acc92b7aa27f1d602913",
+        "matchedCount": 1,
+        "truncated": false,
+        "expansionCount": 0,
+        "expansionTruncated": false
+      },
+      "reRetrieved": false,
+      "reasons": [
+        "主要功能：商品为宠物牵引绳，用于牵遛宠物，属于挽具类，符合税目4201‘各种材料制成的鞍具及挽具’的列名。",
+        "材质：商品由尼龙织带和金属扣构成，不属于濒危野生动物材料，因此排除4201000010，归入4201000090。",
+        "用途：商品明确为遛狗绳，配同色项圈，适合各种动物用，符合4201的用途范围，且比6307等其他纺织制成品更具体。"
+      ],
+      "detail": "",
+      "degraded": false,
+      "latencyMs": 17939
+    },
+    {
+      "id": "export-013",
+      "productName": "儿童塑料积木",
+      "expectedCode": "9503006000",
+      "finalCode": "9503006000",
+      "correct": true,
+      "status": "decided",
+      "coveredByCorpus": null,
+      "headingHit": true,
+      "hs10Hit": true,
+      "poolSize": 33,
+      "poolCodes": [
+        "9503006000",
+        "9503001000",
+        "8501101000",
+        "8503001000",
+        "9503008310",
+        "9503008390",
+        "9503008900",
+        "9503009000",
+        "3925900000",
+        "3926100000",
+        "4903000000",
+        "6114200011",
+        "6601100000",
+        "6601910000",
+        "6601990000",
+        "9013901010",
+        "9401809091",
+        "9803004000",
+        "9803005000",
+        "3917290000",
+        "3917310000",
+        "3917390000",
+        "3917400000",
+        "3918901000",
+        "3918909000",
+        "3923290000",
+        "3923900000",
+        "8421320040",
+        "3926909090",
+        "9504200090",
+        "9504309000",
+        "9505900000",
+        "9505100090"
+      ],
+      "finalPoolCodes": [
+        "9503006000",
+        "9503001000",
+        "8501101000",
+        "8503001000",
+        "9503008310",
+        "9503008390",
+        "9503008900",
+        "9503009000",
+        "3925900000",
+        "3926100000",
+        "4903000000",
+        "6114200011",
+        "6601100000",
+        "6601910000",
+        "6601990000",
+        "9013901010",
+        "9401809091",
+        "9803004000",
+        "9803005000",
+        "3917290000",
+        "3917310000",
+        "3917390000",
+        "3917400000",
+        "3918901000",
+        "3918909000",
+        "3923290000",
+        "3923900000",
+        "8421320040",
+        "3926909090",
+        "9504200090",
+        "9504309000",
+        "9505900000",
+        "9505100090"
+      ],
+      "asked": true,
+      "answers": [
+        {
+          "attr": "关键确认",
+          "answer": "补充商品事实",
+          "freeText": "儿童益智塑料积木大颗粒拼装，ABS环保材质百变造型DIY拼插，早教智力开发玩具，散装和盒装可定制包装出口。它是塑料制的拼插构建类儿童玩具（智力玩具），不是毛绒玩具或电动玩具，也不是塑料文具或日用塑料制品。"
+        }
+      ],
+      "questions": [
+        {
+          "attr": "关键确认",
+          "question": "该塑料积木是否作为完整玩具零售包装出售，还是作为散装零件或未组装件出口？",
+          "hint": "该问题的答案直接决定候选编码取舍",
+          "hintPlaceholder": "例如：请补充实际材质、结构或用途",
+          "options": [
+            {
+              "label": "完整玩具零售包装",
+              "codes": [
+                "9503006000",
+                "9503008900"
+              ]
+            },
+            {
+              "label": "散装零件或未组装件",
+              "codes": [
+                "9503009000"
+              ]
+            },
+            {
+              "label": "以上都不是（我补充说明）",
+              "codes": []
+            },
+            {
+              "label": "我不清楚这项",
+              "codes": []
+            }
+          ],
+          "why": "区分完整玩具（9503006000或9503008900）与玩具零件（9503009000）的归类。",
+          "whyDetail": "是否属于智力玩具：智力玩具子目（9503006000）与其他玩具子目（9503008900）的区分。；是否完整品：完整积木与零件（9503009000）的区分。；是否带动力：带动力玩具（9503008310/8390）与无动力积木的区分。"
+        }
+      ],
+      "llmCalls": 3,
+      "modelTrace": [
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "understand"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "compare"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "decide"
+        }
+      ],
+      "retrievedCaseIds": [],
+      "addedCodes": [],
+      "caseReferences": [],
+      "caseKnowledgeStatus": {
+        "status": "no_match",
+        "available": true,
+        "enabled": true,
+        "version": "cn_rulings_2023_2025:80adab77952f020a8851961ed30a4e38c3254a2e4f61acc92b7aa27f1d602913",
+        "matchedCount": 0,
+        "truncated": false,
+        "expansionCount": 0,
+        "expansionTruncated": false
+      },
+      "reRetrieved": false,
+      "reasons": [
+        "主要功能：用户确认其为儿童益智塑料积木，用于拼插构建和早教智力开发，属于智力玩具，符合9503006000子目‘智力玩具’的定义。",
+        "材质：商品为ABS塑料制，属于塑料玩具，排除金属、木质等其他材质，且不属于毛绒或电动玩具。",
+        "形态：大颗粒拼插结构，无动力装置，非零件或未组装件，作为完整玩具归类，符合9503品目下智力玩具的范畴。"
+      ],
+      "detail": "",
+      "degraded": false,
+      "latencyMs": 15058
+    },
+    {
+      "id": "export-014",
+      "productName": "USB-C数据线",
+      "expectedCode": "8544421100",
+      "finalCode": "8544421900",
+      "correct": false,
+      "status": "decided",
+      "coveredByCorpus": null,
+      "headingHit": true,
+      "hs10Hit": true,
+      "poolSize": 36,
+      "poolCodes": [
+        "8535900040",
+        "8544421100",
+        "8544422100",
+        "8544421900",
+        "8544422900",
+        "8547901000",
+        "7602000010",
+        "4907009010",
+        "4911991010",
+        "4911999010",
+        "8414599060",
+        "8470100000",
+        "8471309000",
+        "8471411090",
+        "8471412000",
+        "8471419000",
+        "8471605000",
+        "8471606000",
+        "8443311010",
+        "8443311090",
+        "8443319010",
+        "8443319090",
+        "8443321100",
+        "8443321200",
+        "8443321300",
+        "8443321400",
+        "8443321900",
+        "8443322100",
+        "8443322200",
+        "8443322900",
+        "8544190000",
+        "8517622200",
+        "8517629990",
+        "8705909930",
+        "8711600000",
+        "8705909990"
+      ],
+      "finalPoolCodes": [
+        "8535900040",
+        "8544421100",
+        "8544422100",
+        "8544421900",
+        "8544422900",
+        "8547901000",
+        "7602000010",
+        "4907009010",
+        "4911991010",
+        "4911999010",
+        "8414599060",
+        "8470100000",
+        "8471309000",
+        "8471411090",
+        "8471412000",
+        "8471419000",
+        "8471605000",
+        "8471606000",
+        "8443311010",
+        "8443311090",
+        "8443319010",
+        "8443319090",
+        "8443321100",
+        "8443321200",
+        "8443321300",
+        "8443321400",
+        "8443321900",
+        "8443322100",
+        "8443322200",
+        "8443322900",
+        "8544190000",
+        "8517622200",
+        "8517629990",
+        "8705909930",
+        "8711600000",
+        "8705909990"
+      ],
+      "asked": true,
+      "answers": [
+        {
+          "attr": "关键确认",
+          "answer": "补充商品事实",
+          "freeText": "USB-C数据线Type-C转Type-C和Lightning，1米和2米编织线身，支持60W快充和数据传输铝合金接头，可定制长度logo出口。它是两端都带接头、低压（不超过80伏）用来传输数据和充电的连接线，不是不带接头的裸电线，也不是高压电缆或充电头。"
+        }
+      ],
+      "questions": [
+        {
+          "attr": "关键确认",
+          "question": "该USB-C数据线的额定电压具体是多少伏？",
+          "hint": "该问题的答案直接决定候选编码取舍",
+          "hintPlaceholder": "例如：请补充实际材质、结构或用途",
+          "options": [
+            {
+              "label": "≤80V",
+              "codes": [
+                "8544421100",
+                "8544421900"
+              ]
+            },
+            {
+              "label": ">80V且≤1000V",
+              "codes": [
+                "8544422100",
+                "8544422900"
+              ]
+            },
+            {
+              "label": "以上都不是（我补充说明）",
+              "codes": []
+            },
+            {
+              "label": "我不清楚这项",
+              "codes": []
+            }
+          ],
+          "why": "额定电压是区分85444211/19与85444221/29的关键，同时影响电缆与电导体的归类。",
+          "whyDetail": "商品是电缆还是电导体，决定归入85444211还是85444219。；额定电压是否确实≤80V，影响是否排除85444221/29。；是否属于有接头电缆，排除无接头电线。"
+        }
+      ],
+      "llmCalls": 3,
+      "modelTrace": [
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "understand"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "compare"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "decide"
+        }
+      ],
+      "retrievedCaseIds": [
+        "cn_ruling:Z2023-0028",
+        "cn_ruling:Z2023-0033",
+        "cn_ruling:Z2023-0036",
+        "cn_ruling:J2023-0001"
+      ],
+      "addedCodes": [
+        "8705909930",
+        "8711600000",
+        "8705909990"
+      ],
+      "caseReferences": [],
+      "caseKnowledgeStatus": {
+        "status": "ready",
+        "available": true,
+        "enabled": true,
+        "version": "cn_rulings_2023_2025:80adab77952f020a8851961ed30a4e38c3254a2e4f61acc92b7aa27f1d602913",
+        "matchedCount": 4,
+        "truncated": false,
+        "expansionCount": 3,
+        "expansionTruncated": false
+      },
+      "reRetrieved": false,
+      "reasons": [
+        "主要功能：该商品为USB-C数据线，用于数据传输和充电，属于有接头的电导体，符合税目8544项下“有接头电导体”的描述。",
+        "材质/结构：线身为编织线，接头为铝合金，两端带接头，额定电压不超过80伏，符合子目8544.42的电压范围（≤80V）。",
+        "用途：用于连接设备进行数据传输和充电，非高压电缆或裸电线，排除其他候选编码。"
+      ],
+      "detail": "",
+      "degraded": false,
+      "latencyMs": 11590
+    },
+    {
+      "id": "export-015",
+      "productName": "太阳能庭院灯",
+      "expectedCode": "9405429000",
+      "finalCode": "9405429000",
+      "correct": true,
+      "status": "decided",
+      "coveredByCorpus": null,
+      "headingHit": true,
+      "hs10Hit": true,
+      "poolSize": 42,
+      "poolCodes": [
+        "9405410000",
+        "9405429000",
+        "8502390010",
+        "8503009030",
+        "2804619012",
+        "2804619013",
+        "2804619092",
+        "2804619093",
+        "8419120000",
+        "9405110000",
+        "9405499000",
+        "9405500000",
+        "9803004000",
+        "9405210010",
+        "9405210090",
+        "9405310000",
+        "9405421000",
+        "9405610000",
+        "2804619011",
+        "2804619019",
+        "2804619091",
+        "2804619099",
+        "8512100000",
+        "8512201000",
+        "8512209000",
+        "8513109000",
+        "8539324010",
+        "8539399019",
+        "9033000010",
+        "8541410090",
+        "8541490000",
+        "8703223010",
+        "8705909930",
+        "8539510000",
+        "8703223090",
+        "8705909990",
+        "8703224010",
+        "8703224090",
+        "8703225010",
+        "8703225090",
+        "8703229010",
+        "8703229090"
+      ],
+      "finalPoolCodes": [
+        "9405410000",
+        "9405429000",
+        "8502390010",
+        "8503009030",
+        "2804619012",
+        "2804619013",
+        "2804619092",
+        "2804619093",
+        "8419120000",
+        "9405110000",
+        "9405499000",
+        "9405500000",
+        "9803004000",
+        "9405210010",
+        "9405210090",
+        "9405310000",
+        "9405421000",
+        "9405610000",
+        "2804619011",
+        "2804619019",
+        "2804619091",
+        "2804619099",
+        "8512100000",
+        "8512201000",
+        "8512209000",
+        "8513109000",
+        "8539324010",
+        "8539399019",
+        "9033000010",
+        "8541410090",
+        "8541490000",
+        "8703223010",
+        "8705909930",
+        "8539510000",
+        "8703223090",
+        "8705909990",
+        "8703224010",
+        "8703224090",
+        "8703225010",
+        "8703225090",
+        "8703229010",
+        "8703229090"
+      ],
+      "asked": true,
+      "answers": [
+        {
+          "attr": "关键确认",
+          "answer": "补充商品事实",
+          "freeText": "太阳能庭院灯户外防水LED，白天太阳能板充电晚上自动亮，一体式设计带地插和壁挂暖光，用于花园草坪道路照明，可定制功率造型出口。它是自带太阳能供电、只用LED光源的完整照明灯具，不是单独的灯泡光源，也不只是一块太阳能发电板。"
+        }
+      ],
+      "questions": [
+        {
+          "attr": "关键确认",
+          "question": "该太阳能庭院灯是否设计为固定安装（如通过地插或壁挂固定于地面或墙壁），而非手持或便携式？",
+          "hint": "该问题的答案直接决定候选编码取舍",
+          "hintPlaceholder": "例如：请补充实际材质、结构或用途",
+          "options": [
+            {
+              "label": "固定安装",
+              "codes": [
+                "9405410000",
+                "9405429000",
+                "9405499000"
+              ]
+            },
+            {
+              "label": "手提式或便携式",
+              "codes": [
+                "8513109000"
+              ]
+            },
+            {
+              "label": "以上都不是（我补充说明）",
+              "codes": []
+            },
+            {
+              "label": "我不清楚这项",
+              "codes": []
+            }
+          ],
+          "why": "该问题区分了固定式灯具（9405）与手提式电灯（8513），直接影响归类。",
+          "whyDetail": "是否属于“光伏的”灯具（9405.41）与“其他”LED灯具（9405.42）的区别。；是否属于手提式电灯（8513）与固定式灯具（9405）的区别。；是否作为完整灯具（9405）与单独LED光源（8541）的区别。"
+        }
+      ],
+      "llmCalls": 3,
+      "modelTrace": [
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "understand"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "compare"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "decide"
+        }
+      ],
+      "retrievedCaseIds": [
+        "cn_ruling:W2023-22",
+        "cn_ruling:Z2023-0035",
+        "cn_ruling:W2023-24",
+        "cn_ruling:W2023-21",
+        "cn_ruling:Z2023-0032"
+      ],
+      "addedCodes": [
+        "8703223010",
+        "8705909930",
+        "8539510000",
+        "8703223090",
+        "8705909990",
+        "8703224010",
+        "8703224090",
+        "8703225010",
+        "8703225090",
+        "8703229010",
+        "8703229090"
+      ],
+      "caseReferences": [
+        {
+          "caseId": "cn_ruling:W2023-24",
+          "decisionNo": "W2023-24",
+          "productName": "描画灯箱",
+          "productDescription": "描画灯箱，由外壳为塑料的电池供电的LED灯箱组成。该灯箱的led光通过半透明的LED灯罩照亮放置在纸张下面的原始图像，可使使用者准确地描画纸上显现的图像的轮廓。该产品表面没有任何网格或图案，也不带任何辅助绘图的附件。可以用于绘画、描摹、剪贴或书法、丝印、刺绣、羽毛笔等创意活动，也可用于观看幻灯片或底片。箱体尺寸为250毫米×340毫米×25毫米。",
+          "classificationDecision": null,
+          "ruleBasis": "归类总规则一及六",
+          "historicalCode": "9405.42",
+          "normalizedHistoricalCode": "940542",
+          "codeLevel": "6位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 2,
+          "sourceFile": "53371691393917063.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:W2023-24",
+            "relation": "supports",
+            "matchedFacts": [
+              "LED灯箱",
+              "电池供电",
+              "照明用途"
+            ],
+            "differingFacts": [
+              "描画灯箱为桌面使用，非户外庭院灯",
+              "无太阳能板"
+            ],
+            "explanation": "该判例将LED灯箱归入9405.42，表明LED灯具归入9405.42，支持本商品归入9405.42。"
+          }
+        },
+        {
+          "caseId": "cn_ruling:W2023-21",
+          "decisionNo": "W2023-21",
+          "productName": "灯带",
+          "productDescription": "灯带为24V室内用柔性LED带状灯，1.3W，冷白光。该灯带为可链接的模块化照明产品的单元模块，由18颗沿灯带长度方向排列的发光二极管（LED）组成。灯带的发光二极管（LED）连接在印刷电路板（PCB）上。沿灯带每隔102毫米（4英寸）有一个用以消除电压下降的恒流驱动器和一个内置连接器。灯带最大连接数量为50节，也可按每102毫米（4英寸）为单元切割成自定义长度。该商品报验时不带为其供电的24V驱动器或硬线盒，可用于如橱柜、背光区域和难以触及区域的工作照明和重点照明。",
+          "classificationDecision": null,
+          "ruleBasis": "归类总规则一【第八十五章注释十一（一）和第九十四章注释一（六）】及六",
+          "historicalCode": "8539.51",
+          "normalizedHistoricalCode": "853951",
+          "codeLevel": "6位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 1,
+          "sourceFile": "53371691393917063.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:W2023-21",
+            "relation": "distinguishes",
+            "matchedFacts": [
+              "LED光源",
+              "照明用途"
+            ],
+            "differingFacts": [
+              "灯带为柔性带状，非完整灯具",
+              "不带电源驱动器",
+              "室内使用"
+            ],
+            "explanation": "该判例将灯带归入8539.51，因其为LED模块而非完整灯具，本商品为完整灯具，故不适用。"
+          }
+        }
+      ],
+      "caseKnowledgeStatus": {
+        "status": "ready",
+        "available": true,
+        "enabled": true,
+        "version": "cn_rulings_2023_2025:80adab77952f020a8851961ed30a4e38c3254a2e4f61acc92b7aa27f1d602913",
+        "matchedCount": 5,
+        "truncated": false,
+        "expansionCount": 11,
+        "expansionTruncated": false
+      },
+      "reRetrieved": false,
+      "reasons": [
+        "主要功能：商品为完整照明灯具，利用太阳能供电，但核心功能是照明，符合品目9405的灯具定义。",
+        "光源类型：用户确认仅使用LED光源，且非单独灯泡或光源，应归入9405.42项下。",
+        "光伏特征：商品虽为太阳能供电，但9405.41要求“光伏的”且设计为仅使用LED光源，而商品未明确是否直接连接光伏电池，且9405.42为其他LED灯具，更符合"
+      ],
+      "detail": "",
+      "degraded": false,
+      "latencyMs": 17719
+    },
+    {
+      "id": "export-016",
+      "productName": "不锈钢分格餐盒",
+      "expectedCode": "7323930000",
+      "finalCode": "7323930000",
+      "correct": true,
+      "status": "decided",
+      "coveredByCorpus": null,
+      "headingHit": true,
+      "hs10Hit": true,
+      "poolSize": 42,
+      "poolCodes": [
+        "9617009000",
+        "7020009100",
+        "9617001100",
+        "9617001900",
+        "8414100030",
+        "8414100050",
+        "7304419000",
+        "7314120000",
+        "7314140000",
+        "7008001000",
+        "8414100010",
+        "8414100020",
+        "8414100040",
+        "8414100060",
+        "8414100090",
+        "8477409000",
+        "8479899930",
+        "8508600000",
+        "8508709000",
+        "8514200010",
+        "8514320010",
+        "8514320090",
+        "8484200010",
+        "8543100020",
+        "8609001100",
+        "8609002100",
+        "9803004000",
+        "9803005000",
+        "7304111000",
+        "7304112000",
+        "7323930000",
+        "7323949000",
+        "8215200000",
+        "8215990000",
+        "3924900000",
+        "3924100000",
+        "7308300000",
+        "9023009000",
+        "7010200000",
+        "8507600020",
+        "8507600030",
+        "8507600090"
+      ],
+      "finalPoolCodes": [
+        "9617009000",
+        "7020009100",
+        "9617001100",
+        "9617001900",
+        "8414100030",
+        "8414100050",
+        "7304419000",
+        "7314120000",
+        "7314140000",
+        "7008001000",
+        "8414100010",
+        "8414100020",
+        "8414100040",
+        "8414100060",
+        "8414100090",
+        "8477409000",
+        "8479899930",
+        "8508600000",
+        "8508709000",
+        "8514200010",
+        "8514320010",
+        "8514320090",
+        "8484200010",
+        "8543100020",
+        "8609001100",
+        "8609002100",
+        "9803004000",
+        "9803005000",
+        "7304111000",
+        "7304112000",
+        "7323930000",
+        "7323949000",
+        "8215200000",
+        "8215990000",
+        "3924900000",
+        "3924100000",
+        "7308300000",
+        "9023009000",
+        "7010200000",
+        "8507600020",
+        "8507600030",
+        "8507600090"
+      ],
+      "asked": true,
+      "answers": [
+        {
+          "attr": "关键确认",
+          "answer": "补充商品事实",
+          "freeText": "304不锈钢分格餐盒，上班族学生带饭便当盒，单层钢无真空保温层、密封防漏，可分装汤菜饭支持激光刻字定制出口。它就是普通不锈钢制的餐厨盛器、用来装饭菜的饭盒，不抽真空也不保温，不是玻璃或钢制真空保温瓶，也不是插电加热饭盒或一次性餐盒。"
+        }
+      ],
+      "questions": [
+        {
+          "attr": "关键确认",
+          "question": "该不锈钢分格餐盒是否与餐具（如餐匙、餐叉）成套报验？",
+          "hint": "该问题的答案直接决定候选编码取舍",
+          "hintPlaceholder": "例如：请补充实际材质、结构或用途",
+          "options": [
+            {
+              "label": "是，成套报验",
+              "codes": [
+                "8215200000"
+              ]
+            },
+            {
+              "label": "否，单独报验",
+              "codes": [
+                "7323930000"
+              ]
+            },
+            {
+              "label": "以上都不是（我补充说明）",
+              "codes": []
+            },
+            {
+              "label": "我不清楚这项",
+              "codes": []
+            }
+          ],
+          "why": "若成套报验，可能归入品目82.15；若单独报验，则归入品目73.23。",
+          "whyDetail": "品目73.23与82.15的区别在于：73.23涵盖餐桌、厨房用钢铁器具（如餐盒），而82.15仅涵盖餐匙、餐叉等类似用具，不包括餐盒。；材质为不锈钢，排除塑料制品（品目39.24）和玻璃制品（品目70.20）。；商品无真空保温功能，排除品目96.17的真空容器。；是否成套报验影响品目82.15的归类，但商品描述未提及成套。"
+        }
+      ],
+      "llmCalls": 3,
+      "modelTrace": [
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "understand"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "compare"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "decide"
+        }
+      ],
+      "retrievedCaseIds": [
+        "cn_ruling:J2025-0004",
+        "cn_ruling:Z2023-0044",
+        "cn_ruling:W2023-19",
+        "cn_ruling:Z2023-0025",
+        "cn_ruling:Z2023-0012",
+        "cn_ruling:Z2023-0013"
+      ],
+      "addedCodes": [
+        "7308300000",
+        "9023009000",
+        "7010200000",
+        "8507600020",
+        "8507600030",
+        "8507600090"
+      ],
+      "caseReferences": [
+        {
+          "caseId": "cn_ruling:J2025-0004",
+          "decisionNo": "J2025-0004",
+          "productName": "玻璃淋浴房",
+          "productDescription": "该商品由2块固定安装的平面钢化玻璃、2块可左右滑动的弧形钢化玻璃、不锈钢制边框和弧形轨道套、滑轮、铰链、门把手等组成，不带底盘、顶盖和淋浴装置。 商品组装后，形成一个连接在L型墙体（两面墙体）的配有滑动门的弧形全框架玻璃淋浴空间。",
+          "classificationDecision": "该商品主要由钢化玻璃和不锈钢制框架组成，金属框架构成了商品的基本特征，符合《税则注释》品目73.08项下钢铁制门窗结构件的描述，根据归类总规则三（二）及六，应归入税则号列7308.3000。",
+          "ruleBasis": "归类总规则三（二）及六；《税则注释》品目73.08项下钢铁制门窗结构件的描述",
+          "historicalCode": "7308.3000",
+          "normalizedHistoricalCode": "73083000",
+          "codeLevel": "8位",
+          "announcementNo": "海关总署公告2025年第259号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 1,
+          "sourceFile": "2025年商品归类决定 (1).docx",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:J2025-0004",
+            "relation": "distinguishes",
+            "matchedFacts": [],
+            "differingFacts": [
+              "商品为不锈钢餐盒，判例为玻璃淋浴房"
+            ],
+            "explanation": "判例涉及玻璃淋浴房，归入品目73.08，与本案商品材质、用途均不同，不适用。"
+          }
+        },
+        {
+          "caseId": "cn_ruling:Z2023-0044",
+          "decisionNo": "Z2023-0044",
+          "productName": "模拟射击设备",
+          "productDescription": "该设备由主模拟计算机（PSC）、投影仪、监测镜头、扬声器及高反射屏幕组成，其中除高反射屏幕单独包装外，其他设备装于一个29英寸×22英寸×19英寸的金属包装箱内，箱内用软填充材料隔断，内部设备无单独外包装，用于模拟射击训练，在训练过程中，模拟射击场景由计算机提供并由投影仪投射到屏幕上，训练结束后，练习结果和学员的动作可以显示在监视器上，该设备配有激光插入器，可插入武器的枪管，并由武器的撞针撞击发射激光，在屏幕上射出一个激光点，因高反射屏幕的主要材料是延展性较好的橡胶，子弹穿过后弹孔可以自动闭合，既可支持激光模拟射击又可支持实弹射击。",
+          "classificationDecision": "该商品为用于模拟射击训练的机组设备，符合《税则》第八十四章章注五（五）和第九十章章注三关于功能机组的规定，应归入税则号列9023.0090。",
+          "ruleBasis": "《税则》第八十四章章注五（五）和第九十章章注三关于功能机组的规定",
+          "historicalCode": "9023.0090",
+          "normalizedHistoricalCode": "90230090",
+          "codeLevel": "8位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 1,
+          "sourceFile": "6351691393903988.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:Z2023-0044",
+            "relation": "distinguishes",
+            "matchedFacts": [],
+            "differingFacts": [
+              "商品为餐盒，判例为模拟射击设备"
+            ],
+            "explanation": "判例涉及模拟射击设备，归入品目90.23，与本案商品功能、用途完全不同，不适用。"
+          }
+        },
+        {
+          "caseId": "cn_ruling:W2023-19",
+          "decisionNo": "W2023-19",
+          "productName": "耐热玻璃盖",
+          "productDescription": "耐热玻璃盖，把手可为多种材质，可带有蒸汽喷口和不锈钢边缘，同一盖子可用于平底锅或煎锅，用于防灰尘或减少食物的水分蒸发。该产品单独报验，未与厨具一起报验。",
+          "classificationDecision": null,
+          "ruleBasis": "归类总规则一及六",
+          "historicalCode": "7010.20",
+          "normalizedHistoricalCode": "701020",
+          "codeLevel": "6位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 1,
+          "sourceFile": "53371691393917063.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:W2023-19",
+            "relation": "distinguishes",
+            "matchedFacts": [],
+            "differingFacts": [
+              "商品为不锈钢餐盒，判例为耐热玻璃盖"
+            ],
+            "explanation": "判例涉及玻璃盖，归入品目70.10，材质不同，且用途为锅盖，与餐盒不同，不适用。"
+          }
+        },
+        {
+          "caseId": "cn_ruling:Z2023-0025",
+          "decisionNo": "Z2023-0025",
+          "productName": "锂离子充电电池芯",
+          "productDescription": "该商品呈长方形块状，不锈钢外壳，由正负极极片、隔膜、极耳、包装膜、电解液等组成，用于与充放电保护电路板、五金或塑料外壳组成锂离子充电电池，是电池的主要部件。该商品未配带充放电保护电路，不能进行充电及放电。",
+          "classificationDecision": "该电池芯是电池的主要部件，已构成锂离子充电电池整机基本特征，根据归类总规则二（一），应归入税则号列8507.6000。",
+          "ruleBasis": "归类总规则二（一）",
+          "historicalCode": "8507.6000",
+          "normalizedHistoricalCode": "85076000",
+          "codeLevel": "8位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 3,
+          "sourceFile": "6351691393903988.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:Z2023-0025",
+            "relation": "distinguishes",
+            "matchedFacts": [],
+            "differingFacts": [
+              "商品为餐盒，判例为锂离子电池芯"
+            ],
+            "explanation": "判例涉及电池芯，归入品目85.07，与本案商品功能、用途完全不同，不适用。"
+          }
+        },
+        {
+          "caseId": "cn_ruling:Z2023-0012",
+          "decisionNo": "Z2023-0012",
+          "productName": "清扫车",
+          "productDescription": "该清扫车由使用电池供电的直流马达、液压驱动系统、行车/停车制动系统，以及扫地刷和强力吸尘系统组成，用于道路清洁，可骑乘驾驶。运行原理为：当车辆向前行走时，扫地刷便会将地上的垃圾带到车辆的中间，再由利用吸尘系统将垃圾抽吸进车辆。",
+          "classificationDecision": "该商品为道路清扫车，具有驱动引擎、驱动系统和全自动刹车系统，但不具有变速箱及换挡操纵装置，根据《税则注释》对品目84.79“独立功能”的规定，应归入税则号列8479.8999。",
+          "ruleBasis": "《税则注释》对品目84.79“独立功能”的规定",
+          "historicalCode": "8479.8999",
+          "normalizedHistoricalCode": "84798999",
+          "codeLevel": "8位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 13,
+          "sourceFile": "6351691393903988.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:Z2023-0012",
+            "relation": "distinguishes",
+            "matchedFacts": [],
+            "differingFacts": [
+              "商品为餐盒，判例为清扫车"
+            ],
+            "explanation": "判例涉及清扫车，归入品目84.79，与本案商品功能、用途完全不同，不适用。"
+          }
+        },
+        {
+          "caseId": "cn_ruling:Z2023-0013",
+          "decisionNo": "Z2023-0013",
+          "productName": "管道污水调节装置",
+          "productDescription": "该套装置用于清除中央空调冷凝管道污垢，由阀门开关控制器（PLC）、回球控制器、球注入器、海绵小球、电子阀门和垫片等组装而成，运行原理为：与空调冷凝管构成一个小循环，利用原管道自身的水流和压力，带动海绵小球循环，海绵小球经过冷凝管道时通过摩擦将管道中的污垢擦除并带到指定的位置排放污水。",
+          "classificationDecision": "该商品为管道清洁装置，根据《税则注释》对品目84.79“独立功能”的规定，应归入税则号列8479.8999。",
+          "ruleBasis": "《税则注释》对品目84.79“独立功能”的规定",
+          "historicalCode": "8479.8999",
+          "normalizedHistoricalCode": "84798999",
+          "codeLevel": "8位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 13,
+          "sourceFile": "6351691393903988.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:Z2023-0013",
+            "relation": "distinguishes",
+            "matchedFacts": [],
+            "differingFacts": [
+              "商品为餐盒，判例为管道污水调节装置"
+            ],
+            "explanation": "判例涉及管道清洁装置，归入品目84.79，与本案商品功能、用途完全不同，不适用。"
+          }
+        }
+      ],
+      "caseKnowledgeStatus": {
+        "status": "ready",
+        "available": true,
+        "enabled": true,
+        "version": "cn_rulings_2023_2025:80adab77952f020a8851961ed30a4e38c3254a2e4f61acc92b7aa27f1d602913",
+        "matchedCount": 6,
+        "truncated": true,
+        "expansionCount": 6,
+        "expansionTruncated": false
+      },
+      "reRetrieved": false,
+      "reasons": [
+        "材质：商品为304不锈钢制，符合品目73.23“餐桌、厨房等家用不锈钢器具”的材质要求。",
+        "用途：商品用于盛装饭菜，属于餐桌、厨房用器具，符合品目73.23的用途范围。",
+        "结构：商品为单层无保温功能的分格餐盒，不属于真空容器或保温瓶，排除品目96.17；且非成套餐具，排除品目82.15。"
+      ],
+      "detail": "",
+      "degraded": false,
+      "latencyMs": 20920
+    },
+    {
+      "id": "export-017",
+      "productName": "塑料运动水壶",
+      "expectedCode": "3924100000",
+      "finalCode": "3924900000",
+      "correct": false,
+      "status": "decided",
+      "coveredByCorpus": null,
+      "headingHit": true,
+      "hs10Hit": true,
+      "poolSize": 44,
+      "poolCodes": [
+        "8215100000",
+        "8215200000",
+        "8215910000",
+        "8215990000",
+        "9617009000",
+        "9803004000",
+        "9803005000",
+        "3917290000",
+        "3917310000",
+        "3917390000",
+        "3917400000",
+        "3918901000",
+        "3918909000",
+        "3923290000",
+        "3924100000",
+        "6406202000",
+        "2712901010",
+        "2809201100",
+        "2835252000",
+        "2835311000",
+        "2835391100",
+        "2915211100",
+        "7013370000",
+        "7020009100",
+        "8413810020",
+        "8422302100",
+        "8476210000",
+        "8516101000",
+        "8516102000",
+        "8516109000",
+        "3923100090",
+        "3924900000",
+        "3926201900",
+        "3926209000",
+        "7308300000",
+        "2404910010",
+        "7010200000",
+        "2403990010",
+        "4811519900",
+        "8507600020",
+        "2404910090",
+        "2403990090",
+        "8507600030",
+        "8507600090"
+      ],
+      "finalPoolCodes": [
+        "8215100000",
+        "8215200000",
+        "8215910000",
+        "8215990000",
+        "9617009000",
+        "9803004000",
+        "9803005000",
+        "3917290000",
+        "3917310000",
+        "3917390000",
+        "3917400000",
+        "3918901000",
+        "3918909000",
+        "3923290000",
+        "3924100000",
+        "6406202000",
+        "2712901010",
+        "2809201100",
+        "2835252000",
+        "2835311000",
+        "2835391100",
+        "2915211100",
+        "7013370000",
+        "7020009100",
+        "8413810020",
+        "8422302100",
+        "8476210000",
+        "8516101000",
+        "8516102000",
+        "8516109000",
+        "3923100090",
+        "3924900000",
+        "3926201900",
+        "3926209000",
+        "7308300000",
+        "2404910010",
+        "7010200000",
+        "2403990010",
+        "4811519900",
+        "8507600020",
+        "2404910090",
+        "2403990090",
+        "8507600030",
+        "8507600090"
+      ],
+      "asked": true,
+      "answers": [
+        {
+          "attr": "关键确认",
+          "answer": "补充商品事实",
+          "freeText": "塑料运动水壶750ml和1L，食品级PP和Tritan材质带提手直饮盖防漏，健身房户外骑行用多色可定制logo出口。它是塑料制的饮水壶（厨房餐桌用具），不是不锈钢真空保温杯，也不是玻璃杯或电热水壶。"
+        }
+      ],
+      "questions": [
+        {
+          "attr": "关键确认",
+          "question": "该运动水壶是否具有真空隔热保温功能？",
+          "hint": "该问题的答案直接决定候选编码取舍",
+          "hintPlaceholder": "例如：请补充实际材质、结构或用途",
+          "options": [
+            {
+              "label": "是，具有真空隔热层",
+              "codes": [
+                "9617009000"
+              ]
+            },
+            {
+              "label": "否，普通单层塑料瓶",
+              "codes": [
+                "3924100000",
+                "3924900000",
+                "3923100090"
+              ]
+            },
+            {
+              "label": "以上都不是（我补充说明）",
+              "codes": []
+            },
+            {
+              "label": "我不清楚这项",
+              "codes": []
+            }
+          ],
+          "why": "区分真空容器（96.17）与普通塑料容器（39章）",
+          "whyDetail": "品目39.24与39.23的区别在于用途：39.24为家庭或厨房用具，39.23为运输或包装用容器。；品目39.24与96.17的区别在于是否真空保温容器。；品目39.24与70.13的区别在于材质：塑料制归39章，玻璃制归70章。"
+        }
+      ],
+      "llmCalls": 3,
+      "modelTrace": [
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "understand"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "compare"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "decide"
+        }
+      ],
+      "retrievedCaseIds": [
+        "cn_ruling:J2025-0004",
+        "cn_ruling:W2023-10",
+        "cn_ruling:W2023-19",
+        "cn_ruling:W2023-4",
+        "cn_ruling:Z2023-0010",
+        "cn_ruling:Z2023-0025"
+      ],
+      "addedCodes": [
+        "7308300000",
+        "2404910010",
+        "7010200000",
+        "2403990010",
+        "4811519900",
+        "8507600020",
+        "2404910090",
+        "2403990090",
+        "8507600030",
+        "8507600090"
+      ],
+      "caseReferences": [
+        {
+          "caseId": "cn_ruling:J2025-0004",
+          "decisionNo": "J2025-0004",
+          "productName": "玻璃淋浴房",
+          "productDescription": "该商品由2块固定安装的平面钢化玻璃、2块可左右滑动的弧形钢化玻璃、不锈钢制边框和弧形轨道套、滑轮、铰链、门把手等组成，不带底盘、顶盖和淋浴装置。 商品组装后，形成一个连接在L型墙体（两面墙体）的配有滑动门的弧形全框架玻璃淋浴空间。",
+          "classificationDecision": "该商品主要由钢化玻璃和不锈钢制框架组成，金属框架构成了商品的基本特征，符合《税则注释》品目73.08项下钢铁制门窗结构件的描述，根据归类总规则三（二）及六，应归入税则号列7308.3000。",
+          "ruleBasis": "归类总规则三（二）及六；《税则注释》品目73.08项下钢铁制门窗结构件的描述",
+          "historicalCode": "7308.3000",
+          "normalizedHistoricalCode": "73083000",
+          "codeLevel": "8位",
+          "announcementNo": "海关总署公告2025年第259号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 1,
+          "sourceFile": "2025年商品归类决定 (1).docx",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:J2025-0004",
+            "relation": "distinguishes",
+            "matchedFacts": [],
+            "differingFacts": [
+              "商品为塑料制水壶，判例为玻璃淋浴房（钢铁框架）",
+              "材质和用途完全不同"
+            ],
+            "explanation": "判例涉及钢铁制门窗结构件，与塑料水壶无关联，不适用。"
+          }
+        },
+        {
+          "caseId": "cn_ruling:W2023-10",
+          "decisionNo": "W2023-10",
+          "productName": "一次性口服尼古丁包",
+          "productDescription": "一次性口服尼古丁包，不含烟草成分，含有药物级尼古丁、水和其他食品级成分，包括桉树和松树纤维、香料和甜味剂。使用时将小包尼古丁放在牙龈和上唇之间使用。在使用过程中，产品会释放尼古丁和香料，只有尼古丁会通过牙龈的口腔粘膜被吸收。产品不具有辅助戒烟用途。",
+          "classificationDecision": null,
+          "ruleBasis": "归类总规则一及六",
+          "historicalCode": "2404.91",
+          "normalizedHistoricalCode": "240491",
+          "codeLevel": "6位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 2,
+          "sourceFile": "53371691393917063.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:W2023-10",
+            "relation": "distinguishes",
+            "matchedFacts": [],
+            "differingFacts": [
+              "商品为塑料水壶，判例为口服尼古丁包",
+              "商品类别完全不同"
+            ],
+            "explanation": "判例涉及烟草制品，与塑料水壶无关联，不适用。"
+          }
+        },
+        {
+          "caseId": "cn_ruling:W2023-19",
+          "decisionNo": "W2023-19",
+          "productName": "耐热玻璃盖",
+          "productDescription": "耐热玻璃盖，把手可为多种材质，可带有蒸汽喷口和不锈钢边缘，同一盖子可用于平底锅或煎锅，用于防灰尘或减少食物的水分蒸发。该产品单独报验，未与厨具一起报验。",
+          "classificationDecision": null,
+          "ruleBasis": "归类总规则一及六",
+          "historicalCode": "7010.20",
+          "normalizedHistoricalCode": "701020",
+          "codeLevel": "6位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 1,
+          "sourceFile": "53371691393917063.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:W2023-19",
+            "relation": "distinguishes",
+            "matchedFacts": [],
+            "differingFacts": [
+              "商品为塑料水壶，判例为耐热玻璃盖",
+              "材质和用途不同"
+            ],
+            "explanation": "判例涉及玻璃制品，与塑料水壶无关联，不适用。"
+          }
+        },
+        {
+          "caseId": "cn_ruling:W2023-4",
+          "decisionNo": "W2023-4",
+          "productName": "一次性口服尼古丁包",
+          "productDescription": "一次性口服尼古丁包，含有烟草、药物级尼古丁、水和其他食品级成分，该产品包括桉树和松树纤维、香料和甜味剂。使用时将小包尼古丁放在牙龈和上唇之间。在使用过程中，产品会释放尼古丁和香料，只有尼古丁会通过牙龈的口腔粘膜被吸收。产品不具有辅助戒烟用途。",
+          "classificationDecision": null,
+          "ruleBasis": "归类总规则一及六",
+          "historicalCode": "2403.99",
+          "normalizedHistoricalCode": "240399",
+          "codeLevel": "6位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 2,
+          "sourceFile": "53371691393917063.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:W2023-4",
+            "relation": "distinguishes",
+            "matchedFacts": [],
+            "differingFacts": [
+              "商品为塑料水壶，判例为含烟草口服尼古丁包",
+              "商品类别完全不同"
+            ],
+            "explanation": "判例涉及烟草制品，与塑料水壶无关联，不适用。"
+          }
+        },
+        {
+          "caseId": "cn_ruling:Z2023-0010",
+          "decisionNo": "Z2023-0010",
+          "productName": "涂塑卡纸",
+          "productDescription": "该商品为单面涂塑的白卡纸，用于制造食品级用纸杯。采用漂白化学机械浆制成，在造纸过程中未加入荧光增白剂。",
+          "classificationDecision": "该商品为单面涂塑的白卡纸，《税则》所称“漂白”应为在纸浆制造过程中经过“漂白”流程，不以其变白到何种程度（或白度值大小）判断是否为“漂白的”，该商品是由漂白化学机械浆制得，根据归类总规则一及六，应归入税则号列4811.5199。",
+          "ruleBasis": "归类总规则一及六；《税则》所称“漂白”应为在纸浆制造过程中经过“漂白”流程",
+          "historicalCode": "4811.5199",
+          "normalizedHistoricalCode": "48115199",
+          "codeLevel": "8位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 1,
+          "sourceFile": "6351691393903988.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:Z2023-0010",
+            "relation": "distinguishes",
+            "matchedFacts": [],
+            "differingFacts": [
+              "商品为塑料水壶，判例为涂塑卡纸",
+              "材质和用途不同"
+            ],
+            "explanation": "判例涉及纸制品，与塑料水壶无关联，不适用。"
+          }
+        },
+        {
+          "caseId": "cn_ruling:Z2023-0025",
+          "decisionNo": "Z2023-0025",
+          "productName": "锂离子充电电池芯",
+          "productDescription": "该商品呈长方形块状，不锈钢外壳，由正负极极片、隔膜、极耳、包装膜、电解液等组成，用于与充放电保护电路板、五金或塑料外壳组成锂离子充电电池，是电池的主要部件。该商品未配带充放电保护电路，不能进行充电及放电。",
+          "classificationDecision": "该电池芯是电池的主要部件，已构成锂离子充电电池整机基本特征，根据归类总规则二（一），应归入税则号列8507.6000。",
+          "ruleBasis": "归类总规则二（一）",
+          "historicalCode": "8507.6000",
+          "normalizedHistoricalCode": "85076000",
+          "codeLevel": "8位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 3,
+          "sourceFile": "6351691393903988.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:Z2023-0025",
+            "relation": "distinguishes",
+            "matchedFacts": [],
+            "differingFacts": [
+              "商品为塑料水壶，判例为锂离子电池芯",
+              "商品类别完全不同"
+            ],
+            "explanation": "判例涉及电气设备，与塑料水壶无关联，不适用。"
+          }
+        }
+      ],
+      "caseKnowledgeStatus": {
+        "status": "ready",
+        "available": true,
+        "enabled": true,
+        "version": "cn_rulings_2023_2025:80adab77952f020a8851961ed30a4e38c3254a2e4f61acc92b7aa27f1d602913",
+        "matchedCount": 6,
+        "truncated": true,
+        "expansionCount": 10,
+        "expansionTruncated": false
+      },
+      "reRetrieved": false,
+      "reasons": [
+        "材质：商品为塑料制（PP和Tritan），符合第三十九章塑料及其制品的范围。",
+        "用途：商品为运动水壶，用于盛装饮用水，属于家庭或厨房用具，符合品目39.24的描述。",
+        "结构：商品带提手、直饮盖和防漏设计，是完整的饮水容器，不属于运输或包装用容器（品目39.23），也不属于真空保温容器（品目96.17）。"
+      ],
+      "detail": "",
+      "degraded": false,
+      "latencyMs": 19850
+    },
+    {
+      "id": "export-018",
+      "productName": "偏光太阳镜",
+      "expectedCode": "9004100000",
+      "finalCode": "9004100000",
+      "correct": true,
+      "status": "decided",
+      "coveredByCorpus": null,
+      "headingHit": true,
+      "hs10Hit": true,
+      "poolSize": 30,
+      "poolCodes": [
+        "9001409900",
+        "9001509900",
+        "7015101000",
+        "7015109000",
+        "9001409100",
+        "9001509100",
+        "9004909000",
+        "9001300000",
+        "9004100000",
+        "9003110000",
+        "9003191000",
+        "9003192010",
+        "9003192090",
+        "9003199000",
+        "9003900000",
+        "8539490000",
+        "9018200000",
+        "9027509090",
+        "9803004000",
+        "9803005000",
+        "9503001000",
+        "8806229010",
+        "8806239010",
+        "8806249010",
+        "8806299010",
+        "8806929010",
+        "8806939010",
+        "8806949010",
+        "8806990010",
+        "2804619012"
+      ],
+      "finalPoolCodes": [
+        "9001409900",
+        "9001509900",
+        "7015101000",
+        "7015109000",
+        "9001409100",
+        "9001509100",
+        "9004909000",
+        "9001300000",
+        "9004100000",
+        "9003110000",
+        "9003191000",
+        "9003192010",
+        "9003192090",
+        "9003199000",
+        "9003900000",
+        "8539490000",
+        "9018200000",
+        "9027509090",
+        "9803004000",
+        "9803005000",
+        "9503001000",
+        "8806229010",
+        "8806239010",
+        "8806249010",
+        "8806299010",
+        "8806929010",
+        "8806939010",
+        "8806949010",
+        "8806990010",
+        "2804619012"
+      ],
+      "asked": false,
+      "answers": [],
+      "questions": [],
+      "llmCalls": 3,
+      "modelTrace": [
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "understand"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "compare"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "decide"
+        }
+      ],
+      "retrievedCaseIds": [
+        "cn_ruling:J2025-0008",
+        "cn_ruling:W2023-21",
+        "cn_ruling:Z2023-0040",
+        "cn_ruling:Z2023-0041",
+        "cn_ruling:Z2023-0042",
+        "cn_ruling:Z2023-0043"
+      ],
+      "addedCodes": [],
+      "caseReferences": [],
+      "caseKnowledgeStatus": {
+        "status": "ready",
+        "available": true,
+        "enabled": true,
+        "version": "cn_rulings_2023_2025:80adab77952f020a8851961ed30a4e38c3254a2e4f61acc92b7aa27f1d602913",
+        "matchedCount": 6,
+        "truncated": false,
+        "expansionCount": 0,
+        "expansionTruncated": false
+      },
+      "reRetrieved": false,
+      "reasons": [
+        "主要功能：商品为太阳镜，用于遮阳防紫外线，符合税目9004‘太阳镜’的列名。",
+        "材质/结构：TAC偏光镜片配TR90和金属镜框，为成品太阳镜，非单独报验的镜片或镜架。",
+        "用途：用于开车、钓鱼等户外活动，明确为太阳镜，非矫正视力眼镜或工业护目镜。"
+      ],
+      "detail": "",
+      "degraded": false,
+      "latencyMs": 12606
+    },
+    {
+      "id": "export-019",
+      "productName": "不锈钢厨房水槽",
+      "expectedCode": "7324100000",
+      "finalCode": "7324100000",
+      "correct": true,
+      "status": "decided",
+      "coveredByCorpus": null,
+      "headingHit": true,
+      "hs10Hit": true,
+      "poolSize": 38,
+      "poolCodes": [
+        "7324100000",
+        "8215990000",
+        "3922100000",
+        "7323930000",
+        "3924100000",
+        "4419200010",
+        "4419200090",
+        "4419909030",
+        "4419909090",
+        "6302609000",
+        "6302910000",
+        "6302930010",
+        "6302930090",
+        "6302991000",
+        "6302999010",
+        "6302999090",
+        "6911102100",
+        "6911102900",
+        "6912009000",
+        "7013410000",
+        "7013420000",
+        "7013490000",
+        "7323910000",
+        "7323920000",
+        "7323949000",
+        "7323990000",
+        "7418109000",
+        "8208300000",
+        "8214900010",
+        "8215100000",
+        "7324290000",
+        "7326901100",
+        "7326901990",
+        "7308300000",
+        "7010200000",
+        "8507600020",
+        "8507600030",
+        "8507600090"
+      ],
+      "finalPoolCodes": [
+        "7324100000",
+        "8215990000",
+        "3922100000",
+        "7323930000",
+        "3924100000",
+        "4419200010",
+        "4419200090",
+        "4419909030",
+        "4419909090",
+        "6302609000",
+        "6302910000",
+        "6302930010",
+        "6302930090",
+        "6302991000",
+        "6302999010",
+        "6302999090",
+        "6911102100",
+        "6911102900",
+        "6912009000",
+        "7013410000",
+        "7013420000",
+        "7013490000",
+        "7323910000",
+        "7323920000",
+        "7323949000",
+        "7323990000",
+        "7418109000",
+        "8208300000",
+        "8214900010",
+        "8215100000",
+        "7324290000",
+        "7326901100",
+        "7326901990",
+        "7308300000",
+        "7010200000",
+        "8507600020",
+        "8507600030",
+        "8507600090"
+      ],
+      "asked": false,
+      "answers": [],
+      "questions": [],
+      "llmCalls": 3,
+      "modelTrace": [
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "understand"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "compare"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "decide"
+        }
+      ],
+      "retrievedCaseIds": [
+        "cn_ruling:J2025-0004",
+        "cn_ruling:W2023-19",
+        "cn_ruling:Z2023-0025"
+      ],
+      "addedCodes": [
+        "7308300000",
+        "7010200000",
+        "8507600020",
+        "8507600030",
+        "8507600090"
+      ],
+      "caseReferences": [
+        {
+          "caseId": "cn_ruling:J2025-0004",
+          "decisionNo": "J2025-0004",
+          "productName": "玻璃淋浴房",
+          "productDescription": "该商品由2块固定安装的平面钢化玻璃、2块可左右滑动的弧形钢化玻璃、不锈钢制边框和弧形轨道套、滑轮、铰链、门把手等组成，不带底盘、顶盖和淋浴装置。 商品组装后，形成一个连接在L型墙体（两面墙体）的配有滑动门的弧形全框架玻璃淋浴空间。",
+          "classificationDecision": "该商品主要由钢化玻璃和不锈钢制框架组成，金属框架构成了商品的基本特征，符合《税则注释》品目73.08项下钢铁制门窗结构件的描述，根据归类总规则三（二）及六，应归入税则号列7308.3000。",
+          "ruleBasis": "归类总规则三（二）及六；《税则注释》品目73.08项下钢铁制门窗结构件的描述",
+          "historicalCode": "7308.3000",
+          "normalizedHistoricalCode": "73083000",
+          "codeLevel": "8位",
+          "announcementNo": "海关总署公告2025年第259号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 1,
+          "sourceFile": "2025年商品归类决定 (1).docx",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:J2025-0004",
+            "relation": "distinguishes",
+            "matchedFacts": [
+              "不锈钢制框架",
+              "固定安装"
+            ],
+            "differingFacts": [
+              "商品为玻璃淋浴房，非厨房水槽",
+              "商品为门窗结构件，非洗涤槽"
+            ],
+            "explanation": "该判例商品为玻璃淋浴房，归入7308门窗结构件，与本案不锈钢水槽在功能、用途上完全不同，不适用。"
+          }
+        },
+        {
+          "caseId": "cn_ruling:W2023-19",
+          "decisionNo": "W2023-19",
+          "productName": "耐热玻璃盖",
+          "productDescription": "耐热玻璃盖，把手可为多种材质，可带有蒸汽喷口和不锈钢边缘，同一盖子可用于平底锅或煎锅，用于防灰尘或减少食物的水分蒸发。该产品单独报验，未与厨具一起报验。",
+          "classificationDecision": null,
+          "ruleBasis": "归类总规则一及六",
+          "historicalCode": "7010.20",
+          "normalizedHistoricalCode": "701020",
+          "codeLevel": "6位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 1,
+          "sourceFile": "53371691393917063.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:W2023-19",
+            "relation": "distinguishes",
+            "matchedFacts": [
+              "厨房用",
+              "不锈钢边缘"
+            ],
+            "differingFacts": [
+              "商品为耐热玻璃盖，非水槽",
+              "商品为玻璃制品，非不锈钢制"
+            ],
+            "explanation": "该判例商品为玻璃盖，归入7010，与本案不锈钢水槽材质、功能均不同，不适用。"
+          }
+        },
+        {
+          "caseId": "cn_ruling:Z2023-0025",
+          "decisionNo": "Z2023-0025",
+          "productName": "锂离子充电电池芯",
+          "productDescription": "该商品呈长方形块状，不锈钢外壳，由正负极极片、隔膜、极耳、包装膜、电解液等组成，用于与充放电保护电路板、五金或塑料外壳组成锂离子充电电池，是电池的主要部件。该商品未配带充放电保护电路，不能进行充电及放电。",
+          "classificationDecision": "该电池芯是电池的主要部件，已构成锂离子充电电池整机基本特征，根据归类总规则二（一），应归入税则号列8507.6000。",
+          "ruleBasis": "归类总规则二（一）",
+          "historicalCode": "8507.6000",
+          "normalizedHistoricalCode": "85076000",
+          "codeLevel": "8位",
+          "announcementNo": "海关总署公告2023年第94号",
+          "publishDate": null,
+          "effectiveDate": null,
+          "validityStatus": "未在所附2025失效清单中",
+          "mappingStatus": "pending",
+          "candidateCount": 3,
+          "sourceFile": "6351691393903988.doc",
+          "sourceUrl": null,
+          "analysis": {
+            "caseId": "cn_ruling:Z2023-0025",
+            "relation": "distinguishes",
+            "matchedFacts": [
+              "不锈钢外壳"
+            ],
+            "differingFacts": [
+              "商品为锂离子电池芯，非水槽",
+              "商品为电气设备，非钢铁制品"
+            ],
+            "explanation": "该判例商品为电池芯，归入8507，与本案不锈钢水槽在商品类别上完全不同，不适用。"
+          }
+        }
+      ],
+      "caseKnowledgeStatus": {
+        "status": "ready",
+        "available": true,
+        "enabled": true,
+        "version": "cn_rulings_2023_2025:80adab77952f020a8851961ed30a4e38c3254a2e4f61acc92b7aa27f1d602913",
+        "matchedCount": 3,
+        "truncated": false,
+        "expansionCount": 5,
+        "expansionTruncated": false
+      },
+      "reRetrieved": false,
+      "reasons": [
+        "主要功能：商品为厨房水槽，用于清洗餐具和食材，属于洗涤槽，税目7324明确列名不锈钢制洗涤槽及脸盆，功能匹配。",
+        "材质：商品为304不锈钢制，税目7324.10明确为不锈钢制洗涤槽，材质匹配。",
+        "形态：商品为固定安装在台面上的水槽，符合洗涤槽的固定安装特征，区别于可移动的家用器具。"
+      ],
+      "detail": "",
+      "degraded": false,
+      "latencyMs": 19173
+    },
+    {
+      "id": "export-020",
+      "productName": "户外折叠桌",
+      "expectedCode": "9403200000",
+      "finalCode": "9403200000",
+      "correct": true,
+      "status": "decided",
+      "coveredByCorpus": null,
+      "headingHit": true,
+      "hs10Hit": true,
+      "poolSize": 49,
+      "poolCodes": [
+        "4202220000",
+        "4819200000",
+        "9403100000",
+        "9403200000",
+        "9803004000",
+        "9803005000",
+        "3923900000",
+        "4202320000",
+        "3923100090",
+        "3923290000",
+        "3923300000",
+        "4202121000",
+        "4202129000",
+        "4202920000",
+        "4202210010",
+        "4202210090",
+        "4202290000",
+        "4205009020",
+        "6306291000",
+        "6306299000",
+        "6306901000",
+        "6306902000",
+        "6306903000",
+        "6306909000",
+        "6601910000",
+        "6809190000",
+        "6909900000",
+        "8211950000",
+        "8424410000",
+        "8424490000",
+        "9401209000",
+        "9401310090",
+        "7326901100",
+        "7326901990",
+        "8479899910",
+        "8705909930",
+        "8479899920",
+        "8705909990",
+        "8479899930",
+        "8479899940",
+        "8479899952",
+        "8479899953",
+        "8479899954",
+        "8479899955",
+        "8479899956",
+        "8479899957",
+        "8479899959",
+        "8479899960",
+        "8479899990"
+      ],
+      "finalPoolCodes": [
+        "4202220000",
+        "4819200000",
+        "9403100000",
+        "9403200000",
+        "9803004000",
+        "9803005000",
+        "3923900000",
+        "4202320000",
+        "3923100090",
+        "3923290000",
+        "3923300000",
+        "4202121000",
+        "4202129000",
+        "4202920000",
+        "4202210010",
+        "4202210090",
+        "4202290000",
+        "4205009020",
+        "6306291000",
+        "6306299000",
+        "6306901000",
+        "6306902000",
+        "6306903000",
+        "6306909000",
+        "6601910000",
+        "6809190000",
+        "6909900000",
+        "8211950000",
+        "8424410000",
+        "8424490000",
+        "9401209000",
+        "9401310090",
+        "7326901100",
+        "7326901990",
+        "8479899910",
+        "8705909930",
+        "8479899920",
+        "8705909990",
+        "8479899930",
+        "8479899940",
+        "8479899952",
+        "8479899953",
+        "8479899954",
+        "8479899955",
+        "8479899956",
+        "8479899957",
+        "8479899959",
+        "8479899960",
+        "8479899990"
+      ],
+      "asked": false,
+      "answers": [],
+      "questions": [],
+      "llmCalls": 3,
+      "modelTrace": [
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "understand"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "compare"
+        },
+        {
+          "model": "deepseek-v4-flash",
+          "requestedModel": "deepseek-v4-flash",
+          "reportedModel": "deepseek-v4-flash",
+          "requestCount": 1,
+          "providerIndex": 0,
+          "fallback": false,
+          "attempt": 1,
+          "stage": "decide"
+        }
+      ],
+      "retrievedCaseIds": [
+        "cn_ruling:Z2023-0018",
+        "cn_ruling:Z2023-0036",
+        "cn_ruling:Z2024-0016"
+      ],
+      "addedCodes": [
+        "8479899910",
+        "8705909930",
+        "8479899920",
+        "8705909990",
+        "8479899930",
+        "8479899940",
+        "8479899952",
+        "8479899953",
+        "8479899954",
+        "8479899955",
+        "8479899956",
+        "8479899957",
+        "8479899959",
+        "8479899960",
+        "8479899990"
+      ],
+      "caseReferences": [],
+      "caseKnowledgeStatus": {
+        "status": "ready",
+        "available": true,
+        "enabled": true,
+        "version": "cn_rulings_2023_2025:80adab77952f020a8851961ed30a4e38c3254a2e4f61acc92b7aa27f1d602913",
+        "matchedCount": 3,
+        "truncated": false,
+        "expansionCount": 15,
+        "expansionTruncated": false
+      },
+      "reRetrieved": false,
+      "reasons": [
+        "主要功能：商品为户外用餐或置物用折叠桌，属于家具，符合税目9403的范畴。",
+        "材质：桌面为铝合金，桌架为钢架，整体为金属制，符合9403.20“其他金属家具”的材质要求。",
+        "用途：商品用于户外野餐、烧烤、露营，非办公室用，排除9403.10“办公室用金属家具”，归入9403.20“其他金属家具”更合适。"
+      ],
+      "detail": "",
+      "degraded": false,
+      "latencyMs": 12600
+    }
+  ]
+}

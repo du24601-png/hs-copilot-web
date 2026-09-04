@@ -55,10 +55,21 @@
           <div id="recentBody"></div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="home-note">
-        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-        结果附官方依据，可继续核验
+  <!-- ================= 全部历史记录列表页（右上角“历史记录”进入）================= -->
+  <section class="view hidden" id="view-history">
+    <div class="home-wrap">
+      <div class="history-head">
+        <h1 class="history-title">历史记录</h1>
+        <button class="clear-btn" id="clearHistory" title="清空全部历史记录">清空全部</button>
+      </div>
+      <div class="table-card">
+        <div class="tr th">
+          <span>商品</span><span>推荐编码</span><span>状态</span><span>时间</span><span></span>
+        </div>
+        <div id="historyBody"></div>
       </div>
     </div>
   </section>
@@ -151,6 +162,8 @@
 
         <div class="sec-title hidden" id="secLegal">归类依据 · 税则原文</div>
         <div class="legal-refs hidden" id="legalRefs"></div>
+        <div class="sec-title hidden" id="secCases">参考判例</div>
+        <div class="case-refs hidden" id="caseRefs"></div>
 
         <div class="unconfirmed-box hidden" id="unconfirmedBox" role="status">
           <b>仍需人工确认</b>
@@ -334,11 +347,33 @@
     </div>
   </div>
 
+  <!-- ================= 常见问题浮层（右上角“帮助”进入）================= -->
+  <div class="modal-backdrop hidden" id="faqModal">
+    <div class="modal faq-modal">
+      <div class="modal-head">
+        <div>
+          <div class="modal-title">常见问题</div>
+          <div class="modal-sub">关于 HS 编码与本站使用的高频问题</div>
+        </div>
+        <div class="faq-head-actions">
+          <a class="link-blue" id="faqFeedback">建议反馈
+            <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </a>
+          <button class="icon-btn" id="faqClose" title="关闭">
+            <svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="faq-list" id="faqList"></div>
+    </div>
+  </div>
+
 </main>
 
 <div class="toast" id="toast"></div>
 <script src="confirm-logic.js"></script>
 <script src="decision-logic.js"></script>
+<script src="ruling-view.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

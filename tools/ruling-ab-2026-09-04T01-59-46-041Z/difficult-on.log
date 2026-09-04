@@ -1,0 +1,105 @@
+[db] 已连接 D:\hs-copilot-web\tools\backup\ruling-ab-2026-09-04T01-59-46-041Z.db
+(node:13368) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+HS Copilot dev server: http://127.0.0.1:53116/
+[understand] deepseek-v4-flash 2310ms {"core_product":"土壤修复菌液","function":"通过复合微生物菌群和氮磷钾营养物改良土壤和植物根际环境","materials":["胶冻样类芽孢杆菌","枯草芽孢杆菌","解淀粉芽孢杆菌","氮磷钾营养物"],"structure":"液剂","usage":"兑水后用于土壤和植物根际","specifications":["有效活菌不少于20亿每毫升","总养分16%到18%"],"search_terms":["土壤修复菌液","微生物菌剂","复合菌液","菌肥"],"hs_synonyms":["微生物肥料","生物肥料","肥料","微生物制剂"],"possible_headings":["3101","3105","3002","3824"]}
+[recall] 1835ms pool=36 headings=3101,3105,3002,3824 legalRules=30
+[understand] deepseek-v4-flash 4182ms {"core_product":"干辣椒圈/丝/丁/小粒","function":"","materials":["辣椒属植物果实"],"structure":"切成圈、丝、丁和小粒，未磨成粉","usage":"餐饮原料","specifications":["20公斤纸箱散装"],"search_terms":["干辣椒","辣椒圈","辣椒丝","辣椒丁","辣椒粒"],"hs_synonyms":["干辣椒","辣椒干","未磨辣椒"],"possible_headings":["0904","0710","2005"]}
+[recall] 1679ms pool=32 headings=0904,0710,2005 legalRules=25
+[compare] deepseek-v4-flash 6275ms plausible=3105909000,3105590000,3002499090,3002493020,3821000000,3101001990 needClarification=true
+[compare] deepseek-v4-flash 6898ms plausible=0904210000,0904220000,0709600000,2005519900,2103909000 needClarification=true
+[decide] deepseek-v4-flash 7308ms selected=3105909000 refuse=false
+[decide] deepseek-v4-flash 6286ms selected=0904210000 refuse=false
+[understand] deepseek-v4-flash 1920ms {"core_product":"腐植酸钾","function":"作为钻井泥浆稳定剂、工业污水处理剂和土壤调理剂使用","materials":["褐煤","氢氧化钾"],"structure":"黑色颗粒","usage":"用于油田钻井泥浆稳定、工业污水处理和土壤调理","specifications":["25公斤一袋","氮0.59%","五氧化二磷0.14%","氧化钾2.53%","总养分3.26%"],"search_terms":["腐植酸钾","腐植酸","钾肥","泥浆处理剂"],"hs_synonyms":["腐植酸盐","矿物钾肥","有机无机复混肥","钻井助剂"],"possible_headings":["3105","3101","3804","3824"]}
+[recall] 1691ms pool=40 headings=3105,3101,3804,3824 legalRules=23
+[understand] deepseek-v4-flash 2330ms {"core_product":"共模电感","function":"共模电流经过时两线圈形成同向磁场，提高感抗并衰减电磁干扰，用于共模滤波","materials":["塑料","金属","铁芯","铜线"],"structure":"有塑料外壳、金属引脚、两个绕线线圈和铁芯，共四个端子","usage":"焊接在新能源汽车充电线控制板上，用于共模滤波","specifications":[],"search_terms":["共模电感","电感","滤波器"],"hs_synonyms":["电感器","电感","抑制电磁干扰的器件"],"possible_headings":["8504","8548"]}
+[recall] 2072ms pool=36 headings=8504,8548 legalRules=13
+[compare] deepseek-v4-flash 5166ms plausible=8504500000,8548000001,8548000002,8504909000 needClarification=true
+[compare] deepseek-v4-flash 11692ms plausible=3104909000,3101009090,3804000090,3824999921,2702100000 needClarification=true
+[decide] deepseek-v4-flash 7408ms selected=8504500000 refuse=false
+[understand] deepseek-v4-flash 1671ms {"core_product":"TOSA光发射次模块","function":"将电信号调制成光信号","materials":[],"structure":"带滤光片和柔性管脚","usage":"用于光纤通信设备，需装进通信设备才能工作","specifications":["10G光模块","1310nm DFB"],"search_terms":["光发射次模块","光模块","激光头","光通信"],"hs_synonyms":["光发射组件","光通信模块","激光二极管模块"],"possible_headings":["8517","8541","9001","9013"]}
+[recall] 2062ms pool=55 headings=8517,8541,9001,9013 legalRules=26
+[decide] deepseek-v4-flash 6695ms selected=3104909000 refuse=false
+[understand] deepseek-v4-flash 1216ms {"core_product":"股骨髁假体","function":"植入人体用于膝关节置换","materials":["铸造钴铬钼合金"],"structure":"骨水泥固定型","usage":"用于膝关节置换手术，植入人体","specifications":[],"search_terms":["股骨髁假体","人工关节","假体","钴铬钼合金"],"hs_synonyms":["人造关节","矫形器具","植入物","骨科假体"],"possible_headings":["9021","9018","3006"]}
+[recall] 1998ms pool=36 headings=9021,9018,3006 legalRules=19
+[compare] deepseek-v4-flash 8494ms plausible=8517795000,8517799000,9013200099,8541511290,9001901000 needClarification=true
+[compare] deepseek-v4-flash 5431ms plausible=9021310000,9021100090,9021909000,8105900010 needClarification=false
+[decide] deepseek-v4-flash 3679ms selected=8517795000 refuse=false
+[understand] deepseek-v4-flash 1533ms {"core_product":"苹果干","function":"烘干脱水","materials":["苹果","葡萄糖"],"structure":"颗粒状，约7毫米","usage":"烘焙和零食","specifications":["颗粒约7毫米","新鲜苹果98%","葡萄糖2%","水分约5%","55至95℃烘3到4小时"],"search_terms":["苹果干","水果干","干果"],"hs_synonyms":["干果","水果干","脱水水果"],"possible_headings":["0813","2008"]}
+[recall] 1640ms pool=34 headings=0813,2008 legalRules=17
+[decide] deepseek-v4-flash 7584ms selected=9021310000 refuse=false
+[understand] deepseek-v4-flash 1454ms {"core_product":"烘烤绿豆","function":"烘烤使豆子部分裂开，子叶内部结构发生变化","materials":["绿豆"],"structure":"部分豆子裂开，子叶分离","usage":"休闲食品原料","specifications":["160至180℃","25到30分钟","散装"],"search_terms":["烘烤绿豆","绿豆","熟制豆","豆类"],"hs_synonyms":["绿豆","干豆","烘烤豆","豆类制品"],"possible_headings":["2008","2005","0713","1207"]}
+[recall] 1751ms pool=35 headings=2008,2005,0713,1207 legalRules=23
+[compare] deepseek-v4-flash 4091ms plausible=0813300000,0813409000 needClarification=false
+[decide] deepseek-v4-flash 4858ms selected=0813300000 refuse=false
+[compare] deepseek-v4-flash 5785ms plausible=0713319000,2005519900,2005519100,0713311000,0713909000 needClarification=true
+[understand] deepseek-v4-flash 1809ms {"core_product":"浓缩酿造食醋","function":"调味品，使用时需兑水稀释","materials":["饮用水","乙酸","酿造食醋","白砂糖"],"structure":"","usage":"用于腌菜调味等食用用途","specifications":["480毫升","总酸20.13%","乙酸18.3%","酿造食醋20%","白砂糖0.15%","食盐0.03%"],"search_terms":["食醋","醋","调味品"],"hs_synonyms":["醋","食醋","调味醋","酿造醋"],"possible_headings":["2209","2103"]}
+[recall] 1569ms pool=45 headings=2209,2103 legalRules=18
+[decide] deepseek-v4-flash 5469ms selected=2005519900 refuse=false
+[understand] deepseek-v4-flash 1833ms {"core_product":"CAD/CAM氧化锆坯块","function":"用于牙科技工所切削加工牙冠桥体的预烧制陶瓷材料","materials":["氧化锆","微量金属氧化物","粘结剂"],"structure":"白色圆饼形，经冷等静压和最高1040℃高温预烧制","usage":"牙科技工所制作牙冠桥体，车削后需再次烧结瓷化","specifications":["尺寸可选","颜色可选"],"search_terms":["氧化锆坯块","陶瓷坯块","牙科材料","预烧陶瓷"],"hs_synonyms":["氧化锆制品","陶瓷制品","牙科用陶瓷","未烧制陶瓷"],"possible_headings":["6909","6914","2849","3824"]}
+[recall] 2195ms pool=51 headings=6909,6914,2849,3824 legalRules=27
+[compare] deepseek-v4-flash 7046ms plausible=2209000000,2103909000,2106909090,2915211100,2915211900,2915219090 needClarification=true
+[decide] deepseek-v4-flash 5183ms selected=2106909090 refuse=false
+[understand] deepseek-v4-flash 1875ms {"core_product":"氧化锆坯","function":"用于牙科CAD/CAM加工，经车削和烧结后制成牙冠等陶瓷修复体","materials":["氧化锆","金属氧化物"],"structure":"白色圆形，未经过高温烧制","usage":"牙科修复体制造","specifications":["直径98毫米","厚14毫米"],"search_terms":["氧化锆坯","牙科材料","未烧陶瓷"],"hs_synonyms":["氧化锆制品","未烧陶瓷制品","牙科用陶瓷坯体"],"possible_headings":["6909","6914","2849","3824"]}
+[recall] 2247ms pool=52 headings=6909,6914,2849,3824 legalRules=18
+[compare] deepseek-v4-flash 9314ms plausible=6914900000,3824999999,2825600090,3006400000,6909110090,6909120090,6914100000 needClarification=true
+[llm] deepseek-v4-flash 返回 402 {"error":{"message":"Insufficient Balance","type":"unknown_error","param":null,"code":"invalid_request_error"}}
+[llm] deepseek-v4-flash 返回 402 {"error":{"message":"Insufficient Balance","type":"unknown_error","param":null,"code":"invalid_request_error"}}
+[llm] deepseek-chat 返回 402 {"error":{"message":"Insufficient Balance","type":"unknown_error","param":null,"code":"invalid_request_error"}}
+[llm] deepseek-chat 返回 402 {"error":{"message":"Insufficient Balance","type":"unknown_error","param":null,"code":"invalid_request_error"}}
+[decide] mimo-v2.5-free 19436ms selected=6914900000 refuse=false
+[llm] deepseek-v4-flash 返回 402 {"error":{"message":"Insufficient Balance","type":"unknown_error","param":null,"code":"invalid_request_error"}}
+[llm] deepseek-chat 返回 402 {"error":{"message":"Insufficient Balance","type":"unknown_error","param":null,"code":"invalid_request_error"}}
+[compare] mimo-v2.5-free 20861ms plausible=3824999999,2825600090,2811290090,6914100000,6914900000 needClarification=false
+[llm] deepseek-v4-flash 返回 402 {"error":{"message":"Insufficient Balance","type":"unknown_error","param":null,"code":"invalid_request_error"}}
+[llm] deepseek-chat 返回 402 {"error":{"message":"Insufficient Balance","type":"unknown_error","param":null,"code":"invalid_request_error"}}
+[understand] mimo-v2.5-free 7783ms {"core_product":"电机用转速传感器","function":"装到电机后读取磁场变化，并把转速独立编码成数字脉冲信号输出","materials":["霍尔感应元件","电子信号转换电路"],"structure":"模块由霍尔感应元件和电子信号转换电路组成","usage":"用于叉车、电动车电机读取转速","specifications":["ABI输出","不同脉冲数","不同线长"],"search_terms":["转速传感器","电机传感器","霍尔传感器","脉冲传感器","传感器模块"],"hs_synonyms":["转速计","霍尔效应传感器","传感器","测量或检验仪器","电气测量或检验仪器"],"possible_headings":["9030","9031","9029","8543"]}
+[recall] 2301ms pool=52 headings=9030,9031,9029,8543 legalRules=12
+[llm] deepseek-v4-flash 返回 402 {"error":{"message":"Insufficient Balance","type":"unknown_error","param":null,"code":"invalid_request_error"}}
+[llm] deepseek-chat 返回 402 {"error":{"message":"Insufficient Balance","type":"unknown_error","param":null,"code":"invalid_request_error"}}
+[decide] mimo-v2.5-free 20688ms selected=3824999999 refuse=false
+[llm] deepseek-v4-flash 返回 402 {"error":{"message":"Insufficient Balance","type":"unknown_error","param":null,"code":"invalid_request_error"}}
+[llm] deepseek-chat 返回 402 {"error":{"message":"Insufficient Balance","type":"unknown_error","param":null,"code":"invalid_request_error"}}
+[llm] mimo-v2.5-free 返回 429 {"type":"error","error":{"type":"FreeUsageLimitError","message":"Error from provider (Console): Rate limit exceeded. Ple
+[llm] mimo-v2.5-free 返回 429 {"type":"error","error":{"type":"FreeUsageLimitError","message":"Error from provider (Console): Rate limit exceeded. Ple
+[compare] mimo-v2.5-free 39000ms plausible=8543709990,9029209000,9030899090,8541511300,9029101000 needClarification=true
+[llm] mimo-v2.5-free 返回 429 {"type":"error","error":{"type":"FreeUsageLimitError","message":"Error from provider (Console): Rate limit exceeded. Ple
+[llm] deepseek-v4-flash 返回 402 {"error":{"message":"Insufficient Balance","type":"unknown_error","param":null,"code":"invalid_request_error"}}
+[llm] deepseek-chat 返回 402 {"error":{"message":"Insufficient Balance","type":"unknown_error","param":null,"code":"invalid_request_error"}}
+[llm] mimo-v2.5-free 返回 429 {"type":"error","error":{"type":"FreeUsageLimitError","message":"Error from provider (Console): Rate limit exceeded. Ple
+[llm] mimo-v2.5-free 返回 429 {"type":"error","error":{"type":"FreeUsageLimitError","message":"Error from provider (Console): Rate limit exceeded. Ple
+[llm] mimo-v2.5-free 返回 429 {"type":"error","error":{"type":"FreeUsageLimitError","message":"Error from provider (Console): Rate limit exceeded. Ple
+[llm] The operation was aborted due to timeout
+[understand] 失败，降级为纯关键词检索： The operation was aborted due to timeout
+[recall] 1722ms pool=30 headings= legalRules=15
+[decide] deepseek-v4-flash 8176ms selected=8711600000 refuse=false
+[understand] deepseek-v4-flash 1851ms {"core_product":"马苏里拉奶酪","function":"","materials":["巴氏杀菌牛乳","盐","嗜热链球菌","氯化钙"],"structure":"真空块装","usage":"披萨连锁店采购，适合餐饮批发","specifications":["含水48%","每100克脂肪21.3克","原料约98.757%巴氏杀菌牛乳","0至4℃放10天后出货","低于零下18℃保存"],"search_terms":["马苏里拉","奶酪","乳酪","干酪"],"hs_synonyms":["马苏里拉奶酪","乳酪","干酪","凝乳"],"possible_headings":["0406"]}
+[recall] 1489ms pool=29 headings=0406 legalRules=23
+[compare] deepseek-v4-flash 4980ms plausible=0406100000,0406900000,0406300000,0406200000,0406400000 needClarification=true
+[decide] deepseek-v4-flash 4247ms selected=0406100000 refuse=false
+[understand] deepseek-v4-flash 1950ms {"core_product":"一次性三通旋塞","function":"手动旋转手柄，将一个进口切换到两个出口之一，用于连接三条输液或测压液路","materials":[],"structure":"由手柄、接头端帽、螺帽、外壳和标志塞组成，带两个母鲁尔和一个公鲁尔，360度旋转","usage":"医院输液或测压液路连接","specifications":["CE","ISO","360度旋转","两个母鲁尔和一个公鲁尔","单独泡罩包装"],"search_terms":["三通旋塞","旋塞","医用阀","鲁尔接头"],"hs_synonyms":["医用阀门","旋塞","塑料制品","注射器及附件"],"possible_headings":["9018","3926","8481"]}
+[recall] 2164ms pool=53 headings=9018,3926,8481 legalRules=30
+[llm] The operation was aborted due to timeout
+[decide] The operation was aborted due to timeout
+[understand] deepseek-v4-flash 1807ms {"core_product":"电动四轮车","function":"电池驱动，链传动，机械转向，供儿童或青少年驾驶","materials":[],"structure":"双手柄转向、跨坐式单座、四轮、非公路低压轮胎","usage":"儿童户外玩具，沙滩雪地行驶","specifications":["约100×57×52厘米","最高时速22公里","面向8岁以上且体重50公斤以下使用者"],"search_terms":["电动四轮车","四轮车","电动车","童车","ATV"],"hs_synonyms":["电动车辆","四轮车","全地形车","玩具车","非公路车辆"],"possible_headings":["8703","8711","9503","8704","8716"]}
+[recall] 1599ms pool=34 headings=8703,8711,9503,8704,8716 legalRules=22
+[compare] deepseek-v4-flash 6115ms plausible=8481802990,8481809000,8481909000,9018390000,9018909919,3926909090 needClarification=false
+[decide] deepseek-v4-flash 5023ms selected=8481802990 refuse=false
+[understand] deepseek-v4-flash 1709ms {"core_product":"血糖试纸","function":"与血糖仪配合，通过电化学反应测量指尖血中的葡萄糖含量","materials":["聚合物基板","葡萄糖脱氢酶"],"structure":"由上表层、电极层和聚合物基板组成，反应区涂有葡萄糖脱氢酶","usage":"家用血糖仪配套耗材，用于血糖监测","specifications":["一盒50条"],"search_terms":["血糖试纸","试纸","诊断试纸"],"hs_synonyms":["诊断试剂","试纸","血糖检测试纸"],"possible_headings":["3822","9027"]}
+[recall] 2105ms pool=38 headings=3822,9027 legalRules=20
+[compare] deepseek-v4-flash 10857ms plausible=8703101100,9503001000,8711600000,8703109000,9503008900 needClarification=true
+[compare] deepseek-v4-flash 4656ms plausible=3822190090,3822190010,3822110090,3822190040,3822190020,3822190030,9027899090,9027509090 needClarification=false
+[decide] deepseek-v4-flash 6086ms selected=8703101100 refuse=false
+[understand] deepseek-v4-flash 1631ms {"core_product":"推拉淋浴隔断","function":"围出淋浴空间，防止水溅出","materials":["钢化玻璃","不锈钢","铝"],"structure":"无框，由固定玻璃和推拉玻璃组成，单边铝边框固定到墙上，带横杆、铰链和把手","usage":"卫生间淋浴区域隔断","specifications":["8毫米钢化玻璃","约299毫米宽的固定玻璃","约600毫米宽的推拉玻璃"],"search_terms":["淋浴隔断","玻璃隔断","推拉门","淋浴房"],"hs_synonyms":["玻璃隔断","淋浴房","玻璃门","铝框玻璃结构"],"possible_headings":["7308","7610","7008","9406"]}
+[recall] 1875ms pool=41 headings=7308,7610,7008,9406 legalRules=19
+[decide] deepseek-v4-flash 4940ms selected=3822190090 refuse=false
+[understand] deepseek-v4-flash 1648ms {"core_product":"玻璃淋浴房","function":"形成弧形全框架淋浴空间，玻璃可滑动开合","materials":["钢化玻璃","304不锈钢"],"structure":"两块固定平面玻璃加两块可左右滑动的弧形玻璃，四周为完整304不锈钢边框和弧形轨道套，带滑轮、铰链、把手，无底盘、顶盖和淋","usage":"酒店项目淋浴空间隔断","specifications":["可定制尺寸"],"search_terms":["玻璃淋浴房","淋浴房","弧形玻璃","不锈钢框架"],"hs_synonyms":["玻璃隔断","淋浴房","金属框架玻璃结构","滑动玻璃门"],"possible_headings":["7308","7610","7008","9406","8302"]}
+[recall] 2256ms pool=42 headings=7308,7610,7008,9406,8302 legalRules=24
+[compare] deepseek-v4-flash 8061ms plausible=7020009990,7007190000,7610900000,7308900000,7008009000,9406900090 needClarification=true
+[compare] deepseek-v4-flash 6331ms plausible=7308300000,7020009990,7007190000,7610900000,9406900090 needClarification=true
+[decide] deepseek-v4-flash 7585ms selected=7020009990 refuse=false
+[decide] deepseek-v4-flash 5640ms selected=7308300000 refuse=false
+[understand] deepseek-v4-flash 1484ms {"core_product":"电动腔镜下切割吻合器","function":"通过电气控制，在外科手术中结扎并吻合体内血管和组织","materials":[],"structure":"带插销、杆、关节头旋钮、旋转轴环、击发与回复按钮和手柄","usage":"用于腔镜手术时配合内窥镜，开放手术时直接缝合","specifications":[],"search_terms":["吻合器","切割吻合器","电动吻合器","外科吻合器"],"hs_synonyms":["外科器械","吻合器","电动器械","手术器械"],"possible_headings":["9018","9019"]}
+[recall] 2174ms pool=39 headings=9018,9019 legalRules=19
+[compare] deepseek-v4-flash 6557ms plausible=9018909919,9018909911,9018908000,9018909991,9018909999 needClarification=true
+[decide] deepseek-v4-flash 7657ms selected=9018909919 refuse=false

@@ -6,8 +6,10 @@
   "scripts": {
     "dev": "node server.js",
     "test": "node --test --test-isolation=none test/*.test.cjs",
-    "test:data": "python -m unittest test.test_legal_knowledge_import -v",
+    "test:data": "python -m unittest test.test_legal_knowledge_import test.test_ruling_knowledge_import -v",
     "test:all": "npm run test:data && npm test",
-    "test:real20": "node tools/test-real-products-20-v2.cjs"
+    "test:real20": "node tools/test-real-products-20-v2.cjs",
+    "test:export20": "node tools/test-export-seller-20.cjs",
+    "test:ruling-ab": "node tools/run-ruling-ab.cjs"
   }
 }

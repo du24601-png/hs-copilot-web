@@ -1,0 +1,22 @@
+{
+  "source_id": "cn_rulings_2023_2025",
+  "original_filename": "HS_Copilot_商品归类判例知识库_104条_税号核对.xlsx",
+  "portable_filename": "rulings-104.xlsx",
+  "source_sha256": "80adab77952f020a8851961ed30a4e38c3254a2e4f61acc92b7aa27f1d602913",
+  "source_sheet": "判例知识库",
+  "original_column_count": 27,
+  "approved_row_count": 104,
+  "knowledge_status": "可入库",
+  "historical_years": [2023, 2024, 2025],
+  "tariff_year": 2026,
+  "mapping_method": "Recompute all current HS10 candidates from the normalized historical 6/8-digit code prefix; do not trust current_code_2026.",
+  "mapping_review_status": "pending",
+  "expected_unique_prefix_count": 27,
+  "expected_multiple_prefix_count": 77,
+  "expected_missing_prefix_count": 0,
+  "expected_publish_date_missing_count": 93,
+  "expected_classification_decision_missing_count": 24,
+  "validity_status_original": "未在所附2025失效清单中",
+  "validity_caveat": "The source wording does not establish present-day validity.",
+  "preservation_policy": "Unchanged binary copy. Preserve original values and nulls; no invented dates, narratives, URLs, or current classifications."
+}

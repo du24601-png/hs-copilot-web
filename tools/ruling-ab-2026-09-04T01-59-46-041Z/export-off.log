@@ -1,0 +1,84 @@
+[db] 已连接 D:\hs-copilot-web\tools\backup\ruling-ab-2026-09-04T01-59-46-041Z.db
+(node:1152) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+HS Copilot dev server: http://127.0.0.1:53207/
+[understand] deepseek-v4-flash 2747ms {"core_product":"TWS真无线蓝牙耳机","function":"通过蓝牙无线连接手机进行听歌和通话，两只耳塞之间无线连接","materials":[],"structure":"入耳式，带充电仓，触控操作","usage":"用于手机听歌通话，便携使用","specifications":["蓝牙5.3","续航30小时"],"search_terms":["蓝牙耳机","无线耳机","入耳式耳机","耳机"],"hs_synonyms":["耳机","听筒","无线耳机","蓝牙耳机"],"possible_headings":["8518","8517"]}
+[recall] 1451ms pool=31 headings=8518,8517 legalRules=11
+[understand] deepseek-v4-flash 4227ms {"core_product":"保温杯","function":"保温保冷，通过双层真空内胆实现保温12小时、保冷24小时","materials":["304不锈钢"],"structure":"双层真空内胆，杯盖带提手","usage":"户外和通勤喝水用","specifications":["500ml容量","保温12小时","保冷24小时"],"search_terms":["保温杯","不锈钢杯","真空杯","水杯"],"hs_synonyms":["保温瓶","真空容器","不锈钢容器","杯"],"possible_headings":["9617","7323","7310","7615"]}
+[recall] 1481ms pool=36 headings=9617,7323,7310,7615 legalRules=17
+[compare] deepseek-v4-flash 6541ms plausible=9617009000,9617001900,7323930000,7310100090,7310219000 needClarification=true
+[compare] deepseek-v4-flash 8260ms plausible=8517629400,8518300000,8517629200,8517699000,8517691099 needClarification=true
+[decide] deepseek-v4-flash 4970ms selected=9617009000 refuse=false
+[decide] deepseek-v4-flash 4961ms selected=8517629400 refuse=false
+[understand] deepseek-v4-flash 2812ms {"core_product":"移动电源","function":"储存电能并为手机、平板等设备充电","materials":["铝合金","锂离子电芯"],"structure":"双USB输出加Type-C快充，带LED电量显示","usage":"给手机平板充电","specifications":["10000mAh"],"search_terms":["移动电源","充电宝","锂电池组","便携电源"],"hs_synonyms":["蓄电池","锂离子电池","充电电池","电源"],"possible_headings":["8507","8506"]}
+[recall] 1270ms pool=34 headings=8507,8506 legalRules=10
+[understand] deepseek-v4-flash 3865ms {"core_product":"LED球泡灯","function":"通电后发光照明","materials":[],"structure":"E27螺口，完整的LED球泡，可直接拧入灯座使用","usage":"家庭和工程照明","specifications":["9W和12W可选","暖白光3000K","正白光6500K"],"search_terms":["LED球泡灯","球泡灯","LED灯","灯泡"],"hs_synonyms":["电灯","照明装置","发光二极管灯泡","LED灯泡"],"possible_headings":["9405","8539","8541"]}
+[recall] 1226ms pool=32 headings=9405,8539,8541 legalRules=16
+[compare] deepseek-v4-flash 11125ms plausible=8507200000,8507300090,8506101910,8506101990 needClarification=false
+[compare] deepseek-v4-flash 10603ms plausible=8539521000,9405429000,9405499000,9405410000,8541410090 needClarification=true
+[decide] deepseek-v4-flash 3530ms selected=null refuse=true
+[decide] deepseek-v4-flash 5498ms selected=8539521000 refuse=false
+[understand] deepseek-v4-flash 2973ms {"core_product":"手机壳","function":"保护手机","materials":["硅胶","TPU","超细纤维"],"structure":"全包防摔内衬","usage":"用于iPhone 15和16系列手机","specifications":["适配iPhone 15和16系列"],"search_terms":["手机壳","保护壳","硅胶壳"],"hs_synonyms":["手机保护壳","塑料制手机壳","手机用塑料制品"],"possible_headings":["3926","8517","4202"]}
+[recall] 1454ms pool=33 headings=3926,8517,4202 legalRules=24
+[understand] deepseek-v4-flash 2883ms {"core_product":"帆布手提袋","function":"用于日常携带物品，可单肩斜背","materials":["棉帆布"],"structure":"带提手，单肩斜背两用","usage":"购物、通勤","specifications":["大容量"],"search_terms":["帆布手提袋","手提袋","帆布袋","包"],"hs_synonyms":["纺织材料手提包","手提包","购物袋","包袋"],"possible_headings":["4202","4203","6307"]}
+[recall] 1674ms pool=29 headings=4202,4203,6307 legalRules=18
+[compare] deepseek-v4-flash 6145ms plausible=3926901000,8517793000,3926901000,4202920000,4202129000 needClarification=true
+[compare] deepseek-v4-flash 4084ms plausible=4202220000,4202920000,6307909000 needClarification=false
+[decide] deepseek-v4-flash 4468ms selected=4202220000 refuse=false
+[decide] deepseek-v4-flash 7545ms selected=3926901000 refuse=false
+[understand] deepseek-v4-flash 2811ms {"core_product":"陶瓷马克杯","function":"用于饮水或饮咖啡的餐饮器皿","materials":["陶","炻器"],"structure":"带手柄","usage":"喝水、喝咖啡，办公礼品","specifications":["350ml"],"search_terms":["马克杯","陶瓷杯","炻器杯","咖啡杯","水杯"],"hs_synonyms":["陶瓷杯","陶器","炻器","餐具","杯"],"possible_headings":["6912","6911","6913"]}
+[recall] 1598ms pool=35 headings=6912,6911,6913 legalRules=22
+[understand] deepseek-v4-flash 3017ms {"core_product":"纯棉针织短袖T恤","function":"","materials":["100%精梳棉"],"structure":"圆领，套头式，短袖，针织面料","usage":"男士日常穿着，可印花刺绣定制","specifications":["180g克重","230g克重"],"search_terms":["纯棉T恤","针织T恤","短袖T恤","T恤"],"hs_synonyms":["针织T恤衫","棉制针织套头衫","T恤衫"],"possible_headings":["6109","6105","6106"]}
+[recall] 1146ms pool=29 headings=6109,6105,6106 legalRules=10
+[compare] deepseek-v4-flash 5955ms plausible=6912001000,6912009000,6911101900,6911101100,6913100000,6913900000 needClarification=true
+[compare] deepseek-v4-flash 6545ms plausible=6109100000,6105100090,6109909000,6109901000,6110110000,6110191000,6110192000,6110199000,6106100090,6106200020 needClarification=true
+[decide] deepseek-v4-flash 3952ms selected=6912001000 refuse=false
+[understand] deepseek-v4-flash 2869ms {"core_product":"折叠露营椅","function":"提供可折叠的坐具，便于户外携带","materials":["铝合金","钢管","牛津布"],"structure":"金属框架，牛津布坐面，可折叠收纳带提袋","usage":"户外钓鱼、野餐、沙滩等场景使用","specifications":["承重150kg"],"search_terms":["折叠椅","露营椅","户外椅","金属框架椅"],"hs_synonyms":["折叠椅","户外椅","金属框架坐具","野营椅"],"possible_headings":["9401","9403","9406"]}
+[recall] 1451ms pool=33 headings=9401,9403,9406 legalRules=28
+[decide] deepseek-v4-flash 5607ms selected=6109100000 refuse=false
+[understand] deepseek-v4-flash 2478ms {"core_product":"声波电动牙刷","function":"靠内置电机震动来清洁牙齿","materials":[],"structure":"","usage":"成人日常口腔清洁","specifications":["每分钟3万次震动","USB充电","IPX7防水","多档模式","2分钟定时"],"search_terms":["电动牙刷","牙刷","声波牙刷"],"hs_synonyms":["电动牙刷","牙刷","电动口腔清洁器具"],"possible_headings":["8509","9603"]}
+[recall] 1253ms pool=31 headings=8509,9603 legalRules=23
+[compare] deepseek-v4-flash 4702ms plausible=9401790000,9401719000,9401711000,9403200000 needClarification=true
+[compare] deepseek-v4-flash 4198ms plausible=8509803000,8509809000,9603210000 needClarification=false
+[decide] deepseek-v4-flash 5148ms selected=9401790000 refuse=false
+[decide] deepseek-v4-flash 5891ms selected=8509803000 refuse=false
+[understand] deepseek-v4-flash 7163ms {"core_product":"化妆刷套装","function":"用于化妆时涂抹散粉、腮红、眼影等","materials":["动物毛","纤维毛","木柄","铝管"],"structure":"刷头由动物毛和纤维毛混合制成，刷柄为木质，连接部分为铝管","usage":"美妆工具，用于人体化妆","specifications":["10支","12支"],"search_terms":["化妆刷","刷子","美妆刷"],"hs_synonyms":["化妆刷","刷子","化妆用具"],"possible_headings":["9603","9616","3304"]}
+[recall] 1257ms pool=32 headings=9603,9616,3304 legalRules=16
+[understand] deepseek-v4-flash 4448ms {"core_product":"宠物牵引绳","function":"牵遛宠物","materials":["尼龙","金属"],"structure":"可伸缩和固定款，配同色项圈","usage":"用于遛狗，牵遛宠物","specifications":["多色","多尺寸"],"search_terms":["宠物牵引绳","牵引绳","遛狗绳","狗链","项圈"],"hs_synonyms":["牵引绳","挽具","狗链","项圈","宠物用品"],"possible_headings":["4201","4202","4206","7326","6307"]}
+[recall] 1479ms pool=37 headings=4201,4202,4206,7326,6307 legalRules=23
+[compare] deepseek-v4-flash 5914ms plausible=4201000090,4201000010,4205009020,6307909000,7326901990 needClarification=true
+[compare] deepseek-v4-flash 9208ms plausible=9603290090,9603290010,4417009090,4417001000,4417009010,4417009020,3304990099,9616200000 needClarification=true
+[decide] deepseek-v4-flash 5341ms selected=4201000090 refuse=false
+[understand] deepseek-v4-flash 2531ms {"core_product":"塑料积木","function":"拼插构建，锻炼儿童智力","materials":["ABS塑料"],"structure":"大颗粒拼插结构","usage":"儿童早教智力开发玩具","specifications":["大颗粒"],"search_terms":["塑料积木","积木","拼插玩具","儿童玩具"],"hs_synonyms":["智力玩具","拼插玩具","塑料玩具"],"possible_headings":["9503","9504","9505"]}
+[recall] 1492ms pool=33 headings=9503,9504,9505 legalRules=18
+[decide] deepseek-v4-flash 7561ms selected=9603290090 refuse=false
+[understand] deepseek-v4-flash 2643ms {"core_product":"USB-C数据线","function":"用于数据传输和充电，支持60W快充","materials":["铝合金","编织线身"],"structure":"两端都带接头，Type-C转Type-C和Lightning","usage":"用于连接设备进行数据传输和充电","specifications":["1米和2米","60W快充"],"search_terms":["数据线","USB线","充电线","编织线"],"hs_synonyms":["电线","连接线","带接头电缆"],"possible_headings":["8544","8471","8517"]}
+[recall] 1139ms pool=33 headings=8544,8471,8517 legalRules=12
+[compare] deepseek-v4-flash 6627ms plausible=9503006000,9503008900,9503009000,9503008390,9503008310,9503001000,3926909090,9504200090,9504309000,9505900000 needClarification=true
+[compare] deepseek-v4-flash 6893ms plausible=8544421100,8544421900,8544422100,8544422900,8544190000,8535900040,8547901000,8517629990,8471605000,8471606000 needClarification=true
+[decide] deepseek-v4-flash 4205ms selected=9503006000 refuse=false
+[understand] deepseek-v4-flash 2229ms {"core_product":"太阳能庭院灯","function":"白天太阳能板充电，晚上自动亮起，用于照明","materials":[],"structure":"一体式设计，带地插和壁挂","usage":"用于花园、草坪、道路照明","specifications":["暖光"],"search_terms":["太阳能庭院灯","庭院灯","太阳能灯","LED灯"],"hs_synonyms":["太阳能灯具","户外灯具","电灯","照明装置"],"possible_headings":["9405","9404","8504"]}
+[recall] 1842ms pool=33 headings=9405,9404,8504 legalRules=15
+[decide] deepseek-v4-flash 5277ms selected=8544421100 refuse=false
+[understand] deepseek-v4-flash 1806ms {"core_product":"不锈钢分格餐盒","function":"盛装饭菜，密封防漏，便于携带","materials":["304不锈钢"],"structure":"单层，无真空保温层，分格设计","usage":"上班族、学生带饭用","specifications":[],"search_terms":["不锈钢餐盒","餐盒","饭盒","便当盒"],"hs_synonyms":["不锈钢制餐具","餐厨用具","金属制饭盒","便当盒"],"possible_headings":["7323","8215","7615","3924"]}
+[recall] 1836ms pool=38 headings=7323,8215,7615,3924 legalRules=19
+[compare] deepseek-v4-flash 6170ms plausible=9405410000,9405429000,9405499000,8513109000,9405110000 needClarification=true
+[compare] deepseek-v4-flash 4673ms plausible=7323930000,8215990000,8215200000,7615109000,3924100000,3924900000 needClarification=true
+[decide] deepseek-v4-flash 5787ms selected=9405410000 refuse=false
+[decide] deepseek-v4-flash 5217ms selected=7323930000 refuse=false
+[understand] deepseek-v4-flash 2711ms {"core_product":"塑料运动水壶","function":"盛装饮用水，带直饮盖和防漏设计，便于运动时携带和饮用","materials":["食品级PP","Tritan"],"structure":"带提手，直饮盖，防漏","usage":"健身房、户外骑行等运动场景饮水","specifications":["750ml","1L"],"search_terms":["运动水壶","塑料水壶","水壶"],"hs_synonyms":["塑料饮水壶","运动水壶","塑料瓶","水壶"],"possible_headings":["3923","3924","3926"]}
+[recall] 1171ms pool=34 headings=3923,3924,3926 legalRules=23
+[understand] deepseek-v4-flash 2505ms {"core_product":"太阳镜","function":"遮阳防紫外线","materials":["TAC偏光镜片","TR90","金属"],"structure":"偏光镜片，镜框材质为TR90和金属","usage":"开车、钓鱼、驾驶等户外活动","specifications":["UV400"],"search_terms":["太阳镜","偏光镜","墨镜","眼镜"],"hs_synonyms":["太阳镜","偏光眼镜","眼镜","护目镜"],"possible_headings":["9004","9003","9001"]}
+[recall] 1397ms pool=30 headings=9004,9003,9001 legalRules=15
+[compare] deepseek-v4-flash 4758ms plausible=3924100000,3924900000,3923290000,3923100090,9617009000 needClarification=true
+[compare] deepseek-v4-flash 6162ms plausible=9004100000,9001409100,9001509100,9003110000,9003191000,9004909000 needClarification=true
+[decide] deepseek-v4-flash 4735ms selected=3924100000 refuse=false
+[understand] deepseek-v4-flash 2503ms {"core_product":"厨房水槽","function":"用于厨房清洗餐具和食材，固定安装在台面上","materials":["304不锈钢"],"structure":"手工单槽或双槽，加厚防刮拉丝台面，配下水器和沥水篮","usage":"厨房洗菜洗碗","specifications":["可定制尺寸"],"search_terms":["不锈钢水槽","厨房水槽","水槽","洗涤槽"],"hs_synonyms":["不锈钢洗涤槽","厨房洗涤槽","不锈钢槽"],"possible_headings":["7324","7323","7326"]}
+[recall] 1683ms pool=33 headings=7324,7323,7326 legalRules=18
+[decide] deepseek-v4-flash 4877ms selected=9004100000 refuse=false
+[understand] deepseek-v4-flash 2693ms {"core_product":"折叠桌","function":"户外用餐或置物时提供支撑平面","materials":["铝合金","钢"],"structure":"可折叠，桌面为蛋卷式，带提包","usage":"用于野餐、烧烤、露营等户外活动","specifications":["可定制尺寸"],"search_terms":["折叠桌","桌子","金属桌","户外桌"],"hs_synonyms":["金属家具","折叠家具","户外家具"],"possible_headings":["9403","9401","7326"]}
+[recall] 1376ms pool=34 headings=9403,9401,7326 legalRules=22
+[compare] deepseek-v4-flash 6126ms plausible=7324100000,7323930000,7323990000,7323949000,7323910000,7323920000,7324290000,7326901990,8215990000,3922100000 needClarification=false
+[compare] deepseek-v4-flash 4864ms plausible=9403200000,9403100000,7326901990,4202920000 needClarification=false
+[decide] deepseek-v4-flash 5234ms selected=7324100000 refuse=false
+[decide] deepseek-v4-flash 5220ms selected=9403200000 refuse=false

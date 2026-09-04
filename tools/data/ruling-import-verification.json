@@ -1,0 +1,252 @@
+{
+  "backup": "tools/backup/hs_copilot-before-rulings-20260904T015127.187971Z-7d69e70d.db",
+  "allOriginalTablesUnchanged": true,
+  "before": {
+    "ciq_code": {
+      "count": 24074,
+      "sha256": "6df3467de66a0d42f007bd0fa0825628c2c8d19b95588d01696f66e61cf05333"
+    },
+    "declare_element": {
+      "count": 114284,
+      "sha256": "1cf3e864cdb82197a19de1ce0e580c27d20dd94f4065cc59dd0267a5e5422ab2"
+    },
+    "hs_chapter": {
+      "count": 96,
+      "sha256": "fa7a98cf02f25899d03117d2e1a1085e6034929fc61b68c854cdf7c23fe7a5d8"
+    },
+    "hs_code": {
+      "count": 12032,
+      "sha256": "6662aafe906ff156ffcb6dd2406d795b59457c2543980b7d6464d92745810a8f"
+    },
+    "hs_fts": {
+      "count": 12032,
+      "sha256": "372eb53091681a0b662aa2d86f2ee85ee690c836d04bd6fd15697d1153d6e108"
+    },
+    "hs_fts_config": {
+      "count": 1,
+      "sha256": "300c80a0261120ea097372af8371d15ea35efab886367d002f6ac9f2e362b6c9"
+    },
+    "hs_fts_content": {
+      "count": 12032,
+      "sha256": "98f6ea7f260df804265175ee68161784eefb2f240a1a41a3f337453ac39080a2"
+    },
+    "hs_fts_data": {
+      "count": 423,
+      "sha256": "79b7676cb346b2cbd88631541b301bf7be48740b51e6bef7a65b0b8956fa8304"
+    },
+    "hs_fts_docsize": {
+      "count": 12032,
+      "sha256": "2da418c3f99115618e9e214ab6041df04d59c50490364dad68251dbdb25f9da9"
+    },
+    "hs_fts_idx": {
+      "count": 686,
+      "sha256": "26666b765c1aa5ec3441354264b8347c0af75260897b02f5be2f812e5ce2fef2"
+    },
+    "legal_clause": {
+      "count": 643,
+      "sha256": "3826e94380e468d7429528fb2673fd6e8d4968f3d0086c9fc898f1b76367e72e"
+    },
+    "legal_clause_fts": {
+      "count": 643,
+      "sha256": "755b1b0b8b8783fb7351b1f597887eb3ed35b955e16725b4038cf8836ed1756d"
+    },
+    "legal_clause_fts_config": {
+      "count": 1,
+      "sha256": "300c80a0261120ea097372af8371d15ea35efab886367d002f6ac9f2e362b6c9"
+    },
+    "legal_clause_fts_content": {
+      "count": 643,
+      "sha256": "0f7adc01def83ee7f36b81cb67db2535395a8190507ff95704cccc487107731a"
+    },
+    "legal_clause_fts_data": {
+      "count": 309,
+      "sha256": "ddc6140d16f495529acbc36c8c6859a927fe120c030a404de369a677aed7de5d"
+    },
+    "legal_clause_fts_docsize": {
+      "count": 643,
+      "sha256": "2a1f6e0c71e82fdc2cd308befd8824261f6903922a6bc2290c178d330d6cea92"
+    },
+    "legal_clause_fts_idx": {
+      "count": 753,
+      "sha256": "67b5c20e6c1ac2193e850d11a4c83312f15a576df1ad5fc57b372c8d658b2507"
+    },
+    "legal_relation": {
+      "count": 1438,
+      "sha256": "d5808071da2317cdea30fedf3ee3bdfc3e0d45adafe41f4ada1147e8001ddd6a"
+    },
+    "legal_rule": {
+      "count": 304,
+      "sha256": "544c1b8cc973004f508b1efc6484b2054df9a2fe8151f6e5ce7410291ca177e9"
+    },
+    "legal_rule_scope": {
+      "count": 345,
+      "sha256": "6b6743fa677cf943f2ed82d338dd7ac0e2467201745ad713597161401f94a318"
+    },
+    "legal_source": {
+      "count": 1,
+      "sha256": "601198bf29b68f2386c914077a7e2564f25a3316775d0fda983418ffa8827119"
+    },
+    "ref_country": {
+      "count": 265,
+      "sha256": "f82bed5e2e1563737e3375d93c4f530806fff4a35fb17ffef15fea3da5005e07"
+    },
+    "ref_customs": {
+      "count": 1161,
+      "sha256": "9a39978c5c4a967804853c534cde2c447145f48d9045bff572c26677130fdb12"
+    },
+    "ref_district": {
+      "count": 983,
+      "sha256": "6146561feb4b1a414ae83626e3676243fb0eabc27dc62b2e9aee385892e1f267"
+    },
+    "ref_mfn_country": {
+      "count": 236,
+      "sha256": "f669c2c7be335688662b1c2726c0be671df2eede90168770b588cb53c86c7660"
+    },
+    "ref_port_domestic": {
+      "count": 1313,
+      "sha256": "2fec38d34d5975649ee850931949a0bbf1fd19ae1f6d1098b18d85282e96b9d1"
+    },
+    "ref_port_intl": {
+      "count": 4270,
+      "sha256": "5bf1e36852d572c6cde0786f16435a3880b902f9cd936e81fb92e07d90cbbe8b"
+    },
+    "ref_reg_doc": {
+      "count": 57,
+      "sha256": "6826cd823717a08486d8b05a7dc38d25c2207bef10639afd41bbc95e39efaf52"
+    },
+    "ref_unit": {
+      "count": 122,
+      "sha256": "1ba1be499b81ba8cccf179376d6518a6f89e66df03282322c9213ab16ffcd510"
+    },
+    "tariff_scope": {
+      "count": 118,
+      "sha256": "4df06b01424435f3b1edd913428981d2c96f978a92d08042470a35174b0b32cc"
+    }
+  },
+  "after": {
+    "ciq_code": {
+      "count": 24074,
+      "sha256": "6df3467de66a0d42f007bd0fa0825628c2c8d19b95588d01696f66e61cf05333"
+    },
+    "declare_element": {
+      "count": 114284,
+      "sha256": "1cf3e864cdb82197a19de1ce0e580c27d20dd94f4065cc59dd0267a5e5422ab2"
+    },
+    "hs_chapter": {
+      "count": 96,
+      "sha256": "fa7a98cf02f25899d03117d2e1a1085e6034929fc61b68c854cdf7c23fe7a5d8"
+    },
+    "hs_code": {
+      "count": 12032,
+      "sha256": "6662aafe906ff156ffcb6dd2406d795b59457c2543980b7d6464d92745810a8f"
+    },
+    "hs_fts": {
+      "count": 12032,
+      "sha256": "372eb53091681a0b662aa2d86f2ee85ee690c836d04bd6fd15697d1153d6e108"
+    },
+    "hs_fts_config": {
+      "count": 1,
+      "sha256": "300c80a0261120ea097372af8371d15ea35efab886367d002f6ac9f2e362b6c9"
+    },
+    "hs_fts_content": {
+      "count": 12032,
+      "sha256": "98f6ea7f260df804265175ee68161784eefb2f240a1a41a3f337453ac39080a2"
+    },
+    "hs_fts_data": {
+      "count": 423,
+      "sha256": "79b7676cb346b2cbd88631541b301bf7be48740b51e6bef7a65b0b8956fa8304"
+    },
+    "hs_fts_docsize": {
+      "count": 12032,
+      "sha256": "2da418c3f99115618e9e214ab6041df04d59c50490364dad68251dbdb25f9da9"
+    },
+    "hs_fts_idx": {
+      "count": 686,
+      "sha256": "26666b765c1aa5ec3441354264b8347c0af75260897b02f5be2f812e5ce2fef2"
+    },
+    "legal_clause": {
+      "count": 643,
+      "sha256": "3826e94380e468d7429528fb2673fd6e8d4968f3d0086c9fc898f1b76367e72e"
+    },
+    "legal_clause_fts": {
+      "count": 643,
+      "sha256": "755b1b0b8b8783fb7351b1f597887eb3ed35b955e16725b4038cf8836ed1756d"
+    },
+    "legal_clause_fts_config": {
+      "count": 1,
+      "sha256": "300c80a0261120ea097372af8371d15ea35efab886367d002f6ac9f2e362b6c9"
+    },
+    "legal_clause_fts_content": {
+      "count": 643,
+      "sha256": "0f7adc01def83ee7f36b81cb67db2535395a8190507ff95704cccc487107731a"
+    },
+    "legal_clause_fts_data": {
+      "count": 309,
+      "sha256": "ddc6140d16f495529acbc36c8c6859a927fe120c030a404de369a677aed7de5d"
+    },
+    "legal_clause_fts_docsize": {
+      "count": 643,
+      "sha256": "2a1f6e0c71e82fdc2cd308befd8824261f6903922a6bc2290c178d330d6cea92"
+    },
+    "legal_clause_fts_idx": {
+      "count": 753,
+      "sha256": "67b5c20e6c1ac2193e850d11a4c83312f15a576df1ad5fc57b372c8d658b2507"
+    },
+    "legal_relation": {
+      "count": 1438,
+      "sha256": "d5808071da2317cdea30fedf3ee3bdfc3e0d45adafe41f4ada1147e8001ddd6a"
+    },
+    "legal_rule": {
+      "count": 304,
+      "sha256": "544c1b8cc973004f508b1efc6484b2054df9a2fe8151f6e5ce7410291ca177e9"
+    },
+    "legal_rule_scope": {
+      "count": 345,
+      "sha256": "6b6743fa677cf943f2ed82d338dd7ac0e2467201745ad713597161401f94a318"
+    },
+    "legal_source": {
+      "count": 1,
+      "sha256": "601198bf29b68f2386c914077a7e2564f25a3316775d0fda983418ffa8827119"
+    },
+    "ref_country": {
+      "count": 265,
+      "sha256": "f82bed5e2e1563737e3375d93c4f530806fff4a35fb17ffef15fea3da5005e07"
+    },
+    "ref_customs": {
+      "count": 1161,
+      "sha256": "9a39978c5c4a967804853c534cde2c447145f48d9045bff572c26677130fdb12"
+    },
+    "ref_district": {
+      "count": 983,
+      "sha256": "6146561feb4b1a414ae83626e3676243fb0eabc27dc62b2e9aee385892e1f267"
+    },
+    "ref_mfn_country": {
+      "count": 236,
+      "sha256": "f669c2c7be335688662b1c2726c0be671df2eede90168770b588cb53c86c7660"
+    },
+    "ref_port_domestic": {
+      "count": 1313,
+      "sha256": "2fec38d34d5975649ee850931949a0bbf1fd19ae1f6d1098b18d85282e96b9d1"
+    },
+    "ref_port_intl": {
+      "count": 4270,
+      "sha256": "5bf1e36852d572c6cde0786f16435a3880b902f9cd936e81fb92e07d90cbbe8b"
+    },
+    "ref_reg_doc": {
+      "count": 57,
+      "sha256": "6826cd823717a08486d8b05a7dc38d25c2207bef10639afd41bbc95e39efaf52"
+    },
+    "ref_unit": {
+      "count": 122,
+      "sha256": "1ba1be499b81ba8cccf179376d6518a6f89e66df03282322c9213ab16ffcd510"
+    },
+    "tariff_scope": {
+      "count": 118,
+      "sha256": "4df06b01424435f3b1edd913428981d2c96f978a92d08042470a35174b0b32cc"
+    }
+  },
+  "integrity": "ok",
+  "caseCount": 104,
+  "mappingCount": 452,
+  "pendingMappings": 452
+}
